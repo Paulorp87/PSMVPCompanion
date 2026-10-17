@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { q } from "@/lib/db";
 import { createProject } from "@/app/actions";
-import { ITEM_TYPES, projectOdds, type ItemType } from "@/lib/refine";
+import { ITEM_TYPES, chanceOne, type ItemType } from "@/lib/refine";
 import { STATIC_MVPS } from "@/lib/static-data";
 
 export const dynamic = "force-dynamic";
@@ -29,16 +29,17 @@ export default async function Projetos({ searchParams }: { searchParams: Promise
           {projects.map((p) => {
             const mine = units.filter((u) => u.project_id === p.id);
             const alive = mine.filter((u) => u.status === "projeto");
-            const odds = projectOdds(p.item_type, alive.map((u) => u.refine), p.target_refine);
+            const avg = 1 / chanceOne(p.item_type, 0, p.target_refine);
+            const prog = Math.min(1, alive.length / avg);
             return (
               <Link key={p.id} href={`/projetos/${p.id}`} className="panel" style={{ textDecoration: "none", display: "grid", gap: 6 }}>
                 <div style={{ fontWeight: 700 }}>{p.name} {p.status === "concluido" && <span className="pill">concluído</span>}</div>
                 <div className="dim">{p.item_name} · {ITEM_TYPES[p.item_type].label}</div>
-                <div className="num"><b>{alive.length}</b> de {p.target_qty} itens{mine.length > alive.length && <span className="dim"> · {mine.length - alive.length} quebrado(s)</span>}</div>
+                <div className="num"><b>{alive.length}</b> de {avg.toLocaleString("pt-BR", { maximumFractionDigits: 1 })} itens da média <b style={{ color: "var(--accent)" }}>({Math.round(prog * 100)}%)</b></div>
                 <div style={{ height: 6, background: "var(--panel-2)", borderRadius: 4, overflow: "hidden" }}>
-                  <div style={{ width: `${Math.min(100, (alive.length / p.target_qty) * 100)}%`, height: "100%", background: "var(--accent)" }} />
+                  <div style={{ width: `${prog * 100}%`, height: "100%", background: "var(--accent)" }} />
                 </div>
-                <div className="num">Chance de +{p.target_refine}: <b className="accent" style={{ color: "var(--accent)" }}>{odds.done ? "já conseguiu!" : pct(odds.chance)}</b></div>
+                <div className="dim num" style={{ fontSize: 13 }}>Sua meta: {alive.length}/{p.target_qty}{mine.length > alive.length && ` · ${mine.length - alive.length} quebrado(s)`}</div>
               </Link>
             );
           })}
@@ -64,7 +65,7 @@ export default async function Projetos({ searchParams }: { searchParams: Promise
               {Array.from({ length: 10 }, (_, i) => i + 1).map((n) => <option key={n} value={n}>+{n}</option>)}
             </select>
           </label>
-          <label className="f">Juntar quantos antes de tentar<input name="target_qty" type="number" min={1} defaultValue={10} style={{ width: 110 }} /></label>
+          <label className="f">Sua meta de itens<input name="target_qty" type="number" min={1} placeholder="média do site" style={{ width: 130 }} /></label>
         </div>
         <div className="row">
           <label className="f" style={{ flex: 1 }}>Nome (opcional)<input name="name" placeholder="ex.: Pick +8" /></label>

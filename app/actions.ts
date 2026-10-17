@@ -169,8 +169,10 @@ export async function createProject(form: FormData) {
   for (const m of Object.values(STATIC_MVPS)) { const d = m.drops.find((x) => x.id === itemId); if (d) { known = d.name; break; } }
   const itemName = String(form.get("item_name") ?? "").trim() || known || `Item ${itemId}`;
   const target = Math.max(1, Math.min(10, Number(form.get("target_refine"))));
-  const qty = Math.max(1, Number(form.get("target_qty")) || 1);
   const type = String(form.get("item_type") ?? "w4");
+  const { chanceOne } = await import("@/lib/refine");
+  const avg = Math.ceil(1 / chanceOne((["w1","w2","w3","w4","armor"].includes(type) ? type : "w4") as "w4", 0, target));
+  const qty = Math.max(1, Number(form.get("target_qty")) || avg); // sem meta: usa a média do site
   const name = String(form.get("name") ?? "").trim() || `${itemName} +${target}`;
   if (!itemId) redirect("/projetos?e=1");
   const r = await q<{ id: number }>(

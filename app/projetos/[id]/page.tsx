@@ -45,15 +45,26 @@ export default async function Projeto({ params }: { params: Promise<{ id: string
       <h1>{p.name} {p.status === "concluido" && <span className="pill">concluído</span>}</h1>
       <p className="sub">{p.item_name} #{p.item_id} · {t.label} · usa {t.ore.name} · taxa de {n(t.fee)} z por tentativa</p>
 
-      <div className="stats">
-        <div className="stat"><div className="k">Itens no projeto</div><div className="v num">{alive.length} <span className="dim" style={{ fontSize: 16 }}>/ {p.target_qty}</span></div>{broken > 0 && <div className="note">{broken} quebrado(s)</div>}</div>
-        <div className="stat"><div className="k">Sua chance de +{p.target_refine} com o que tem</div><div className="v num accent">{odds.done ? "100%" : pct(odds.chance)}</div></div>
-        <div className="stat"><div className="k">Chance de cada item (+0 → +{p.target_refine})</div><div className="v num">{pct(each)}</div><div className="note">média do site: {avgItems === Infinity ? "—" : avgItems.toLocaleString("pt-BR", { maximumFractionDigits: 2 })} itens por sucesso</div></div>
-        <div className="stat"><div className="k">{t.ore.name} esperados com o que tem</div><div className="v num">{odds.done ? "0" : n(odds.ores)}</div>{orePrice != null && !odds.done && <div className="note">≈ {nk(odds.ores * oreCost)} z com a taxa</div>}</div>
+      <div className="panel" style={{ margin: "16px 0 10px" }}>
+        <div className="k dim" style={{ fontSize: 13 }}>Progresso até a média do site para +{p.target_refine}</div>
+        <div className="num" style={{ fontSize: 30, fontWeight: 700, marginTop: 2 }}>
+          {alive.length} <span className="dim" style={{ fontSize: 18 }}>de {avgItems === Infinity ? "—" : avgItems.toLocaleString("pt-BR", { maximumFractionDigits: 2 })} itens</span>
+          <span style={{ color: "var(--accent)", marginLeft: 12 }}>{avgItems === Infinity ? "" : Math.round(Math.min(1, alive.length / avgItems) * 100) + "%"}</span>
+        </div>
+        <div style={{ height: 10, background: "var(--panel-2)", borderRadius: 6, overflow: "hidden", marginTop: 8 }}>
+          <div style={{ width: `${avgItems === Infinity ? 0 : Math.min(100, (alive.length / avgItems) * 100)}%`, height: "100%", background: "var(--accent)" }} />
+        </div>
+        <div className="note" style={{ marginTop: 8 }}>
+          {alive.length >= avgItems ? "Você já juntou a média de itens. Hora de tentar a sorte!" : `Faltam ${Math.ceil(avgItems - alive.length)} para chegar na média.`}
+          {broken > 0 && ` · ${broken} já quebrado(s).`}
+        </div>
       </div>
-      {!odds.done && each < 1 && (
-        <p className="note">Para ter 50% de chance você precisaria de {itemsFor(0.5)} itens em +0; para 90%, de {itemsFor(0.9)}. {missingToGoal > 0 && `Faltam ${missingToGoal} para a meta de ${p.target_qty}.`}</p>
-      )}
+
+      <div className="stats">
+        <div className="stat"><div className="k">Sua meta</div><div className="v num">{alive.length} <span className="dim" style={{ fontSize: 16 }}>/ {p.target_qty}</span></div></div>
+        <div className="stat"><div className="k">{t.ore.name} em média para +{p.target_refine}</div><div className="v num">{n(attemptsOne(p.item_type, 0, p.target_refine) / (each || 1))}</div>{orePrice != null && <div className="note">≈ {nk((attemptsOne(p.item_type, 0, p.target_refine) / (each || 1)) * oreCost)} z com a taxa</div>}</div>
+        <div className="stat"><div className="k">Chance real com o que tem</div><div className="v num" style={{ fontSize: 20 }}>{odds.done ? "100%" : pct(odds.chance)}</div><div className="note">pelo menos 1 chegar em +{p.target_refine}</div></div>
+      </div>
 
       <h2>Itens do projeto</h2>
       {units.length === 0 ? <p className="note">Nenhum item ainda. Adicione do estoque abaixo ou importe do histórico na página <Link href="/drops">Drops</Link>.</p> : (
