@@ -51,6 +51,28 @@ export async function mvpInfo(name: string, force = false): Promise<MvpInfo> {
   }
 }
 
+/** Corrige manualmente o ID do monstro de um MVP e recarrega a tabela de drops. */
+export async function setMobId(name: string, mobId: number): Promise<MvpInfo> {
+  await q(
+    `INSERT INTO mvps(name, mob_id, drops, fetched_at) VALUES ($1,$2,NULL,NULL)
+     ON CONFLICT (name) DO UPDATE SET mob_id=EXCLUDED.mob_id, drops=NULL, fetched_at=NULL`, [name, mobId]);
+  return mvpInfo(name, true);
+}
+
+/** Carrega a tabela de drops de vários MVPs, poucos por vez. */
+export async function mvpInfoMany(names: string[], concurrency = 4): Promise<Map<string, MvpInfo | null>> {
+  const out = new Map<string, MvpInfo | null>();
+  let i = 0;
+  async function worker() {
+    while (i < names.length) {
+      const n = names[i++];
+      try { out.set(n, await mvpInfo(n)); } catch { out.set(n, null); }
+    }
+  }
+  await Promise.all(Array.from({ length: Math.min(concurrency, names.length) }, worker));
+  return out;
+}
+
 export type Price = { item_id: number; price: number | null; samples: number; source: string; fetched_at: Date };
 
 /** Média das últimas vendas (item sem refino e sem carta); se não houver, preço de NPC. */

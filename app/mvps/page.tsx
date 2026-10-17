@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { getWeeks, totalsByMvp, fmtDate } from "@/lib/data";
 
 export const dynamic = "force-dynamic";
@@ -32,7 +33,7 @@ export default async function Mvps() {
           <tbody>
             {names.map((m) => (
               <tr key={m}>
-                <td>{m}</td>
+                <td><Link href={`/mvp/${encodeURIComponent(m)}`}>{m}</Link></td>
                 <td className="r num"><b>{n(last.get(m) ?? 0)}</b></td>
                 {diffs.slice().reverse().map((d) => {
                   const x = (d.cur.get(m) ?? 0) - (d.prev.get(m) ?? 0);

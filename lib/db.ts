@@ -46,6 +46,21 @@ CREATE TABLE IF NOT EXISTS mvps (
   drops JSONB,
   fetched_at TIMESTAMPTZ
 );
+CREATE TABLE IF NOT EXISTS history (
+  character_id INT NOT NULL REFERENCES characters(id) ON DELETE CASCADE,
+  mvp TEXT NOT NULL,
+  item_id INT NOT NULL,
+  item_name TEXT NOT NULL,
+  qty INT NOT NULL CHECK (qty >= 0),
+  PRIMARY KEY (character_id, mvp, item_id)
+);
+CREATE TABLE IF NOT EXISTS history_flag (
+  character_id INT NOT NULL REFERENCES characters(id) ON DELETE CASCADE,
+  mvp TEXT NOT NULL,
+  complete BOOLEAN NOT NULL DEFAULT false,
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  PRIMARY KEY (character_id, mvp)
+);
 CREATE TABLE IF NOT EXISTS prices (
   item_id INT PRIMARY KEY,
   name TEXT,

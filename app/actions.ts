@@ -57,3 +57,41 @@ export async function deleteDrop(form: FormData) {
   revalidatePath("/", "layout");
   redirect("/drops");
 }
+
+export type HistItem = { item_id: number; item_name: string; qty: number };
+
+export async function saveHistory(characterId: number, mvp: string, items: HistItem[], complete: boolean): Promise<{ ok: boolean; msg: string }> {
+  const clean = items
+    .map((i) => ({ item_id: Math.floor(Number(i.item_id)), item_name: String(i.item_name || `Item ${i.item_id}`).trim(), qty: Math.floor(Number(i.qty)) }))
+    .filter((i) => i.item_id > 0 && Number.isFinite(i.qty) && i.qty >= 0);
+  await q("DELETE FROM history WHERE character_id=$1 AND mvp=$2", [characterId, mvp]);
+  for (const i of clean) {
+    if (i.qty === 0) continue;
+    await q("INSERT INTO history(character_id, mvp, item_id, item_name, qty) VALUES ($1,$2,$3,$4,$5)",
+      [characterId, mvp, i.item_id, i.item_name, i.qty]);
+  }
+  await q(
+    `INSERT INTO history_flag(character_id, mvp, complete, updated_at) VALUES ($1,$2,$3,now())
+     ON CONFLICT (character_id, mvp) DO UPDATE SET complete=EXCLUDED.complete, updated_at=now()`,
+    [characterId, mvp, complete]);
+  revalidatePath("/", "layout");
+  const n = clean.filter((i) => i.qty > 0).length;
+  return { ok: true, msg: `Drops até hoje de ${mvp} salvos (${n} item(s))${complete ? ", marcado como histórico completo" : ""}.` };
+}
+
+export async function setMobIdAction(form: FormData) {
+  const { setMobId } = await import("@/lib/ps");
+  const name = String(form.get("name") ?? "");
+  const id = Number(form.get("mob_id"));
+  if (name && id > 0) { try { await setMobId(name, id); } catch {} }
+  revalidatePath("/", "layout");
+  redirect(`/mvp/${encodeURIComponent(name)}`);
+}
+
+export async function reloadMvp(form: FormData) {
+  const { mvpInfo } = await import("@/lib/ps");
+  const name = String(form.get("name") ?? "");
+  try { await mvpInfo(name, true); } catch {}
+  revalidatePath("/", "layout");
+  redirect(`/mvp/${encodeURIComponent(name)}`);
+}
