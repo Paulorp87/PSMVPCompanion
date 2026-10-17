@@ -5,7 +5,7 @@ export const dynamic = "force-dynamic";
 const BASE = "https://tools.payonstories.com";
 const PATHS = ["/api/db/search?mode=mobs_filter&q=orc%20hero", "/api/db/entity?type=mob&id=1087", "/api/pc/history?id=985"];
 const UAS: Record<string, string> = {
-  app: "mvp-kc-tracker (uso pessoal, 1x/semana)",
+  app: "ps-companion (uso pessoal, 1x/semana)",
   navegador: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
 };
 

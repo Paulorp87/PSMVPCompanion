@@ -1,4 +1,4 @@
-# MVP KC — Payon Stories
+# PS Companion — Payon Stories
 
 Controle pessoal de KC de MVP, drops e rentabilidade (zeny por kill).
 

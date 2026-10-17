@@ -8,7 +8,7 @@ export const SALES_SAMPLE = 10;
 
 async function getJSON(path: string): Promise<any> {
   const r = await fetch(BASE + path, {
-    headers: { Accept: "application/json", "User-Agent": "mvp-kc-tracker (uso pessoal, 1x/semana)" },
+    headers: { Accept: "application/json", "User-Agent": "ps-companion (uso pessoal, 1x/semana)" },
     signal: AbortSignal.timeout(15000),
     cache: "no-store",
   });
