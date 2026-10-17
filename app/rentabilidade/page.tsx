@@ -21,14 +21,14 @@ async function forceRefresh(form: FormData) {
   redirect(`/rentabilidade?atualizado=1${desde ? "&desde=" + desde : ""}`);
 }
 
-type DropAgg = { mvp: string; item_id: number; item_name: string; qty: number };
+type DropAgg = { mvp: string; item_id: number; item_name: string; qty: number; units: number; fixed: number };
 type PriceRow = { item_id: number; name: string; price: number | null; samples: number; source: string; fetched: string };
 
 export default async function Rentabilidade({ searchParams }: { searchParams: Promise<{ desde?: string; atualizado?: string }> }) {
   const sp = await searchParams;
   const weeks = await getWeeks();
   const last = weeks[0];
-  const first = (await q<{ d: string | null }>("SELECT to_char(MIN(dropped_on),'YYYY-MM-DD') AS d FROM drops"))[0]?.d ?? null;
+  const first = (await q<{ d: string | null }>("SELECT to_char(MIN(dropped_on),'YYYY-MM-DD') AS d FROM drops WHERE source <> 'history'"))[0]?.d ?? null;
   const complete = await q<{ character_id: number; mvp: string }>("SELECT character_id, mvp FROM history_flag WHERE complete");
   const isHist = new Set(complete.map((c) => `${c.character_id}|${c.mvp}`));
 
@@ -62,23 +62,28 @@ export default async function Rentabilidade({ searchParams }: { searchParams: Pr
     }
   }
 
-  const regs = await q<{ character_id: number | null; mvp: string; item_id: number; item_name: string; qty: number; dropped_on: string }>(
-    "SELECT character_id, mvp, item_id, item_name, qty, to_char(dropped_on,'YYYY-MM-DD') AS dropped_on FROM drops WHERE dropped_on <= $1::date", [last]);
+  const regs = await q<{ character_id: number | null; mvp: string; item_id: number; item_name: string; qty: number; dropped_on: string; status: string; sold_price: number | null; split: number }>(
+    `SELECT character_id, mvp, item_id, item_name, qty, to_char(dropped_on,'YYYY-MM-DD') AS dropped_on, status, sold_price::float8 AS sold_price, split
+     FROM drops WHERE dropped_on <= $1::date AND source <> 'history'`, [last]);
   const hist = await q<{ character_id: number; mvp: string; item_id: number; item_name: string; qty: number }>(
     "SELECT h.character_id, h.mvp, h.item_id, h.item_name, h.qty FROM history h JOIN history_flag f USING (character_id, mvp) WHERE f.complete");
   const agg = new Map<string, DropAgg>();
-  const add = (mvp: string, item_id: number, item_name: string, qty: number) => {
+  // units: unidades avaliadas pelo preço de mercado (já descontada a divisão); fixed: zeny de vendas reais
+  const add = (mvp: string, item_id: number, item_name: string, qty: number, units: number, fixed: number) => {
     const k = `${mvp}|${item_id}`;
-    const e = agg.get(k) ?? { mvp, item_id, item_name, qty: 0 };
-    e.qty += qty; agg.set(k, e);
+    const e = agg.get(k) ?? { mvp, item_id, item_name, qty: 0, units: 0, fixed: 0 };
+    e.qty += qty; e.units += units; e.fixed += fixed; agg.set(k, e);
   };
-  for (const h of hist) add(h.mvp, h.item_id, h.item_name, h.qty);
+  for (const h of hist) add(h.mvp, h.item_id, h.item_name, h.qty, h.qty, 0);
   for (const r of regs) {
     const histPair = r.character_id != null && isHist.has(`${r.character_id}|${r.mvp}`);
-    if (histPair || (first && r.dropped_on > base)) add(r.mvp, r.item_id, r.item_name, r.qty);
+    if (!(histPair || (first && r.dropped_on > base))) continue;
+    const share = 1 / Math.max(1, r.split);
+    if (r.status === "vendido" && r.sold_price != null) add(r.mvp, r.item_id, r.item_name, r.qty, 0, r.sold_price * r.qty * share);
+    else add(r.mvp, r.item_id, r.item_name, r.qty, r.qty * share, 0);
   }
   const drops = [...agg.values()];
-  const pending = (await q<{ n: number }>("SELECT COALESCE(SUM(qty),0)::int AS n FROM drops WHERE dropped_on > $1::date", [last]))[0].n;
+  const pending = (await q<{ n: number }>("SELECT COALESCE(SUM(qty),0)::int AS n FROM drops WHERE dropped_on > $1::date AND source <> 'history'", [last]))[0].n;
 
   const items = [...new Map(drops.map((d) => [d.item_id, { id: d.item_id, name: d.item_name }])).values()];
   await refreshPrices(items); // só busca o que estiver sem preço ou com mais de 7 dias
@@ -93,8 +98,8 @@ export default async function Rentabilidade({ searchParams }: { searchParams: Pr
   for (const d of drops) {
     const e = byMvp.get(d.mvp) ?? { value: 0, qty: 0, best: null, missing: 0 };
     const p = price.get(d.item_id);
-    const v = p != null ? p * d.qty : 0;
-    if (p == null) e.missing++;
+    const v = d.fixed + (p != null ? p * d.units : 0);
+    if (p == null && d.units > 0) e.missing++;
     e.value += v; e.qty += d.qty;
     if (!e.best || v > e.best.value) e.best = { name: d.item_name, value: v };
     byMvp.set(d.mvp, e);
@@ -150,7 +155,7 @@ export default async function Rentabilidade({ searchParams }: { searchParams: Pr
           </tbody>
         </table>
       </div>
-      <p className="note">MVP com kills e sem drop registrado aparece com 0 z — isso também conta na média. * item sem preço encontrado.</p>
+      <p className="note">MVP com kills e sem drop registrado aparece com 0 z — isso também conta na média. Itens vendidos entram pelo preço da venda; itens divididos, só a sua parte. * item sem preço encontrado.</p>
 
       <h2>Preços usados</h2>
       {prices.length === 0 ? <p className="note">Nenhum item no período.</p> : (

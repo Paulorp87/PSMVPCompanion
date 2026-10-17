@@ -2,6 +2,7 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { q } from "@/lib/db";
+import { STATUSES } from "@/lib/status";
 
 export type KcEntry = { mvp: string; kills: number };
 
@@ -94,4 +95,122 @@ export async function reloadMvp(form: FormData) {
   try { await mvpInfo(name, true); } catch {}
   revalidatePath("/", "layout");
   redirect(`/mvp/${encodeURIComponent(name)}`);
+}
+
+// ---------- Destino dos drops ----------
+
+/** Separa `n` unidades de um drop numa linha nova (ou devolve a mesma se for tudo). */
+async function splitOff(id: number, n: number): Promise<number | null> {
+  const r = await q<{ qty: number }>("SELECT qty FROM drops WHERE id=$1", [id]);
+  if (!r[0]) return null;
+  const qty = r[0].qty;
+  n = Math.max(1, Math.min(Math.floor(n), qty));
+  if (n === qty) return id;
+  await q("UPDATE drops SET qty=qty-$2 WHERE id=$1", [id, n]);
+  const ins = await q<{ id: number }>(
+    `INSERT INTO drops(dropped_on, character_id, mvp, item_id, item_name, qty, status, project_id, refine, sold_price, split, source)
+     SELECT dropped_on, character_id, mvp, item_id, item_name, $2, status, project_id, refine, sold_price, split, source FROM drops WHERE id=$1 RETURNING id`,
+    [id, n]);
+  return ins[0].id;
+}
+
+export async function updateDrop(id: number, f: { status?: string; qty?: number; sold_price?: number | null; split?: number; project_id?: number | null }) {
+  if (f.status === "projeto" && f.project_id) {
+    const cur = await q<{ qty: number }>("SELECT qty FROM drops WHERE id=$1", [id]);
+    if (!cur[0]) return;
+    if (f.split) await q("UPDATE drops SET split=$2 WHERE id=$1", [id, Math.max(1, Math.floor(f.split))]);
+    return addToProject(f.project_id, id, f.qty ?? cur[0].qty);
+  }
+  // muda só `qty` unidades (separa a linha se for parte)
+  const target = f.qty ? await splitOff(id, f.qty) : id;
+  if (!target) return;
+  const status = f.status && (STATUSES as readonly string[]).includes(f.status) ? f.status : undefined;
+  await q(
+    `UPDATE drops SET
+       status = COALESCE($2, status),
+       sold_price = CASE WHEN $3::boolean THEN $4::numeric ELSE sold_price END,
+       split = COALESCE($5, split),
+       project_id = CASE WHEN $6::boolean THEN $7::int ELSE project_id END
+     WHERE id=$1`,
+    [target, status ?? null, f.sold_price !== undefined, f.sold_price ?? null,
+     f.split ? Math.max(1, Math.floor(f.split)) : null, f.project_id !== undefined, f.project_id ?? null]);
+  if (status && status !== "projeto" && f.project_id === undefined) await q("UPDATE drops SET project_id=NULL WHERE id=$1 AND status<>'projeto'", [target]);
+  revalidatePath("/", "layout");
+}
+
+/** Traz unidades dos "Drops até hoje" para o estoque com status (não conta de novo na rentabilidade). */
+export async function importFromHistory(characterId: number, mvp: string, itemId: number, n: number, status: string, projectId: number | null) {
+  const h = await q<{ item_name: string; qty: number }>(
+    "SELECT item_name, qty FROM history WHERE character_id=$1 AND mvp=$2 AND item_id=$3", [characterId, mvp, itemId]);
+  if (!h[0]) return { ok: false, msg: "Item não está no histórico." };
+  const used = (await q<{ n: number }>(
+    "SELECT COALESCE(SUM(qty),0)::int AS n FROM drops WHERE source='history' AND character_id=$1 AND mvp=$2 AND item_id=$3",
+    [characterId, mvp, itemId]))[0].n;
+  const free = h[0].qty - used;
+  n = Math.floor(n);
+  if (n < 1 || n > free) return { ok: false, msg: `Só dá para importar até ${free}.` };
+  const st = (STATUSES as readonly string[]).includes(status) ? status : "guardando";
+  const rows = st === "projeto" ? Array(n).fill(1) : [n];
+  for (const qty of rows) {
+    await q(
+      `INSERT INTO drops(dropped_on, character_id, mvp, item_id, item_name, qty, status, project_id, source)
+       VALUES (CURRENT_DATE,$1,$2,$3,$4,$5,$6,$7,'history')`,
+      [characterId, mvp, itemId, h[0].item_name, qty, st, st === "projeto" ? projectId : null]);
+  }
+  revalidatePath("/", "layout");
+  return { ok: true, msg: `${n} ${h[0].item_name} importado(s) do histórico.` };
+}
+
+// ---------- Projetos ----------
+export async function createProject(form: FormData) {
+  const itemId = Number(form.get("item_id"));
+  const { STATIC_MVPS } = await import("@/lib/static-data");
+  let known = "";
+  for (const m of Object.values(STATIC_MVPS)) { const d = m.drops.find((x) => x.id === itemId); if (d) { known = d.name; break; } }
+  const itemName = String(form.get("item_name") ?? "").trim() || known || `Item ${itemId}`;
+  const target = Math.max(1, Math.min(10, Number(form.get("target_refine"))));
+  const qty = Math.max(1, Number(form.get("target_qty")) || 1);
+  const type = String(form.get("item_type") ?? "w4");
+  const name = String(form.get("name") ?? "").trim() || `${itemName} +${target}`;
+  if (!itemId) redirect("/projetos?e=1");
+  const r = await q<{ id: number }>(
+    "INSERT INTO projects(name, item_id, item_name, item_type, target_refine, target_qty) VALUES ($1,$2,$3,$4,$5,$6) RETURNING id",
+    [name, itemId, itemName, type, target, qty]);
+  revalidatePath("/", "layout");
+  redirect(`/projetos/${r[0].id}`);
+}
+
+/** Coloca `n` unidades de um drop do estoque no projeto, uma linha por unidade. */
+export async function addToProject(projectId: number, dropId: number, n: number) {
+  for (let i = 0; i < n; i++) {
+    const id = await splitOff(dropId, 1);
+    if (!id) break;
+    await q("UPDATE drops SET status='projeto', project_id=$2, qty=1 WHERE id=$1", [id, projectId]);
+    if (id === dropId) break; // era a última unidade
+  }
+  revalidatePath("/", "layout");
+}
+
+export async function setRefine(dropId: number, level: number) {
+  await q("UPDATE drops SET refine=$2 WHERE id=$1", [dropId, Math.max(0, Math.min(10, Math.floor(level)))]);
+  revalidatePath("/", "layout");
+}
+
+export async function breakItem(dropId: number, broken: boolean) {
+  await q("UPDATE drops SET status=$2 WHERE id=$1", [dropId, broken ? "quebrou" : "projeto"]);
+  revalidatePath("/", "layout");
+}
+
+export async function setProjectStatus(form: FormData) {
+  const id = Number(form.get("id"));
+  const st = String(form.get("status"));
+  if (st === "apagar") {
+    await q("UPDATE drops SET status='guardando', project_id=NULL WHERE project_id=$1 AND status='projeto'", [id]);
+    await q("DELETE FROM projects WHERE id=$1", [id]);
+    revalidatePath("/", "layout");
+    redirect("/projetos");
+  }
+  await q("UPDATE projects SET status=$2 WHERE id=$1", [id, st === "concluido" ? "concluido" : "juntando"]);
+  revalidatePath("/", "layout");
+  redirect(`/projetos/${id}`);
 }
