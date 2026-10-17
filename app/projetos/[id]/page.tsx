@@ -23,7 +23,7 @@ export default async function Projeto({ params }: { params: Promise<{ id: string
        WHERE d.project_id=$1 ORDER BY (d.status='quebrou'), d.refine DESC, d.id`, [id]),
     q<{ id: number; qty: number; char: string | null; mvp: string; status: string; source: string }>(
       `SELECT d.id, d.qty, c.name AS char, d.mvp, d.status, d.source FROM drops d LEFT JOIN characters c ON c.id=d.character_id
-       WHERE d.item_id=$1 AND d.status IN ('guardando','loja') ORDER BY d.dropped_on`, [p.item_id]),
+       WHERE d.item_id=$1 AND d.status IN ('sem_status','guardando','loja') ORDER BY d.dropped_on`, [p.item_id]),
     q<{ item_id: number; price: number | null }>("SELECT item_id, price::float8 AS price FROM prices WHERE item_id = ANY($1::int[])", [[t.ore.id, p.item_id]]),
   ]);
   const price = new Map(priceRows.map((r) => [r.item_id, r.price]));

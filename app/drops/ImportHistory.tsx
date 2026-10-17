@@ -35,7 +35,7 @@ export default function ImportHistory({ rows, projects }: { rows: H[]; projects:
         <label className="f">Quantos<input className="kc-in num" inputMode="numeric" value={n} onChange={(e) => setN(e.target.value.replace(/\D/g, ""))} style={{ width: 80 }} /></label>
         <label className="f">Destino
           <select value={status} onChange={(e) => setStatus(e.target.value)}>
-            {(["guardando", "loja", "vendido", "projeto"] as const).filter((s) => s !== "projeto" || mine.length).map((s) => <option key={s} value={s}>{STATUS_LABEL[s]}</option>)}
+            {(["guardando", "sem_status", "loja", "vendido", "projeto"] as const).filter((s) => s !== "projeto" || mine.length).map((s) => <option key={s} value={s}>{STATUS_LABEL[s]}</option>)}
           </select>
         </label>
         {status === "projeto" && (

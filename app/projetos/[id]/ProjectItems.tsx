@@ -38,7 +38,7 @@ export function AddFromStock({ projectId, stock }: { projectId: number; stock: S
           {stock.map((s) => (
             <tr key={s.id}>
               <td>{s.char ?? "—"} <span className="dim">· {s.mvp}{s.source === "history" ? " · do histórico" : ""}</span></td>
-              <td className="dim">{s.status === "loja" ? "Indo pra loja" : "Guardando"}</td>
+              <td className="dim">{s.status === "loja" ? "Indo pra loja" : s.status === "sem_status" ? "Sem status" : "Guardando"}</td>
               <td className="r num">{s.qty}</td>
               <td className="r" style={{ whiteSpace: "nowrap" }}>
                 <form style={{ display: "inline-flex", gap: 6 }} onSubmit={(e) => {

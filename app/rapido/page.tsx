@@ -26,7 +26,7 @@ export default async function Rapido() {
   return (
     <>
       <h1>Drop rápido</h1>
-      <p className="sub">Personagem → MVP → item. Três toques e o drop fica registrado como Guardando.</p>
+      <p className="sub">Personagem → MVP → item. Três toques e o drop fica registrado. O destino padrão é "Sem status".</p>
       <QuickDrop
         chars={chars.filter((c) => c.sprite || byChar[c.id]).map((c) => ({ id: c.id, name: c.name, sprite: c.sprite, mvps: byChar[c.id] ?? [] }))}
         tables={tables}
