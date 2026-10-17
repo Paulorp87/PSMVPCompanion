@@ -27,6 +27,8 @@ export default async function Projeto({ params }: { params: Promise<{ id: string
     q<{ item_id: number; price: number | null }>("SELECT item_id, price::float8 AS price FROM prices WHERE item_id = ANY($1::int[])", [[t.ore.id, p.item_id]]),
   ]);
   const price = new Map(priceRows.map((r) => [r.item_id, r.price]));
+  const oreStock = (await q<{ qty: number; week: string }>(
+    "SELECT qty, to_char(week,'YYYY-MM-DD') AS week FROM stock WHERE item_id=$1 ORDER BY week DESC LIMIT 1", [t.ore.id]))[0] ?? null;
   const orePrice = price.get(t.ore.id) ?? null;
   const itemPrice = price.get(p.item_id) ?? null;
 
@@ -38,6 +40,7 @@ export default async function Projeto({ params }: { params: Promise<{ id: string
   const itemsFor = (target: number) => (each >= 1 ? 1 : Math.ceil(Math.log(1 - target) / Math.log(1 - each)));
   const oreCost = (orePrice ?? 0) + t.fee;
   const missingToGoal = Math.max(0, p.target_qty - alive.length);
+  const avgOres = attemptsOne(p.item_type, 0, p.target_refine) / (each || 1);
 
   return (
     <>
@@ -62,7 +65,13 @@ export default async function Projeto({ params }: { params: Promise<{ id: string
 
       <div className="stats">
         <div className="stat"><div className="k">Sua meta</div><div className="v num">{alive.length} <span className="dim" style={{ fontSize: 16 }}>/ {p.target_qty}</span></div></div>
-        <div className="stat"><div className="k">{t.ore.name} em média para +{p.target_refine}</div><div className="v num">{n(attemptsOne(p.item_type, 0, p.target_refine) / (each || 1))}</div>{orePrice != null && <div className="note">≈ {nk((attemptsOne(p.item_type, 0, p.target_refine) / (each || 1)) * oreCost)} z com a taxa</div>}</div>
+        <div className="stat"><div className="k">{t.ore.name} em média para +{p.target_refine}</div><div className="v num">{n(avgOres)}</div>{orePrice != null && <div className="note">≈ {nk(avgOres * oreCost)} z com a taxa</div>}</div>
+        <div className="stat"><div className="k">Seu estoque de {t.ore.name}</div>
+          {oreStock ? <>
+            <div className="v num">{n(oreStock.qty)} <span style={{ fontSize: 16, color: "var(--accent)" }}>{Math.round(Math.min(1, oreStock.qty / (avgOres || 1)) * 100)}%</span></div>
+            <div className="note">{oreStock.qty >= avgOres ? "cobre a média" : `faltam ${n(avgOres - oreStock.qty)}`} · em {oreStock.week.split("-").reverse().join("/")}</div>
+          </> : <div className="note" style={{ marginTop: 6 }}>Atualize na página <Link href="/estoque">Estoque</Link>.</div>}
+        </div>
         <div className="stat"><div className="k">Chance real com o que tem</div><div className="v num" style={{ fontSize: 20 }}>{odds.done ? "100%" : pct(odds.chance)}</div><div className="note">pelo menos 1 chegar em +{p.target_refine}</div></div>
       </div>
 

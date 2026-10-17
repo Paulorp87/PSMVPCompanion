@@ -14,7 +14,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <nav>
               <Link href="/">Personagens</Link>
               <Link href="/mvps">Total por MVP</Link>
+              <Link href="/rapido">Drop rápido</Link>
               <Link href="/drops">Drops</Link>
+              <Link href="/estoque">Estoque</Link>
               <Link href="/tabelas">Tabelas de drop</Link>
               <Link href="/projetos">Projetos</Link>
               <Link href="/rentabilidade">Rentabilidade</Link>

@@ -5,6 +5,7 @@ import { q } from "@/lib/db";
 import { getWeeks, totalsByMvp, fmtDate } from "@/lib/data";
 import { refreshPrices } from "@/lib/ps";
 import { STATIC_PRICES } from "@/lib/static-data";
+import { STOCK_IDS } from "@/lib/stock";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 60;
@@ -70,6 +71,7 @@ export default async function Rentabilidade({ searchParams }: { searchParams: Pr
   const agg = new Map<string, DropAgg>();
   // units: unidades avaliadas pelo preço de mercado (já descontada a divisão); fixed: zeny de vendas reais
   const add = (mvp: string, item_id: number, item_name: string, qty: number, units: number, fixed: number) => {
+    if (STOCK_IDS.includes(item_id)) return; // Elunium/Oridecon ficam fora (controlados pelo Estoque)
     const k = `${mvp}|${item_id}`;
     const e = agg.get(k) ?? { mvp, item_id, item_name, qty: 0, units: 0, fixed: 0 };
     e.qty += qty; e.units += units; e.fixed += fixed; agg.set(k, e);
@@ -155,7 +157,7 @@ export default async function Rentabilidade({ searchParams }: { searchParams: Pr
           </tbody>
         </table>
       </div>
-      <p className="note">MVP com kills e sem drop registrado aparece com 0 z — isso também conta na média. Itens vendidos entram pelo preço da venda; itens divididos, só a sua parte. * item sem preço encontrado.</p>
+      <p className="note">MVP com kills e sem drop registrado aparece com 0 z — isso também conta na média. Itens vendidos entram pelo preço da venda; itens divididos, só a sua parte. Elunium e Oridecon ficam fora (são controlados pelo Estoque). * item sem preço encontrado.</p>
 
       <h2>Preços usados</h2>
       {prices.length === 0 ? <p className="note">Nenhum item no período.</p> : (

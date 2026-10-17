@@ -216,3 +216,33 @@ export async function setProjectStatus(form: FormData) {
   revalidatePath("/", "layout");
   redirect(`/projetos/${id}`);
 }
+
+// ---------- Drop rápido ----------
+export async function quickDrop(characterId: number | null, mvp: string, itemId: number, itemName: string, qty: number, split: number) {
+  const r = await q<{ id: number }>(
+    `INSERT INTO drops(dropped_on, character_id, mvp, item_id, item_name, qty, split)
+     VALUES ((now() AT TIME ZONE 'America/Chicago')::date, $1, $2, $3, $4, $5, $6) RETURNING id`,
+    [characterId, mvp, itemId, itemName, Math.max(1, Math.floor(qty)), Math.max(1, Math.floor(split))]);
+  revalidatePath("/", "layout");
+  return r[0].id;
+}
+
+export async function undoDrop(id: number) {
+  await q("DELETE FROM drops WHERE id=$1", [id]);
+  revalidatePath("/", "layout");
+}
+
+// ---------- Estoque semanal ----------
+export async function saveStock(form: FormData) {
+  const week = String(form.get("week") ?? "");
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(week)) redirect("/estoque?e=1");
+  const { STOCK_ITEMS } = await import("@/lib/stock");
+  for (const it of STOCK_ITEMS) {
+    const v = String(form.get(`q${it.id}`) ?? "").trim();
+    if (v === "") continue;
+    await q(`INSERT INTO stock(item_id, week, qty) VALUES ($1,$2,$3)
+             ON CONFLICT (item_id, week) DO UPDATE SET qty=EXCLUDED.qty`, [it.id, week, Math.max(0, Math.floor(Number(v)))]);
+  }
+  revalidatePath("/", "layout");
+  redirect("/estoque?ok=1");
+}
