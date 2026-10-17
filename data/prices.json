@@ -1,0 +1,1026 @@
+{
+ "updated": "2026-10-17",
+ "method": "Mediana das médias diárias de venda (vendAvg) dos últimos 10 dias com venda, na Price Check do Payon Stories.",
+ "items": {
+  "5053": {
+   "name": "Sphinx Hat",
+   "price": 71250,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 01/10/2026 a 16/10/2026"
+  },
+  "2615": {
+   "name": "Safety Ring",
+   "price": 3299999,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 05/10/2026 a 16/10/2026"
+  },
+  "7211": {
+   "name": "Fragment of Rossata Stone",
+   "price": 87500,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 09/07/2026 a 26/09/2026"
+  },
+  "985": {
+   "name": "Elunium",
+   "price": 28244,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 08/10/2026 a 17/10/2026"
+  },
+  "616": {
+   "name": "Old Card Album",
+   "price": 2999999,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 04/10/2026 a 16/10/2026"
+  },
+  "1552": {
+   "name": "Tablet",
+   "price": 30000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 19/04/2026 a 14/09/2026"
+  },
+  "607": {
+   "name": "Yggdrasil Berry",
+   "price": 40000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 04/10/2026 a 15/10/2026"
+  },
+  "4236": {
+   "name": "Amon Ra Card",
+   "price": 300000000,
+   "samples": 6,
+   "source": "mediana de 6 dia(s) com venda, 29/09/2024 a 13/10/2024"
+  },
+  "968": {
+   "name": "Heroic Emblem",
+   "price": 25000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 20/09/2026 a 16/10/2026"
+  },
+  "10018": {
+   "name": "Monkey Circlet",
+   "price": 53116,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 28/09/2026 a 17/10/2026"
+  },
+  "1366": {
+   "name": "Light Epsilon",
+   "price": 1499123,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 06/10/2026 a 16/10/2026"
+  },
+  "2106": {
+   "name": "Shield",
+   "price": 1135970,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 03/10/2026 a 17/10/2026"
+  },
+  "1124": {
+   "name": "Orcish Sword",
+   "price": 90000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 01/09/2026 a 12/10/2026"
+  },
+  "4143": {
+   "name": "Orc Hero Card",
+   "price": null,
+   "samples": 0,
+   "source": "sem dados (o site não respondeu)"
+  },
+  "969": {
+   "name": "Gold",
+   "price": 156500,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 05/10/2026 a 17/10/2026"
+  },
+  "1524": {
+   "name": "Golden Mace",
+   "price": 261111,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 02/10/2026 a 16/10/2026"
+  },
+  "2246": {
+   "name": "Golden Gear",
+   "price": 744444,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 04/10/2026 a 17/10/2026"
+  },
+  "10016": {
+   "name": "Golden Bell",
+   "price": 67500,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 26/09/2026 a 15/10/2026"
+  },
+  "714": {
+   "name": "Emperium",
+   "price": 86166,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 03/10/2026 a 14/10/2026"
+  },
+  "984": {
+   "name": "Oridecon",
+   "price": 18490,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 08/10/2026 a 17/10/2026"
+  },
+  "4128": {
+   "name": "Golden Thief Bug Card",
+   "price": null,
+   "samples": 0,
+   "source": "sem dados (o site não respondeu)"
+  },
+  "7562": {
+   "name": "Ice Scale",
+   "price": null,
+   "samples": 0,
+   "source": "sem dados (o site não respondeu)"
+  },
+  "617": {
+   "name": "Old Purple Box",
+   "price": 89903,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 06/10/2026 a 16/10/2026"
+  },
+  "2111": {
+   "name": "Herald of God",
+   "price": 11000000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 05/10/2026 a 16/10/2026"
+  },
+  "4419": {
+   "name": "Ktullanux Card",
+   "price": null,
+   "samples": 0,
+   "source": "sem dados (o site não respondeu)"
+  },
+  "8136": {
+   "name": "Titanium",
+   "price": 45500,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 02/10/2026 a 15/10/2026"
+  },
+  "8138": {
+   "name": "Level 3 Volcano",
+   "price": 8000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 15/11/2024 a 08/09/2026"
+  },
+  "8137": {
+   "name": "Grand Codex",
+   "price": 5000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 14/09/2026 a 08/10/2026"
+  },
+  "628": {
+   "name": "Well-Dried Bone",
+   "price": 20000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 27/08/2026 a 14/10/2026"
+  },
+  "8135": {
+   "name": "Carapace of the Damned",
+   "price": 1504472,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 05/10/2026 a 16/10/2026"
+  },
+  "8122": {
+   "name": "Guardian's Skull",
+   "price": 252500,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 28/09/2026 a 14/10/2026"
+  },
+  "8134": {
+   "name": "Guardian's Robe",
+   "price": 2888883,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 01/10/2026 a 14/10/2026"
+  },
+  "8095": {
+   "name": "Logi Card",
+   "price": null,
+   "samples": 0,
+   "source": "sem dados (o site não respondeu)"
+  },
+  "7113": {
+   "name": "Broken Pharaoh Emblem",
+   "price": 17500,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 10/08/2026 a 12/09/2026"
+  },
+  "7114": {
+   "name": "Masque of Tutankhamen",
+   "price": 9999,
+   "samples": 6,
+   "source": "mediana de 6 dia(s) com venda, 27/07/2023 a 16/08/2026"
+  },
+  "1136": {
+   "name": "Solar Sword",
+   "price": 333332,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 02/10/2026 a 14/10/2026"
+  },
+  "2327": {
+   "name": "Holy Robe",
+   "price": 950000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 02/09/2026 a 25/09/2026"
+  },
+  "5002": {
+   "name": "Jewel Crown",
+   "price": 1043233,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 01/10/2026 a 16/10/2026"
+  },
+  "1231": {
+   "name": "Bazerald",
+   "price": 10425000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 29/09/2026 a 15/10/2026"
+  },
+  "4148": {
+   "name": "Pharaoh Card",
+   "price": null,
+   "samples": 0,
+   "source": "sem dados (o site não respondeu)"
+  },
+  "1133": {
+   "name": "Fireblend",
+   "price": 700000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 02/10/2026 a 17/10/2026"
+  },
+  "2268": {
+   "name": "Pipe",
+   "price": 179834,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 05/10/2026 a 16/10/2026"
+  },
+  "518": {
+   "name": "Honey",
+   "price": 1038,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 28/09/2026 a 15/10/2026"
+  },
+  "1258": {
+   "name": "Katar of Raging Blaze",
+   "price": 221250,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 07/10/2026 a 16/10/2026"
+  },
+  "1030": {
+   "name": "Tiger's Footskin",
+   "price": 200000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 24/09/2026 a 16/10/2026"
+  },
+  "4123": {
+   "name": "Eddga Card",
+   "price": null,
+   "samples": 0,
+   "source": "sem dados (o site não respondeu)"
+  },
+  "1234": {
+   "name": "Moonlight Dagger",
+   "price": 1999780,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 03/10/2026 a 14/10/2026"
+  },
+  "1525": {
+   "name": "Long Mace",
+   "price": 474998,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 01/09/2026 a 28/09/2026"
+  },
+  "10008": {
+   "name": "Punisher",
+   "price": 25000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 05/08/2026 a 06/10/2026"
+  },
+  "638": {
+   "name": "Silver Knife of Chastity",
+   "price": 350000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 29/09/2026 a 16/10/2026"
+  },
+  "4131": {
+   "name": "Moonlight Flower Card",
+   "price": null,
+   "samples": 0,
+   "source": "sem dados (o site não respondeu)"
+  },
+  "1015": {
+   "name": "Tongue",
+   "price": 4500,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 19/08/2023 a 15/10/2026"
+  },
+  "1223": {
+   "name": "Fortune Sword",
+   "price": 784006,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 01/10/2026 a 16/10/2026"
+  },
+  "1236": {
+   "name": "Sucsamad",
+   "price": 300000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 09/08/2026 a 08/10/2026"
+  },
+  "1014": {
+   "name": "Ant Jaw",
+   "price": 137500,
+   "samples": 2,
+   "source": "mediana de 2 dia(s) com venda, 11/07/2026 a 16/07/2026"
+  },
+  "2288": {
+   "name": "Mr. Scream",
+   "price": 20000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 07/10/2026 a 16/10/2026"
+  },
+  "4121": {
+   "name": "Phreeoni Card",
+   "price": 150000000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 24/06/2023 a 21/07/2025"
+  },
+  "7036": {
+   "name": "Fang of Hatii",
+   "price": 42500,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 03/08/2026 a 04/10/2026"
+  },
+  "1131": {
+   "name": "Ice Falchion",
+   "price": 777777,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 29/09/2026 a 17/10/2026"
+  },
+  "1256": {
+   "name": "Katar of Frozen Icicle",
+   "price": 149999,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 07/10/2026 a 16/10/2026"
+  },
+  "1815": {
+   "name": "Hatii Claw",
+   "price": 706250,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 04/10/2026 a 16/10/2026"
+  },
+  "4324": {
+   "name": "Hatii Card",
+   "price": null,
+   "samples": 0,
+   "source": "sem dados (o site não respondeu)"
+  },
+  "1468": {
+   "name": "Zephyrus",
+   "price": 549562,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 28/09/2026 a 17/10/2026"
+  },
+  "603": {
+   "name": "Old Blue Box",
+   "price": 56833,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 07/10/2026 a 16/10/2026"
+  },
+  "2621": {
+   "name": "Ring",
+   "price": 3591898,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 08/10/2026 a 17/10/2026"
+  },
+  "2506": {
+   "name": "Manteau",
+   "price": 1103701,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 07/10/2026 a 16/10/2026"
+  },
+  "5007": {
+   "name": "Grand Circlet",
+   "price": 253125,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 04/10/2026 a 17/10/2026"
+  },
+  "4318": {
+   "name": "Stormy Knight Card",
+   "price": null,
+   "samples": 0,
+   "source": "sem dados (o site não respondeu)"
+  },
+  "1529": {
+   "name": "Iron Driver",
+   "price": 400000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 02/07/2025 a 28/06/2026"
+  },
+  "1306": {
+   "name": "War Axe",
+   "price": 4000000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 01/09/2025 a 23/10/2025"
+  },
+  "8393": {
+   "name": "Frozen Pick",
+   "price": 989444,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 05/10/2026 a 16/10/2026"
+  },
+  "1417": {
+   "name": "Pole Axe",
+   "price": 16250000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 08/09/2026 a 11/10/2026"
+  },
+  "7070": {
+   "name": "Broken Shell",
+   "price": 35000,
+   "samples": 2,
+   "source": "mediana de 2 dia(s) com venda, 16/10/2025 a 17/10/2025"
+  },
+  "1141": {
+   "name": "Immaterial Sword",
+   "price": 900000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 16/05/2026 a 29/05/2026"
+  },
+  "658": {
+   "name": "Union of Tribe",
+   "price": null,
+   "samples": 0,
+   "source": "sem dados (o site não respondeu)"
+  },
+  "4305": {
+   "name": "Turtle General Card",
+   "price": null,
+   "samples": 0,
+   "source": "sem dados (o site não respondeu)"
+  },
+  "7169": {
+   "name": "Ba Gua",
+   "price": 20000,
+   "samples": 2,
+   "source": "mediana de 2 dia(s) com venda, 27/05/2026 a 01/06/2026"
+  },
+  "10020": {
+   "name": "Grave Keeper's Sword",
+   "price": 5000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 07/10/2026 a 16/10/2026"
+  },
+  "1471": {
+   "name": "Hellfire",
+   "price": 983334,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 10/07/2026 a 16/09/2026"
+  },
+  "5012": {
+   "name": "Ph.D Hat",
+   "price": 50000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 16/07/2026 a 10/10/2026"
+  },
+  "1474": {
+   "name": "Gae Bolg",
+   "price": 2499780,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 07/10/2026 a 16/10/2026"
+  },
+  "7226": {
+   "name": "Pellet",
+   "price": null,
+   "samples": 0,
+   "source": "sem dados (o site não respondeu)"
+  },
+  "661": {
+   "name": "Soft Apron",
+   "price": 70000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 19/09/2026 a 17/10/2026"
+  },
+  "4330": {
+   "name": "Evil Snake Lord Card",
+   "price": null,
+   "samples": 0,
+   "source": "sem dados (o site não respondeu)"
+  },
+  "1615": {
+   "name": "Evil Bone Wand",
+   "price": 79816,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 07/10/2026 a 17/10/2026"
+  },
+  "1237": {
+   "name": "Grimtooth",
+   "price": 462500,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 25/09/2026 a 16/10/2026"
+  },
+  "2334": {
+   "name": "Mage Coat",
+   "price": 292500,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 26/09/2026 a 17/10/2026"
+  },
+  "2507": {
+   "name": "Ancient Cape",
+   "price": 125000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 08/09/2026 a 14/10/2026"
+  },
+  "12020": {
+   "name": "Cursed Water",
+   "price": 12500,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 30/08/2026 a 13/10/2026"
+  },
+  "5162": {
+   "name": "Bone Helm",
+   "price": 8250000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 01/10/2026 a 15/10/2026"
+  },
+  "4168": {
+   "name": "Dark Lord Card",
+   "price": null,
+   "samples": 0,
+   "source": "sem dados (o site não respondeu)"
+  },
+  "7300": {
+   "name": "Gemstone",
+   "price": 10000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 16/07/2023 a 29/07/2023"
+  },
+  "7067": {
+   "name": "Stone Fragment",
+   "price": 999999,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 14/02/2023 a 11/03/2025"
+  },
+  "728": {
+   "name": "Topaz",
+   "price": 7500,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 19/12/2024 a 04/09/2026"
+  },
+  "2296": {
+   "name": "Binoculars",
+   "price": 500000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 25/09/2026 a 16/10/2026"
+  },
+  "2231": {
+   "name": "Gemmed Sallet",
+   "price": 445000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 17/09/2026 a 15/10/2026"
+  },
+  "13013": {
+   "name": "Murasame",
+   "price": 207500,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 14/09/2026 a 07/10/2026"
+  },
+  "4302": {
+   "name": "Tao Gunka Card",
+   "price": null,
+   "samples": 0,
+   "source": "sem dados (o site não respondeu)"
+  },
+  "1232": {
+   "name": "Assassin Dagger",
+   "price": 295000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 02/10/2026 a 15/10/2026"
+  },
+  "2235": {
+   "name": "Crown",
+   "price": 2556250,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 05/10/2026 a 15/10/2026"
+  },
+  "1255": {
+   "name": "Jamadhar",
+   "price": 50000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 06/09/2026 a 16/10/2026"
+  },
+  "1009": {
+   "name": "Hand of God",
+   "price": 35000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 01/10/2026 a 17/10/2026"
+  },
+  "1264": {
+   "name": "Specialty Jur",
+   "price": 4472222,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 07/10/2026 a 16/10/2026"
+  },
+  "4144": {
+   "name": "Osiris Card",
+   "price": 420000000,
+   "samples": 6,
+   "source": "mediana de 6 dia(s) com venda, 11/07/2024 a 16/07/2024"
+  },
+  "2601": {
+   "name": "Ring",
+   "price": 500000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 04/10/2026 a 17/10/2026"
+  },
+  "1473": {
+   "name": "Wizardry Staff",
+   "price": 4000000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 05/10/2026 a 17/10/2026"
+  },
+  "1722": {
+   "name": "Ballista",
+   "price": 1000000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 14/09/2026 a 14/10/2026"
+  },
+  "1557": {
+   "name": "Book of the Apocalypse",
+   "price": 150000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 12/08/2026 a 16/10/2026"
+  },
+  "4134": {
+   "name": "Dracula Card",
+   "price": null,
+   "samples": 0,
+   "source": "sem dados (o site não respondeu)"
+  },
+  "7093": {
+   "name": "Cogwheel",
+   "price": 800,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 13/05/2025 a 13/07/2025"
+  },
+  "8279": {
+   "name": "Ring of the Claw",
+   "price": 22500000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 08/09/2026 a 09/10/2026"
+  },
+  "7327": {
+   "name": "Flashlight",
+   "price": null,
+   "samples": 0,
+   "source": "sem dados (o site não respondeu)"
+  },
+  "1531": {
+   "name": "Wrench",
+   "price": 900000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 23/08/2024 a 12/10/2026"
+  },
+  "8428": {
+   "name": "Volt Rapier",
+   "price": 1875000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 21/09/2026 a 16/10/2026"
+  },
+  "7317": {
+   "name": "Rusty Screw",
+   "price": 888,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 03/10/2026 a 16/10/2026"
+  },
+  "4342": {
+   "name": "RSX-0806 Card",
+   "price": null,
+   "samples": 0,
+   "source": "sem dados (o site não respondeu)"
+  },
+  "1363": {
+   "name": "Bloody Axe",
+   "price": 3835700,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 07/10/2026 a 17/10/2026"
+  },
+  "2627": {
+   "name": "Belt",
+   "price": 25000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 15/07/2026 a 01/10/2026"
+  },
+  "4135": {
+   "name": "Orc Lord Card",
+   "price": null,
+   "samples": 0,
+   "source": "sem dados (o site não respondeu)"
+  },
+  "1413": {
+   "name": "Gungnir",
+   "price": 799999,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 27/08/2026 a 11/10/2026"
+  },
+  "2249": {
+   "name": "Coronet",
+   "price": 1199999,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 24/08/2026 a 17/10/2026"
+  },
+  "7018": {
+   "name": "Young Twig",
+   "price": null,
+   "samples": 0,
+   "source": "sem dados (o site não respondeu)"
+  },
+  "4132": {
+   "name": "Mistress Card",
+   "price": null,
+   "samples": 0,
+   "source": "sem dados (o site não respondeu)"
+  },
+  "10006": {
+   "name": "Queen's Hair Ornament",
+   "price": 19999,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 30/09/2026 a 16/10/2026"
+  },
+  "2234": {
+   "name": "Tiara",
+   "price": 596250,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 06/10/2026 a 17/10/2026"
+  },
+  "639": {
+   "name": "Armlet of Obedience",
+   "price": 24622,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 29/09/2026 a 16/10/2026"
+  },
+  "7020": {
+   "name": "Mother's Nightmare",
+   "price": 1000000,
+   "samples": 1,
+   "source": "mediana de 1 dia(s) com venda, 14/07/2023 a 14/07/2023"
+  },
+  "4146": {
+   "name": "Maya Card",
+   "price": 377777777,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 01/05/2026 a 02/06/2026"
+  },
+  "2317": {
+   "name": "Full Plate",
+   "price": 2470834,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 06/10/2026 a 16/10/2026"
+  },
+  "1162": {
+   "name": "Broad Sword",
+   "price": 1499999,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 30/09/2026 a 17/10/2026"
+  },
+  "1168": {
+   "name": "Zweihander",
+   "price": 78000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 07/10/2026 a 16/10/2026"
+  },
+  "2258": {
+   "name": "Spiky Band",
+   "price": 866250,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 02/10/2026 a 16/10/2026"
+  },
+  "1411": {
+   "name": "Lance",
+   "price": 175000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 28/11/2025 a 29/09/2026"
+  },
+  "4142": {
+   "name": "Doppelganger Card",
+   "price": null,
+   "samples": 0,
+   "source": "sem dados (o site não respondeu)"
+  },
+  "2649": {
+   "name": "Morpheus's Bracelet",
+   "price": 1200000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 09/09/2026 a 13/10/2026"
+  },
+  "2648": {
+   "name": "Morpheus's Ring",
+   "price": 1500000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 22/08/2026 a 16/10/2026"
+  },
+  "7451": {
+   "name": "Fire Dragon Scale",
+   "price": null,
+   "samples": 0,
+   "source": "sem dados (o site não respondeu)"
+  },
+  "2518": {
+   "name": "Morpheus's Shawl",
+   "price": 9000000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 27/09/2026 a 16/10/2026"
+  },
+  "4386": {
+   "name": "Detardeurus Card",
+   "price": null,
+   "samples": 0,
+   "source": "sem dados (o site não respondeu)"
+  },
+  "7108": {
+   "name": "Piece of Shield",
+   "price": null,
+   "samples": 0,
+   "source": "sem dados (o site não respondeu)"
+  },
+  "7109": {
+   "name": "Shining Spear Blade",
+   "price": null,
+   "samples": 0,
+   "source": "sem dados (o site não respondeu)"
+  },
+  "4276": {
+   "name": "Lord of The Dead Card",
+   "price": null,
+   "samples": 0,
+   "source": "sem dados (o site não respondeu)"
+  },
+  "1127": {
+   "name": "Saber",
+   "price": 2716666,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 07/10/2026 a 16/10/2026"
+  },
+  "1125": {
+   "name": "Ring Pommel Saber",
+   "price": 92500,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 30/09/2026 a 15/10/2026"
+  },
+  "1135": {
+   "name": "Cutlus",
+   "price": 299999,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 06/10/2026 a 17/10/2026"
+  },
+  "1128": {
+   "name": "Haedonggum",
+   "price": 1958332,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 25/09/2026 a 17/10/2026"
+  },
+  "5019": {
+   "name": "Corsair",
+   "price": 499986,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 29/09/2026 a 16/10/2026"
+  },
+  "4137": {
+   "name": "Drake Card",
+   "price": null,
+   "samples": 0,
+   "source": "sem dados (o site não respondeu)"
+  },
+  "1020": {
+   "name": "Black Hair",
+   "price": 898,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 12/09/2026 a 11/10/2026"
+  },
+  "12395": {
+   "name": "Tantan Noodle",
+   "price": 375000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 14/08/2026 a 16/10/2026"
+  },
+  "7165": {
+   "name": "Transparent Celestial Robe",
+   "price": null,
+   "samples": 0,
+   "source": "sem dados (o site não respondeu)"
+  },
+  "7166": {
+   "name": "Soft Silk",
+   "price": null,
+   "samples": 0,
+   "source": "sem dados (o site não respondeu)"
+  },
+  "4372": {
+   "name": "White Lady Card",
+   "price": null,
+   "samples": 0,
+   "source": "sem dados (o site não respondeu)"
+  },
+  "1220": {
+   "name": "Gladius",
+   "price": 1674683,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 08/10/2026 a 17/10/2026"
+  },
+  "2336": {
+   "name": "Thief Clothes",
+   "price": 2339364,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 05/10/2026 a 16/10/2026"
+  },
+  "1164": {
+   "name": "Muramasa",
+   "price": 1442406,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 03/10/2026 a 15/10/2026"
+  },
+  "2625": {
+   "name": "Brooch",
+   "price": 3610166,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 08/10/2026 a 17/10/2026"
+  },
+  "13303": {
+   "name": "Huuma Blaze Shuriken",
+   "price": 81250,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 07/10/2026 a 16/10/2026"
+  },
+  "1165": {
+   "name": "Masamune",
+   "price": 10000000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 26/10/2023 a 29/04/2024"
+  },
+  "4263": {
+   "name": "Samurai Spector Card",
+   "price": null,
+   "samples": 0,
+   "source": "sem dados (o site não respondeu)"
+  },
+  "8265": {
+   "name": "Astral Prayer Beads",
+   "price": 2000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 12/09/2026 a 16/10/2026"
+  },
+  "8298": {
+   "name": "Sacred Saint's Robe",
+   "price": 6929629,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 06/10/2026 a 16/10/2026"
+  },
+  "8300": {
+   "name": "Staff of the Priestess",
+   "price": 3925000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 23/09/2026 a 16/10/2026"
+  },
+  "8259": {
+   "name": "Star Fruit Crystal",
+   "price": 18750,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 30/08/2026 a 17/10/2026"
+  },
+  "8248": {
+   "name": "Lady Huo Card",
+   "price": null,
+   "samples": 0,
+   "source": "sem dados (o site não respondeu)"
+  },
+  "8165": {
+   "name": "Poring Dagger",
+   "price": 99999,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 05/10/2026 a 15/10/2026"
+  },
+  "8166": {
+   "name": "Costume Poring Party Hat",
+   "price": 50000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 08/09/2026 a 11/10/2026"
+  },
+  "14516": {
+   "name": "Magnificat Scroll",
+   "price": 10000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 21/06/2026 a 12/10/2026"
+  },
+  "1520": {
+   "name": "Chain",
+   "price": 2955086,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 08/10/2026 a 17/10/2026"
+  },
+  "8219": {
+   "name": "King Poring Card",
+   "price": null,
+   "samples": 0,
+   "source": "sem dados (o site não respondeu)"
+  }
+ }
+}

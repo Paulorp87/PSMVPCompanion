@@ -1,5 +1,6 @@
 // Cliente das rotas públicas do tools.payonstories.com (não documentadas).
 import { q } from "./db";
+import { STATIC_MVPS } from "./static-data";
 
 const BASE = "https://tools.payonstories.com";
 const WEEK_MS = 7 * 24 * 3600 * 1000;
@@ -23,6 +24,8 @@ export async function mvpInfo(name: string, force = false): Promise<MvpInfo> {
   const cached = await q<{ mob_id: number | null; drops: Drop[] | null; fetched_at: Date | null }>(
     "SELECT mob_id, drops, fetched_at FROM mvps WHERE lower(name)=lower($1)", [name]);
   const c = cached[0];
+  const st = STATIC_MVPS[name];
+  if (st && !force && (!c?.mob_id || c.mob_id === st.mob_id)) return { name, mob_id: st.mob_id, drops: st.drops };
   if (c && c.drops && c.fetched_at && !force && Date.now() - c.fetched_at.getTime() < WEEK_MS) {
     return { name, mob_id: c.mob_id, drops: c.drops };
   }

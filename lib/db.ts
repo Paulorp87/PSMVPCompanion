@@ -1,5 +1,6 @@
 import { Pool, PoolClient } from "pg";
 import { SEED_CHARACTERS, SEED_WEEKS, ADJUST_CHARACTER, parseList, slug } from "./seed";
+import { STATIC_MVPS, STATIC_PRICES } from "./static-data";
 
 const g = globalThis as unknown as { _pool?: Pool; _ready?: Promise<void> };
 
@@ -78,9 +79,31 @@ async function init(): Promise<void> {
     await c.query(SCHEMA);
     const { rows } = await c.query("SELECT count(*)::int AS n FROM characters");
     if (rows[0].n === 0) await seed(c);
+    await loadStatic(c);
     await c.query("SELECT pg_advisory_unlock(424242)");
   } finally {
     c.release();
+  }
+}
+
+// Tabelas de drop e preços embutidos no código (puxados pelo Claude).
+async function loadStatic(c: PoolClient) {
+  for (const [name, m] of Object.entries(STATIC_MVPS)) {
+    await c.query(
+      `INSERT INTO mvps(name, mob_id, drops, fetched_at) VALUES ($1,$2,$3,now())
+       ON CONFLICT (name) DO UPDATE SET mob_id=COALESCE(mvps.mob_id, EXCLUDED.mob_id), drops=EXCLUDED.drops, fetched_at=now()
+       WHERE mvps.drops IS NULL OR jsonb_array_length(mvps.drops)=0 OR EXCLUDED.mob_id = mvps.mob_id`,
+      [name, m.mob_id, JSON.stringify(m.drops)]);
+  }
+  const day = STATIC_PRICES.updated;
+  for (const [id, p] of Object.entries(STATIC_PRICES.items)) {
+    if (p.price == null) continue;
+    await c.query(
+      `INSERT INTO prices(item_id, name, price, samples, source, fetched_at) VALUES ($1,$2,$3,$4,$5,$6::date + time '12:00')
+       ON CONFLICT (item_id) DO UPDATE SET name=EXCLUDED.name, price=EXCLUDED.price, samples=EXCLUDED.samples,
+         source=EXCLUDED.source, fetched_at=EXCLUDED.fetched_at
+       WHERE prices.fetched_at < EXCLUDED.fetched_at`,
+      [Number(id), p.name, p.price, p.samples, p.source, day]);
   }
 }
 

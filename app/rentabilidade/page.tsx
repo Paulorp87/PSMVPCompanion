@@ -3,7 +3,8 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { q } from "@/lib/db";
 import { getWeeks, totalsByMvp, fmtDate } from "@/lib/data";
-import { refreshPrices, SALES_SAMPLE } from "@/lib/ps";
+import { refreshPrices } from "@/lib/ps";
+import { STATIC_PRICES } from "@/lib/static-data";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 60;
@@ -117,7 +118,7 @@ export default async function Rentabilidade({ searchParams }: { searchParams: Pr
         {first
           ? <>Kills de {fmtDate(base)} até {fmtDate(last)} e drops registrados nesse período{complete.length > 0 && <>, mais todas as kills e drops dos personagens com histórico completo</>}.</>
           : <>Todas as kills e drops dos personagens com histórico completo.</>}
-        Preço de cada item é a média das últimas {SALES_SAMPLE} vendas na Price Check (item +0, sem carta).
+        Preço de cada item vem da Price Check do Payon Stories.
       </p>
       {sp.atualizado && <p className="flash">Preços atualizados.</p>}
 
@@ -178,12 +179,9 @@ export default async function Rentabilidade({ searchParams }: { searchParams: Pr
           </label>
           <button className="btn ghost">Aplicar</button>
         </form> : <span />}
-        <form action={forceRefresh}>
-          <input type="hidden" name="desde" value={sp.desde ?? ""} />
-          <button className="btn ghost">Atualizar preços agora</button>
-        </form>
+<span />
       </div>
-      <p className="note">Os preços se atualizam sozinhos quando têm mais de 7 dias.</p>
+      <p className="note">Preços puxados da Price Check em {fmtDate(STATIC_PRICES.updated)}: mediana das médias diárias dos últimos 10 dias com venda. Para atualizar, peça ao Claude.</p>
     </>
   );
 }
