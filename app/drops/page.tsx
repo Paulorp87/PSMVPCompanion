@@ -11,7 +11,7 @@ export const dynamic = "force-dynamic";
 
 export default async function Drops({ searchParams }: { searchParams: Promise<{ ok?: string; e?: string; mvp?: string; status?: string }> }) {
   const sp = await searchParams;
-  const filter = (STATUSES as readonly string[]).includes(sp.status ?? "") ? (sp.status as Status) : null;
+  const filter = sp.status === "todos" ? null : (STATUSES as readonly string[]).includes(sp.status ?? "") ? (sp.status as Status) : "sem_status";
   const [mvps, chars, rows, counts, projects, hist] = await Promise.all([
     knownMvps(),
     getCharacters(),
@@ -41,10 +41,10 @@ export default async function Drops({ searchParams }: { searchParams: Promise<{ 
 
       <h2>Seus drops</h2>
       <div className="row" style={{ marginBottom: 10, gap: 6 }}>
-        <Link href="/drops" className={`btn small ${filter ? "ghost" : ""}`}>Todos ({total})</Link>
         {STATUSES.map((s) => (
           <Link key={s} href={`/drops?status=${s}`} className={`btn small ${filter === s ? "" : "ghost"}`}>{STATUS_LABEL[s]} ({count.get(s) ?? 0})</Link>
         ))}
+        <Link href="/drops?status=todos" className={`btn small ${filter ? "ghost" : ""}`}>Todos ({total})</Link>
       </div>
       {rows.length === 0 ? <p className="note">Nenhum drop {filter ? `com status "${STATUS_LABEL[filter]}"` : "registrado ainda"}.</p> : (
         <div className="tbl">
