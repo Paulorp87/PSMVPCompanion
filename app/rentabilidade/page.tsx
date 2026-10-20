@@ -29,7 +29,7 @@ export default async function Rentabilidade({ searchParams }: { searchParams: Pr
   const sp = await searchParams;
   const weeks = await getWeeks();
   const last = weeks[0];
-  const first = (await q<{ d: string | null }>("SELECT to_char(MIN(dropped_on),'YYYY-MM-DD') AS d FROM drops WHERE source <> 'history'"))[0]?.d ?? null;
+  const first = (await q<{ d: string | null }>("SELECT to_char(MIN(dropped_on),'YYYY-MM-DD') AS d FROM drops WHERE source = 'drop'"))[0]?.d ?? null;
   const complete = await q<{ character_id: number; mvp: string }>("SELECT character_id, mvp FROM history_flag WHERE complete");
   const isHist = new Set(complete.map((c) => `${c.character_id}|${c.mvp}`));
 
@@ -65,7 +65,7 @@ export default async function Rentabilidade({ searchParams }: { searchParams: Pr
 
   const regs = await q<{ character_id: number | null; mvp: string; item_id: number; item_name: string; qty: number; dropped_on: string; status: string; sold_price: number | null; split: number }>(
     `SELECT character_id, mvp, item_id, item_name, qty, to_char(dropped_on,'YYYY-MM-DD') AS dropped_on, status, sold_price::float8 AS sold_price, split
-     FROM drops WHERE dropped_on <= $1::date AND source <> 'history'`, [last]);
+     FROM drops WHERE dropped_on <= $1::date AND source = 'drop'`, [last]);
   const hist = await q<{ character_id: number; mvp: string; item_id: number; item_name: string; qty: number }>(
     "SELECT h.character_id, h.mvp, h.item_id, h.item_name, h.qty FROM history h JOIN history_flag f USING (character_id, mvp) WHERE f.complete");
   const agg = new Map<string, DropAgg>();
@@ -85,7 +85,7 @@ export default async function Rentabilidade({ searchParams }: { searchParams: Pr
     else add(r.mvp, r.item_id, r.item_name, r.qty, r.qty * share, 0);
   }
   const drops = [...agg.values()];
-  const pending = (await q<{ n: number }>("SELECT COALESCE(SUM(qty),0)::int AS n FROM drops WHERE dropped_on > $1::date AND source <> 'history'", [last]))[0].n;
+  const pending = (await q<{ n: number }>("SELECT COALESCE(SUM(qty),0)::int AS n FROM drops WHERE dropped_on > $1::date AND source = 'drop'", [last]))[0].n;
 
   const items = [...new Map(drops.map((d) => [d.item_id, { id: d.item_id, name: d.item_name }])).values()];
   await refreshPrices(items); // só busca o que estiver sem preço ou com mais de 7 dias

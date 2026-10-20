@@ -6,6 +6,7 @@ import { STATUSES, STATUS_LABEL, type Status } from "@/lib/status";
 import DropForm from "./DropForm";
 import DropRow, { type DropRowData } from "./DropRow";
 import ImportHistory from "./ImportHistory";
+import { TAMING } from "@/lib/taming";
 
 export const dynamic = "force-dynamic";
 
@@ -17,7 +18,7 @@ export default async function Drops({ searchParams }: { searchParams: Promise<{ 
     getCharacters(),
     q<DropRowData>(
       `SELECT d.id, to_char(d.dropped_on,'YYYY-MM-DD') AS dropped_on, d.mvp, d.item_id, d.item_name, d.qty, c.name AS char,
-              d.status, d.sold_price::float8 AS sold_price, d.split, d.project_id, d.source, d.refine
+              d.status, d.sold_price::float8 AS sold_price, d.split, d.project_id, d.source, d.refine, d.capture
        FROM drops d LEFT JOIN characters c ON c.id=d.character_id
        WHERE ($1::text IS NULL OR d.status=$1) ORDER BY d.dropped_on DESC, d.id DESC LIMIT 300`, [filter]),
     q<{ status: string; n: number }>("SELECT status, SUM(qty)::int AS n FROM drops GROUP BY status"),
@@ -28,6 +29,9 @@ export default async function Drops({ searchParams }: { searchParams: Promise<{ 
                                   AND d.mvp=h.mvp AND d.item_id=h.item_id),0))::int AS free
        FROM history h JOIN characters c ON c.id=h.character_id ORDER BY c.name, h.mvp, h.item_name`),
   ]);
+  const caps = await q<{ item_id: number; ok: number; fail: number }>(
+    `SELECT item_id, COALESCE(SUM(qty) FILTER (WHERE capture='sucesso'),0)::int AS ok, COALESCE(SUM(qty) FILTER (WHERE capture='falha'),0)::int AS fail
+     FROM drops WHERE capture IS NOT NULL GROUP BY item_id`);
   const count = new Map(counts.map((c) => [c.status, c.n]));
   const total = counts.reduce((a, c) => a + c.n, 0);
 
@@ -52,14 +56,37 @@ export default async function Drops({ searchParams }: { searchParams: Promise<{ 
             <thead><tr><th>Data</th><th>MVP / personagem</th><th>Item</th><th className="r">Qtd</th><th>Destino</th><th className="r" title="Dividido entre quantas pessoas">Dividir</th><th></th></tr></thead>
             <tbody>
               {rows.map((r) => (
-                <DropRow key={`${r.id}-${r.qty}-${r.status}-${r.project_id}-${r.split}-${r.sold_price}`} d={r} projects={projects}
+                <DropRow key={`${r.id}-${r.qty}-${r.status}-${r.project_id}-${r.split}-${r.sold_price}-${r.capture}`} d={r} projects={projects}
                   onDelete={<form action={deleteDrop} style={{ display: "inline" }}><input type="hidden" name="id" value={r.id} /><button className="btn ghost small" title="Apagar">✕</button></form>} />
               ))}
             </tbody>
           </table>
         </div>
       )}
-      <p className="note">Com quantidade maior que 1, mude o número na coluna Qtd para aplicar o destino só a parte dos itens. "Dividir" é o número de pessoas que dividem o item, e na rentabilidade entra só a sua parte.</p>
+      <p className="note">Com quantidade maior que 1, mude o número na coluna Qtd para aplicar o destino só a parte dos itens. "Dividir" é o número de pessoas que dividem o item, e na rentabilidade entra só a sua parte. Em item de captura, "Usei" pergunta se capturou: se sim, o ovo entra na lista como Sem status.</p>
+
+      {caps.length > 0 && (
+        <>
+          <h2>Capturas</h2>
+          <div className="tbl">
+            <table>
+              <thead><tr><th>Pet</th><th>Item</th><th className="r">Tentativas</th><th className="r">Capturas</th><th className="r">Taxa</th></tr></thead>
+              <tbody>
+                {caps.map((c) => {
+                  const t = TAMING[c.item_id]; const tries = c.ok + c.fail;
+                  return (
+                    <tr key={c.item_id}>
+                      <td>{t?.pet ?? "—"}</td><td className="dim">#{c.item_id}</td>
+                      <td className="r num">{tries}</td><td className="r num up">{c.ok}</td>
+                      <td className="r num">{tries ? Math.round((c.ok / tries) * 100) + "%" : "—"}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </>
+      )}
 
       <h2>Importar do histórico</h2>
       <ImportHistory rows={hist} projects={projects} />

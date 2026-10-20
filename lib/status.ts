@@ -1,4 +1,4 @@
-export const STATUSES = ["sem_status", "guardando", "loja", "vendido", "quebrou", "projeto"] as const;
+export const STATUSES = ["sem_status", "guardando", "loja", "vendido", "quebrou", "projeto", "usado"] as const;
 export type Status = (typeof STATUSES)[number];
 export const STATUS_LABEL: Record<Status, string> = {
   sem_status: "Sem status",
@@ -7,4 +7,5 @@ export const STATUS_LABEL: Record<Status, string> = {
   vendido: "Vendido",
   quebrou: "Quebrou",
   projeto: "Projeto",
+  usado: "Usei",
 };

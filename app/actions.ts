@@ -248,3 +248,38 @@ export async function saveStock(form: FormData) {
   revalidatePath("/", "layout");
   redirect("/estoque?ok=1");
 }
+
+// ---------- Usei / captura ----------
+/** Marca `n` unidades como usadas. Itens de captura: `caught` delas viram ovo, o resto fica como falha. */
+export async function useItem(dropId: number, n: number, caught: number) {
+  const { TAMING } = await import("@/lib/taming");
+  const cur = (await q<{ qty: number; item_id: number; character_id: number | null; mvp: string }>(
+    "SELECT qty, item_id, character_id, mvp FROM drops WHERE id=$1", [dropId]))[0];
+  if (!cur) return;
+  n = Math.max(1, Math.min(Math.floor(n), cur.qty));
+  const tame = TAMING[cur.item_id];
+  if (!tame) {
+    const id = await splitOff(dropId, n);
+    if (id) await q("UPDATE drops SET status='usado', project_id=NULL WHERE id=$1", [id]);
+  } else {
+    caught = Math.max(0, Math.min(Math.floor(caught), n));
+    if (caught > 0) {
+      const id = await splitOff(dropId, caught);
+      if (id) await q("UPDATE drops SET status='usado', capture='sucesso', project_id=NULL WHERE id=$1", [id]);
+      await q(
+        `INSERT INTO drops(dropped_on, character_id, mvp, item_id, item_name, qty, status, source)
+         VALUES ((now() AT TIME ZONE 'America/Chicago')::date, $1, $2, $3, $4, $5, 'sem_status', 'captura')`,
+        [cur.character_id, cur.mvp, tame.eggId, tame.eggName, caught]);
+    }
+    const fails = n - caught;
+    if (fails > 0) {
+      const left = (await q<{ qty: number }>("SELECT qty FROM drops WHERE id=$1", [dropId]))[0];
+      // se a linha original foi toda para "sucesso", não sobra nada para falha
+      if (left && !(caught > 0 && left.qty === caught && caught === cur.qty)) {
+        const id = await splitOff(dropId, fails);
+        if (id) await q("UPDATE drops SET status='usado', capture='falha', project_id=NULL WHERE id=$1", [id]);
+      }
+    }
+  }
+  revalidatePath("/", "layout");
+}

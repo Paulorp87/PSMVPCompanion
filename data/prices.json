@@ -1021,6 +1021,36 @@
    "price": null,
    "samples": 0,
    "source": "sem venda registrada na Price Check"
+  },
+  "9020": {
+   "name": "Sohee Egg",
+   "price": 4999999,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 08/10/2026 a 20/10/2026"
+  },
+  "9021": {
+   "name": "Isis Egg",
+   "price": 200000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 21/08/2026 a 17/10/2026"
+  },
+  "9027": {
+   "name": "Alice Egg",
+   "price": 1500000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 14/08/2026 a 20/10/2026"
+  },
+  "9010": {
+   "name": "Baby Desert Wolf Egg",
+   "price": 700000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 10/10/2026 a 20/10/2026"
+  },
+  "9030": {
+   "name": "Green Maiden Egg",
+   "price": 3525000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda, 03/07/2026 a 29/08/2026"
   }
  }
 }
