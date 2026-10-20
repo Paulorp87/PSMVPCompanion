@@ -153,8 +153,8 @@ export async function importFromHistory(characterId: number, mvp: string, itemId
   const rows = st === "projeto" ? Array(n).fill(1) : [n];
   for (const qty of rows) {
     await q(
-      `INSERT INTO drops(dropped_on, character_id, mvp, item_id, item_name, qty, status, project_id, source)
-       VALUES (CURRENT_DATE,$1,$2,$3,$4,$5,$6,$7,'history')`,
+      `INSERT INTO drops(dropped_on, character_id, mvp, item_id, item_name, qty, status, project_id, source, project_at)
+       VALUES (CURRENT_DATE,$1,$2,$3,$4,$5,$6,$7,'history', CASE WHEN $7::int IS NULL THEN NULL ELSE now() END)`,
       [characterId, mvp, itemId, h[0].item_name, qty, st, st === "projeto" ? projectId : null]);
   }
   revalidatePath("/", "layout");
@@ -187,7 +187,7 @@ export async function addToProject(projectId: number, dropId: number, n: number)
   for (let i = 0; i < n; i++) {
     const id = await splitOff(dropId, 1);
     if (!id) break;
-    await q("UPDATE drops SET status='projeto', project_id=$2, qty=1 WHERE id=$1", [id, projectId]);
+    await q("UPDATE drops SET status='projeto', project_id=$2, qty=1, project_at=COALESCE(project_at, now()) WHERE id=$1", [id, projectId]);
     if (id === dropId) break; // era a última unidade
   }
   revalidatePath("/", "layout");
