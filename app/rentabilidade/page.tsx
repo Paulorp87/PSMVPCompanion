@@ -76,7 +76,16 @@ export default async function Rentabilidade({ searchParams }: { searchParams: Pr
     const e = agg.get(k) ?? { mvp, item_id, item_name, qty: 0, units: 0, fixed: 0 };
     e.qty += qty; e.units += units; e.fixed += fixed; agg.set(k, e);
   };
-  for (const h of hist) add(h.mvp, h.item_id, h.item_name, h.qty, h.qty, 0);
+  // itens importados do histórico e vendidos: entram pelo preço da venda (no lugar do preço médio)
+  const soldHist = await q<{ character_id: number; mvp: string; item_id: number; qty: number; sold_price: number; split: number }>(
+    `SELECT character_id, mvp, item_id, qty, sold_price::float8 AS sold_price, split FROM drops
+     WHERE source='history' AND status='vendido' AND sold_price IS NOT NULL`);
+  for (const h of hist) {
+    const sold = soldHist.filter((x) => x.character_id === h.character_id && x.mvp === h.mvp && x.item_id === h.item_id);
+    const soldQty = Math.min(h.qty, sold.reduce((a, x) => a + x.qty, 0));
+    const soldValue = sold.reduce((a, x) => a + (x.sold_price * x.qty) / Math.max(1, x.split), 0);
+    add(h.mvp, h.item_id, h.item_name, h.qty, h.qty - soldQty, soldQty > 0 ? soldValue : 0);
+  }
   for (const r of regs) {
     const histPair = r.character_id != null && isHist.has(`${r.character_id}|${r.mvp}`);
     if (!(histPair || (first && r.dropped_on > base))) continue;
