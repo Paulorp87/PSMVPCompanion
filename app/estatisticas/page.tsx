@@ -34,6 +34,8 @@ export default async function Estatisticas({ searchParams }: { searchParams: Pro
     `SELECT d.character_id, d.mvp, d.item_id, d.qty, to_char(d.dropped_on,'YYYY-MM-DD') AS d, d.status, d.sold_price::float8 AS sold_price, d.split, p.price::float8 AS price
      FROM drops d LEFT JOIN prices p ON p.item_id=d.item_id WHERE d.source='drop'`);
   const realDrops = drops.filter((x) => !STOCK_IDS.includes(x.item_id) && keep(x));
+  const supRows = (await q<{ character_id: number | null; mvp: string; d: string }>(
+    "SELECT character_id, mvp, to_char(day,'YYYY-MM-DD') AS d FROM support")).filter(keep);
   const firstDrop = realDrops.reduce<string | null>((a, x) => (!a || x.d < a ? x.d : a), null);
 
   const weeksData = weeks.slice(1).map((w, i) => {
@@ -45,25 +47,28 @@ export default async function Estatisticas({ searchParams }: { searchParams: Pro
       return a + (unit * x.qty) / Math.max(1, x.split);
     }, 0);
     const tracked = !!firstDrop && w >= firstDrop; // semana com registro de drops
-    return { w, prev, kills, value, perKill: tracked && kills > 0 ? value / kills : null };
+    const sup = supRows.filter((x) => x.d > prev && x.d <= w).length;
+    const all = kills + sup;
+    return { w, prev, kills, sup, all, value, perKill: tracked && all > 0 ? value / all : null };
   });
 
-  const killVals = weeksData.map((x) => x.kills);
+  const killVals = weeksData.map((x) => x.all);
   const killAvg = killVals.length ? killVals.reduce((a, b) => a + b, 0) / killVals.length : null;
   const profVals = weeksData.map((x) => x.perKill).filter((v): v is number => v != null);
   const profAvg = profVals.length ? profVals.reduce((a, b) => a + b, 0) / profVals.length : null;
   const cur = weeksData[weeksData.length - 1];
-  const best = weeksData.reduce<typeof cur | null>((a, x) => (!a || x.kills > a.kills ? x : a), null);
+  const best = weeksData.reduce<typeof cur | null>((a, x) => (!a || x.all > a.all ? x : a), null);
   const bestProf = weeksData.reduce<typeof cur | null>((a, x) => (x.perKill != null && (!a || x.perKill > (a.perKill ?? -1)) ? x : a), null);
   const vsAvg = (v: number | null | undefined, avg: number | null) => (v == null || !avg ? null : ((v - avg) / avg) * 100);
 
   const killBars: Bar[] = weeksData.map((x) => ({
     label: dm(x.w), sub: `desde ${dm(x.prev)}`, value: x.kills,
-    tip: `${fmtDate(x.prev)} → ${fmtDate(x.w)}: ${n(x.kills)} kills`,
+    value2: x.sup,
+    tip: `${fmtDate(x.prev)} → ${fmtDate(x.w)}: ${n(x.kills)} kills${x.sup ? ` + ${n(x.sup)} como suporte` : ""}`,
   }));
   const profBars: Bar[] = weeksData.map((x) => ({
     label: dm(x.w), sub: `desde ${dm(x.prev)}`, value: x.perKill,
-    tip: x.perKill == null ? `${fmtDate(x.w)}: sem drops registrados` : `${fmtDate(x.w)}: ${n(x.perKill)} z/kill · ${n(x.value)} z em ${n(x.kills)} kills`,
+    tip: x.perKill == null ? `${fmtDate(x.w)}: sem drops registrados` : `${fmtDate(x.w)}: ${n(x.perKill)} z/kill · ${n(x.value)} z em ${n(x.all)} kills${x.sup ? ` (com ${n(x.sup)} de suporte)` : ""}`,
   }));
 
   // ---- semana atual por MVP / por personagem ----
@@ -132,11 +137,11 @@ export default async function Estatisticas({ searchParams }: { searchParams: Pro
         <>
           <h2 style={{ marginTop: 0 }}>MVPs mortos por semana</h2>
           <div className="stats">
-            <div className="stat"><div className="k">Semana atual ({dm(cur.prev)} → {dm(cur.w)})</div><div className="v num accent">{n(cur.kills)}</div><div className="note">{pctTag(vsAvg(cur.kills, killAvg))}</div></div>
+            <div className="stat"><div className="k">Semana atual ({dm(cur.prev)} → {dm(cur.w)})</div><div className="v num accent">{n(cur.all)}</div><div className="note">{cur.sup > 0 && <span className="dim">{n(cur.kills)} solo + {n(cur.sup)} suporte · </span>}{pctTag(vsAvg(cur.all, killAvg))}</div></div>
             <div className="stat"><div className="k">Média por semana</div><div className="v num">{killAvg != null ? n(killAvg) : "—"}</div></div>
-            <div className="stat"><div className="k">Melhor semana</div><div className="v num">{best ? n(best.kills) : "—"}</div>{best && <div className="note">até {fmtDate(best.w)}</div>}</div>
+            <div className="stat"><div className="k">Melhor semana</div><div className="v num">{best ? n(best.all) : "—"}</div>{best && <div className="note">até {fmtDate(best.w)}</div>}</div>
           </div>
-          <div className="panel"><BarChart bars={killBars} avg={killAvg} unit="kills" empty="Sem kills no período." /></div>
+          <div className="panel"><BarChart bars={killBars} avg={killAvg} unit="kills" empty="Sem kills no período." legend={weeksData.some((x) => x.sup > 0) ? ["Kills (solo)", "Suporte"] : undefined} /></div>
 
           <h2>Rentabilidade por semana (zeny por kill)</h2>
           <div className="stats">
@@ -145,7 +150,7 @@ export default async function Estatisticas({ searchParams }: { searchParams: Pro
             <div className="stat"><div className="k">Melhor semana</div><div className="v num">{bestProf?.perKill != null ? n(bestProf.perKill) + " z" : "—"}</div>{bestProf && <div className="note">até {fmtDate(bestProf.w)}</div>}</div>
           </div>
           <div className="panel"><BarChart bars={profBars} avg={profAvg} unit="zeny por kill" empty="Ainda não tem semana fechada com drops registrados. A primeira barra aparece na próxima entrada de KC." /></div>
-          <p className="note">Valor dos drops registrados na semana (vendidos pelo preço da venda, divididos só a sua parte) ÷ kills da semana. Elunium, Oridecon e ovos de captura ficam fora.</p>
+          <p className="note">Valor dos drops registrados na semana (vendidos pelo preço da venda, divididos só a sua parte) ÷ (kills + participações como suporte) da semana. Elunium, Oridecon e ovos de captura ficam fora.</p>
 
           {(byMvp.length > 0 || byChar.length > 0) && (
             <>
@@ -218,12 +223,13 @@ export default async function Estatisticas({ searchParams }: { searchParams: Pro
           <h2>Tabela</h2>
           <div className="tbl">
             <table>
-              <thead><tr><th>Semana</th><th className="r">Kills</th><th className="r">Valor dos drops</th><th className="r">Zeny / kill</th></tr></thead>
+              <thead><tr><th>Semana</th><th className="r">Kills</th><th className="r">Suporte</th><th className="r">Valor dos drops</th><th className="r">Zeny / kill</th></tr></thead>
               <tbody>
                 {weeksData.slice().reverse().map((x) => (
                   <tr key={x.w}>
                     <td className="num">{fmtDate(x.prev)} → {fmtDate(x.w)}</td>
                     <td className="r num">{n(x.kills)}</td>
+                    <td className="r num">{x.sup || <span className="dim">—</span>}</td>
                     <td className="r num">{x.perKill != null ? n(x.value) + " z" : <span className="dim">—</span>}</td>
                     <td className="r num">{x.perKill != null ? n(x.perKill) + " z" : <span className="dim">—</span>}</td>
                   </tr>

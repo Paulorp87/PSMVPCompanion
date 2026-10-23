@@ -1,6 +1,6 @@
 "use client";
 import { useState, useTransition } from "react";
-import { quickDrop, undoDrop } from "@/app/actions";
+import { quickDrop, undoDrop, addSupport, undoSupport } from "@/app/actions";
 import { STATUS_LABEL, type Status } from "@/lib/status";
 
 type Char = { id: number; name: string; sprite: string | null; mvps: string[] };
@@ -9,9 +9,12 @@ type Done = { id: number; text: string; undone?: boolean };
 
 const pct = (rate: number) => (rate / 100).toLocaleString("pt-BR", { maximumFractionDigits: 2 }) + "%";
 
-export default function QuickDrop({ chars, tables }: { chars: Char[]; tables: Record<string, Drop[]> }) {
-  const [char, setChar] = useState<Char | null>(null);
-  const [mvp, setMvp] = useState<string | null>(null);
+export default function QuickDrop({ chars, tables, initialChar, initialMvp, initialSupport }:
+  { chars: Char[]; tables: Record<string, Drop[]>; initialChar?: number; initialMvp?: string; initialSupport?: number }) {
+  const [char, setChar] = useState<Char | null>(chars.find((c) => c.id === initialChar) ?? null);
+  const [mvp, setMvp] = useState<string | null>(initialMvp ?? null);
+  const [supportMode, setSupportMode] = useState(!!initialSupport);
+  const [supportId, setSupportId] = useState<number | null>(initialSupport ?? null);
   const [other, setOther] = useState(false);
   const [qty, setQty] = useState(1);
   const [split, setSplit] = useState(1);
@@ -25,8 +28,8 @@ export default function QuickDrop({ chars, tables }: { chars: Char[]; tables: Re
   function register(d: Drop) {
     if (!mvp) return;
     start(async () => {
-      const id = await quickDrop(char?.id ?? null, mvp, d.id, d.name, qty, split, status, price ? Number(price) : null);
-      setDone((x) => [{ id, text: `${d.name}${qty > 1 ? ` ×${qty}` : ""}${split > 1 ? ` (÷${split})` : ""} — ${mvp} · ${char?.name ?? ""} · ${STATUS_LABEL[status]}${status === "vendido" && price ? ` por ${Number(price).toLocaleString("pt-BR")} z` : ""}` }, ...x].slice(0, 8));
+      const id = await quickDrop(char?.id ?? null, mvp, d.id, d.name, qty, split, status, price ? Number(price) : null, supportMode);
+      setDone((x) => [{ id, text: `${d.name}${qty > 1 ? ` ×${qty}` : ""}${split > 1 ? ` (÷${split})` : ""} — ${mvp} · ${char?.name ?? ""}${supportMode ? " · suporte" : ""} · ${STATUS_LABEL[status]}${status === "vendido" && price ? ` por ${Number(price).toLocaleString("pt-BR")} z` : ""}` }, ...x].slice(0, 8));
       setQty(1); setSplit(1); setStatus("sem_status"); setPrice("");
     });
   }
@@ -45,7 +48,11 @@ export default function QuickDrop({ chars, tables }: { chars: Char[]; tables: Re
       )}
 
       <section>
-        <h2 style={{ marginTop: 0 }}>1. Personagem {char && <span className="dim" style={{ fontWeight: 400 }}>· {char.name} <button className="btn ghost small" onClick={() => { setChar(null); setMvp(null); setOther(false); }}>trocar</button></span>}</h2>
+        <h2 style={{ marginTop: 0 }}>1. Personagem {char && <span className="dim" style={{ fontWeight: 400 }}>· {char.name} <button className="btn ghost small" onClick={() => { setChar(null); setMvp(null); setOther(false); setSupportId(null); }}>trocar</button></span>}</h2>
+        <label style={{ display: "inline-flex", gap: 8, alignItems: "center", cursor: "pointer", marginBottom: 10 }}>
+          <input type="checkbox" checked={supportMode} onChange={(e) => { setSupportMode(e.target.checked); if (!e.target.checked) setSupportId(null); }} />
+          <span>Fui suporte <span className="dim">(não conta no KC; vira participação e o drop fica marcado como de suporte)</span></span>
+        </label>
         {!char && (
           <div className="grid" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(96px, 1fr))" }}>
             {chars.map((c) => (
@@ -61,7 +68,7 @@ export default function QuickDrop({ chars, tables }: { chars: Char[]; tables: Re
 
       {char && (
         <section>
-          <h2 style={{ marginTop: 0 }}>2. MVP {mvp && <span className="dim" style={{ fontWeight: 400 }}>· {mvp} <button className="btn ghost small" onClick={() => setMvp(null)}>trocar</button></span>}</h2>
+          <h2 style={{ marginTop: 0 }}>2. MVP {mvp && <span className="dim" style={{ fontWeight: 400 }}>· {mvp} <button className="btn ghost small" onClick={() => { setMvp(null); setSupportId(null); }}>trocar</button></span>}</h2>
           {!mvp && (
             <>
               <div className="row" style={{ gap: 8 }}>
@@ -75,6 +82,21 @@ export default function QuickDrop({ chars, tables }: { chars: Char[]; tables: Re
 
       {char && mvp && (
         <section>
+          {supportMode && (
+            <div className="panel row" style={{ marginBottom: 12, alignItems: "center", justifyContent: "space-between" }}>
+              {supportId ? (
+                <>
+                  <span className="up">✓ Participação como suporte em {mvp} registrada</span>
+                  <button className="btn ghost small" disabled={pending} onClick={() => start(async () => { await undoSupport(supportId); setSupportId(null); })}>Desfazer</button>
+                </>
+              ) : (
+                <>
+                  <span>Registre a participação (uma por MVP morto). Os drops abaixo ficam como de suporte.</span>
+                  <button className="btn" disabled={pending} onClick={() => start(async () => setSupportId(await addSupport(char.id, mvp)))}>+1 participação</button>
+                </>
+              )}
+            </div>
+          )}
           <h2 style={{ marginTop: 0 }}>3. Item</h2>
           <div className="row" style={{ marginBottom: 12, alignItems: "center" }}>
             <span className="dim">Quantidade</span>

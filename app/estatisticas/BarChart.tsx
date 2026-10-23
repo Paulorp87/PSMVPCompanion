@@ -1,7 +1,8 @@
 "use client";
 import { useState } from "react";
 
-export type Bar = { label: string; sub: string; value: number | null; tip: string };
+export type Bar = { label: string; sub: string; value: number | null; value2?: number; tip: string };
+const C2 = "#7aa7ff";
 
 const compact = (x: number) =>
   x >= 1e6 ? (x / 1e6).toLocaleString("pt-BR", { maximumFractionDigits: 1 }) + "M"
@@ -15,9 +16,9 @@ function niceMax(v: number) {
   return 10 * p;
 }
 
-export default function BarChart({ bars, avg, unit, empty }: { bars: Bar[]; avg: number | null; unit: string; empty: string }) {
+export default function BarChart({ bars, avg, unit, empty, legend }: { bars: Bar[]; avg: number | null; unit: string; empty: string; legend?: [string, string] }) {
   const [hover, setHover] = useState<number | null>(null);
-  const vals = bars.map((b) => b.value ?? 0);
+  const vals = bars.map((b) => (b.value ?? 0) + (b.value2 ?? 0));
   if (!bars.some((b) => b.value != null)) return <p className="note">{empty}</p>;
   const H = 220, padL = 48, padR = 12, padT = 16, padB = 40;
   const slot = Math.max(44, Math.min(180, 900 / Math.max(1, bars.length)));
@@ -29,6 +30,12 @@ export default function BarChart({ bars, avg, unit, empty }: { bars: Bar[]; avg:
 
   return (
     <div style={{ position: "relative", overflowX: "auto" }}>
+      {legend && (
+        <div className="row" style={{ gap: 14, fontSize: 12.5, marginBottom: 6 }}>
+          <span><span style={{ display: "inline-block", width: 10, height: 10, borderRadius: 2, background: "var(--accent)", marginRight: 6 }} />{legend[0]}</span>
+          <span><span style={{ display: "inline-block", width: 10, height: 10, borderRadius: 2, background: C2, marginRight: 6 }} />{legend[1]}</span>
+        </div>
+      )}
       <svg viewBox={`0 0 ${W} ${H}`} width={W} height={H} role="img" aria-label={`Gráfico de barras: ${unit} por semana`} style={{ display: "block", maxWidth: "none" }}>
         {ticks.map((t) => (
           <g key={t}>
@@ -49,6 +56,13 @@ export default function BarChart({ bars, avg, unit, empty }: { bars: Bar[]; avg:
                 <path fill={hover === i ? "#ffcd6b" : "var(--accent)"}
                   d={`M${cx - bw / 2},${y(0)} V${top + r} Q${cx - bw / 2},${top} ${cx - bw / 2 + r},${top} H${cx + bw / 2 - r} Q${cx + bw / 2},${top} ${cx + bw / 2},${top + r} V${y(0)} Z`} />
               )}
+              {(b.value2 ?? 0) > 0 && (() => {
+                const base = v != null && v > 0 ? top - 2 : y(0);
+                const t2 = y((v ?? 0) + b.value2!) - (v != null && v > 0 ? 2 : 0);
+                const h2 = base - t2, r2 = Math.min(4, h2);
+                return h2 > 0 ? <path fill={hover === i ? "#a8c4ff" : C2}
+                  d={`M${cx - bw / 2},${base} V${t2 + r2} Q${cx - bw / 2},${t2} ${cx - bw / 2 + r2},${t2} H${cx + bw / 2 - r2} Q${cx + bw / 2},${t2} ${cx + bw / 2},${t2 + r2} V${base} Z`} /> : null;
+              })()}
               {v == null && <text x={cx} y={y(0) - 6} textAnchor="middle" fontSize={11} fill="var(--muted)">—</text>}
               <text x={cx} y={H - padB + 16} textAnchor="middle" fontSize={11} fill="var(--text)">{b.label}</text>
               <text x={cx} y={H - padB + 30} textAnchor="middle" fontSize={10} fill="var(--muted)">{b.sub}</text>

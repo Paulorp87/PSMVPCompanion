@@ -35,6 +35,10 @@ export default async function Personagem({ params }: { params: Promise<{ id: str
     q<{ mvp: string; complete: boolean }>("SELECT mvp, complete FROM history_flag WHERE character_id=$1", [c.id]),
   ]);
   const flag = new Map(flags.map((f) => [f.mvp, f.complete]));
+  const sup = await q<{ mvp: string; n: number }>("SELECT mvp, count(*)::int AS n FROM support WHERE character_id=$1 GROUP BY mvp", [c.id]);
+  const supMap = Object.fromEntries(sup.map((s) => [s.mvp, s.n]));
+  // MVPs onde só foi suporte (sem KC) também aparecem na tabela
+  for (const s of sup) if (!rows.some((r) => r.mvp === s.mvp)) rows.push({ mvp: s.mvp, kills: 0, week: todayChicago() });
 
   return (
     <>
@@ -48,15 +52,15 @@ export default async function Personagem({ params }: { params: Promise<{ id: str
           </p>
         </div>
       </div>
-      <KcForm characterId={c.id} rows={rows} mvpNames={mvps} today={todayChicago()} />
-      {rows.length > 0 && (
+      <KcForm characterId={c.id} rows={rows} mvpNames={mvps} today={todayChicago()} support={supMap} />
+      {rows.some((r) => r.kills > 0) && (
         <>
           <h2>Drops até hoje</h2>
           <p className="sub" style={{ marginBottom: 10 }}>
             Quantos de cada item já caíram neste personagem. Vale a pena principalmente para quem só caça um MVP.
           </p>
           <div style={{ display: "grid", gap: 8 }}>
-            {rows.map((r) => (
+            {rows.filter((r) => r.kills > 0).map((r) => (
               <HistoryForm key={r.mvp} characterId={c.id} mvp={r.mvp} kills={r.kills}
                 drops={info.get(r.mvp)?.drops ?? []} loadError={!info.get(r.mvp)}
                 saved={hist.filter((h) => h.mvp === r.mvp)} complete={flag.get(r.mvp) ?? false}

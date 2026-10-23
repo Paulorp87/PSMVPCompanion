@@ -218,13 +218,13 @@ export async function setProjectStatus(form: FormData) {
 }
 
 // ---------- Drop rápido ----------
-export async function quickDrop(characterId: number | null, mvp: string, itemId: number, itemName: string, qty: number, split: number, status = "sem_status", soldPrice: number | null = null) {
+export async function quickDrop(characterId: number | null, mvp: string, itemId: number, itemName: string, qty: number, split: number, status = "sem_status", soldPrice: number | null = null, support = false) {
   const st = (STATUSES as readonly string[]).includes(status) && status !== "projeto" ? status : "sem_status";
   const r = await q<{ id: number }>(
-    `INSERT INTO drops(dropped_on, character_id, mvp, item_id, item_name, qty, split, status, sold_price)
-     VALUES ((now() AT TIME ZONE 'America/Chicago')::date, $1, $2, $3, $4, $5, $6, $7, $8) RETURNING id`,
+    `INSERT INTO drops(dropped_on, character_id, mvp, item_id, item_name, qty, split, status, sold_price, support)
+     VALUES ((now() AT TIME ZONE 'America/Chicago')::date, $1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING id`,
     [characterId, mvp, itemId, itemName, Math.max(1, Math.floor(qty)), Math.max(1, Math.floor(split)), st,
-     st === "vendido" && soldPrice ? soldPrice : null]);
+     st === "vendido" && soldPrice ? soldPrice : null, support]);
   revalidatePath("/", "layout");
   return r[0].id;
 }
@@ -281,5 +281,19 @@ export async function useItem(dropId: number, n: number, caught: number) {
       }
     }
   }
+  revalidatePath("/", "layout");
+}
+
+// ---------- Suporte ----------
+export async function addSupport(characterId: number | null, mvp: string) {
+  const r = await q<{ id: number }>(
+    "INSERT INTO support(character_id, mvp, day) VALUES ($1,$2,(now() AT TIME ZONE 'America/Chicago')::date) RETURNING id",
+    [characterId, mvp.trim()]);
+  revalidatePath("/", "layout");
+  return r[0].id;
+}
+
+export async function undoSupport(id: number) {
+  await q("DELETE FROM support WHERE id=$1", [id]);
   revalidatePath("/", "layout");
 }

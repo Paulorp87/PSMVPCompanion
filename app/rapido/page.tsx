@@ -6,7 +6,8 @@ import QuickDrop from "./QuickDrop";
 
 export const dynamic = "force-dynamic";
 
-export default async function Rapido() {
+export default async function Rapido({ searchParams }: { searchParams: Promise<{ char?: string; mvp?: string; suporte?: string }> }) {
+  const sp = await searchParams;
   const [chars, kc, extra] = await Promise.all([
     getCharacters(),
     q<{ character_id: number; mvp: string; kills: number }>(
@@ -30,6 +31,9 @@ export default async function Rapido() {
       <QuickDrop
         chars={chars.filter((c) => c.sprite || byChar[c.id]).map((c) => ({ id: c.id, name: c.name, sprite: c.sprite, mvps: byChar[c.id] ?? [] }))}
         tables={tables}
+        initialChar={sp.char ? Number(sp.char) : undefined}
+        initialMvp={sp.mvp || undefined}
+        initialSupport={sp.suporte ? Number(sp.suporte) : undefined}
       />
     </>
   );

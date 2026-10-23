@@ -1,20 +1,27 @@
 "use client";
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
-import { saveKC } from "@/app/actions";
+import { saveKC, addSupport } from "@/app/actions";
 import type { CharMvp } from "@/lib/data";
 
 const n = (x: number) => x.toLocaleString("pt-BR");
 const fmt = (iso: string) => iso.split("-").reverse().join("/");
 
-export default function KcForm({ characterId, rows, mvpNames, today }:
-  { characterId: number; rows: CharMvp[]; mvpNames: string[]; today: string }) {
+export default function KcForm({ characterId, rows, mvpNames, today, support }:
+  { characterId: number; rows: CharMvp[]; mvpNames: string[]; today: string; support: Record<string, number> }) {
   const [vals, setVals] = useState<Record<string, string>>({});
   const [extra, setExtra] = useState<{ mvp: string; kills: string }[]>([{ mvp: "", kills: "" }]);
   const [week, setWeek] = useState(today);
   const [msg, setMsg] = useState<{ ok: boolean; text: string } | null>(null);
   const [pending, start] = useTransition();
   const router = useRouter();
+  const [supPending, startSup] = useTransition();
+  function sup(mvp: string) {
+    startSup(async () => {
+      const id = await addSupport(characterId, mvp);
+      router.push(`/rapido?char=${characterId}&mvp=${encodeURIComponent(mvp)}&suporte=${id}`);
+    });
+  }
   const known = new Set(rows.map((r) => r.mvp.toLowerCase()));
 
   const changed = rows.filter((r) => vals[r.mvp] !== undefined && vals[r.mvp] !== "" && Number(vals[r.mvp]) !== r.kills);
@@ -40,7 +47,7 @@ export default function KcForm({ characterId, rows, mvpNames, today }:
       {msg && <p className={`flash${msg.ok ? "" : " err"}`}>{msg.text}</p>}
       <div className="tbl">
         <table>
-          <thead><tr><th>MVP</th><th className="r">Último KC</th><th className="r">Novo KC</th><th className="r">Diferença</th></tr></thead>
+          <thead><tr><th>MVP</th><th className="r">Último KC</th><th className="r">Novo KC</th><th className="r">Diferença</th><th className="r" title="Participações como suporte">Suporte</th></tr></thead>
           <tbody>
             {rows.map((r) => {
               const v = vals[r.mvp] ?? "";
@@ -54,6 +61,10 @@ export default function KcForm({ characterId, rows, mvpNames, today }:
                       value={v} onChange={(e) => setVals({ ...vals, [r.mvp]: e.target.value.replace(/\D/g, "") })} />
                   </td>
                   <td className={`r num ${d > 0 ? "up" : d < 0 ? "down" : "dim"}`}>{d ? (d > 0 ? "+" : "") + n(d) : "—"}</td>
+                  <td className="r" style={{ whiteSpace: "nowrap" }}>
+                    <span className="num dim" style={{ marginRight: 6 }}>{support[r.mvp] ?? 0}</span>
+                    <button type="button" className="btn ghost small" disabled={supPending} onClick={() => sup(r.mvp)} title="Registrar uma participação como suporte">+1 suporte</button>
+                  </td>
                 </tr>
               );
             })}
@@ -71,6 +82,10 @@ export default function KcForm({ characterId, rows, mvpNames, today }:
                   <td className="r"><input className="kc-in num" inputMode="numeric" value={e.kills}
                     onChange={(ev) => { const x = [...extra]; x[i] = { ...e, kills: ev.target.value.replace(/\D/g, "") }; setExtra(x); }} /></td>
                   <td className="r num up">{e.kills ? "+" + n(Number(e.kills)) : ""}</td>
+                  <td className="r">
+                    {e.mvp.trim() && !e.kills && !known.has(e.mvp.trim().toLowerCase()) &&
+                      <button type="button" className="btn ghost small" disabled={supPending} onClick={() => sup(e.mvp.trim())}>+1 suporte</button>}
+                  </td>
                 </tr>
               );
             })}
