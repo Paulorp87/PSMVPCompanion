@@ -81,3 +81,24 @@ export function slug(s: string): string {
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-|-$/g, "");
 }
+
+// Atualizações de KC lançadas pelo Claude a partir dos prints (aplicadas uma vez cada).
+export const KC_UPDATES: { key: string; week: string; data: Record<string, string> }[] = [
+  {
+    key: "kc-2026-10-23",
+    week: "2026-10-23",
+    data: {
+      "Brujeria": "Orc Hero 618",
+      "Daesung": "Lady Tanee 1",
+      "Sandara": "Turtle General 234",
+      "MiniZeph": "Golden Thief Bug 677, Phreeoni 218, Eddga 74",
+      "Enami Asa": "Pharaoh 268",
+      "Wonyoung": "Amon Ra 1281",
+      "Kim Taeyeon": "Moonlight Flower 109",
+      "Lucas Silveira": "Maya 1",
+      "Professor Jirafales": "Dark Lord 60",
+      "Rami": "Garm 33",
+      "Mestra Genkai": "RSX 0806 34, Mistress 11, Aspect of Sol 5",
+    },
+  },
+];

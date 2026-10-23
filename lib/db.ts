@@ -1,5 +1,5 @@
 import { Pool, PoolClient } from "pg";
-import { SEED_CHARACTERS, SEED_WEEKS, ADJUST_CHARACTER, parseList, slug } from "./seed";
+import { SEED_CHARACTERS, SEED_WEEKS, ADJUST_CHARACTER, KC_UPDATES, parseList, slug } from "./seed";
 import { STATIC_MVPS, STATIC_PRICES } from "./static-data";
 
 const g = globalThis as unknown as { _pool?: Pool; _ready?: Promise<void> };
@@ -88,6 +88,10 @@ CREATE TABLE IF NOT EXISTS stock (
   qty INT NOT NULL CHECK (qty >= 0),
   PRIMARY KEY (item_id, week)
 );
+CREATE TABLE IF NOT EXISTS applied_updates (
+  key TEXT PRIMARY KEY,
+  applied_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
 CREATE TABLE IF NOT EXISTS prices (
   item_id INT PRIMARY KEY,
   name TEXT,
@@ -106,6 +110,7 @@ async function init(): Promise<void> {
     const { rows } = await c.query("SELECT count(*)::int AS n FROM characters");
     if (rows[0].n === 0) await seed(c);
     await loadStatic(c);
+    await applyKcUpdates(c);
     await c.query("SELECT pg_advisory_unlock(424242)");
   } finally {
     c.release();
@@ -130,6 +135,31 @@ async function loadStatic(c: PoolClient) {
          source=EXCLUDED.source, fetched_at=EXCLUDED.fetched_at
        WHERE prices.fetched_at < EXCLUDED.fetched_at`,
       [Number(id), p.name, p.price, p.samples, p.source, day]);
+  }
+}
+
+// Lança cada atualização de KC uma única vez; não sobrescreve o que você já digitou na mesma data.
+async function applyKcUpdates(c: PoolClient) {
+  for (const u of KC_UPDATES) {
+    const done = await c.query("SELECT 1 FROM applied_updates WHERE key=$1", [u.key]);
+    if (done.rowCount) continue;
+    await c.query("BEGIN");
+    try {
+      for (const [name, list] of Object.entries(u.data)) {
+        const ch = await c.query("SELECT id FROM characters WHERE name=$1", [name]);
+        if (!ch.rowCount) continue;
+        for (const { mvp, kills } of parseList(list)) {
+          await c.query(
+            "INSERT INTO kc(character_id, mvp, week, kills) VALUES ($1,$2,$3,$4) ON CONFLICT (character_id, mvp, week) DO NOTHING",
+            [ch.rows[0].id, mvp, u.week, kills]);
+        }
+      }
+      await c.query("INSERT INTO applied_updates(key) VALUES ($1)", [u.key]);
+      await c.query("COMMIT");
+    } catch (e) {
+      await c.query("ROLLBACK");
+      throw e;
+    }
   }
 }
 
