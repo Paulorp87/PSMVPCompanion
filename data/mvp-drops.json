@@ -1257,5 +1257,50 @@
  "Aspect of Sol": {
   "mob_id": null,
   "drops": []
+ },
+ "Lady Tanee": {
+  "mob_id": 1688,
+  "drops": [
+   {
+    "id": 634,
+    "name": "Tropical Banana",
+    "rate": 4001
+   },
+   {
+    "id": 12260,
+    "name": "Cool Summer Outfit",
+    "rate": 3001
+   },
+   {
+    "id": 2407,
+    "name": "Crystal Pumps",
+    "rate": 51
+   },
+   {
+    "id": 5116,
+    "name": "Banana Hat",
+    "rate": 1001
+   },
+   {
+    "id": 985,
+    "name": "Elunium",
+    "rate": 5001
+   },
+   {
+    "id": 617,
+    "name": "Old Purple Box",
+    "rate": 2001
+   },
+   {
+    "id": 1716,
+    "name": "Gakkung Bow",
+    "rate": 6001
+   },
+   {
+    "id": 4376,
+    "name": "Lady Tanee Card",
+    "rate": 2
+   }
+  ]
  }
 }
