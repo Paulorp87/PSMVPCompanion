@@ -297,3 +297,12 @@ export async function undoSupport(id: number) {
   await q("DELETE FROM support WHERE id=$1", [id]);
   revalidatePath("/", "layout");
 }
+
+// ---------- Dei over ----------
+/** Refina `n` unidades do drop até +level (mantém o destino atual). */
+export async function setOver(dropId: number, n: number, level: number) {
+  const id = await splitOff(dropId, n);
+  if (!id) return;
+  await q("UPDATE drops SET refine=$2 WHERE id=$1", [id, Math.max(0, Math.min(10, Math.floor(level)))]);
+  revalidatePath("/", "layout");
+}

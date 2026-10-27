@@ -1,6 +1,6 @@
 "use client";
 import { useState, useTransition } from "react";
-import { updateDrop, useItem } from "@/app/actions";
+import { updateDrop, useItem, setOver } from "@/app/actions";
 import { TAMING } from "@/lib/taming";
 import { STATUSES, STATUS_LABEL, type Status } from "@/lib/status";
 
@@ -13,7 +13,8 @@ type Proj = { id: number; name: string; item_id: number };
 const fmt = (iso: string) => iso.split("-").reverse().join("/");
 
 export default function DropRow({ d, projects, onDelete }: { d: DropRowData; projects: Proj[]; onDelete: React.ReactNode }) {
-  const [status, setStatus] = useState<Status>(d.status);
+  const [status, setStatus] = useState<Status | "over">(d.status);
+  const [over, setOverLvl] = useState(String(Math.min(10, d.refine + 1)));
   const [qty, setQty] = useState(String(d.qty));
   const [price, setPrice] = useState(d.sold_price != null ? String(d.sold_price) : "");
   const [split, setSplit] = useState(String(d.split));
@@ -26,6 +27,10 @@ export default function DropRow({ d, projects, onDelete }: { d: DropRowData; pro
     || Number(split) !== d.split || (proj || "") !== (d.project_id ? String(d.project_id) : "");
 
   function save() {
+    if (status === "over") {
+      start(async () => { await setOver(d.id, Number(qty) || d.qty, Number(over)); });
+      return;
+    }
     if (status === "usado") {
       start(async () => { await useItem(d.id, Number(qty) || d.qty, Number(caught) || 0); });
       return;
@@ -45,7 +50,7 @@ export default function DropRow({ d, projects, onDelete }: { d: DropRowData; pro
     <tr>
       <td className="num">{fmt(d.dropped_on)}</td>
       <td>{d.mvp}<div className="dim" style={{ fontSize: 12 }}>{d.char ?? "—"}{d.source === "history" && " · do histórico"}</div></td>
-      <td>{d.item_name}{d.refine > 0 && <b> +{d.refine}</b>} <span className="dim">#{d.item_id}</span></td>
+      <td>{d.refine > 0 && <b>+{d.refine} </b>}{d.item_name} <span className="dim">#{d.item_id}</span></td>
       <td className="r">
         {d.qty > 1 && d.status !== "usado"
           ? <input className="kc-in num" style={{ width: 64 }} inputMode="numeric" value={qty} title={`Aplicar a quantos dos ${d.qty}`}
@@ -59,9 +64,15 @@ export default function DropRow({ d, projects, onDelete }: { d: DropRowData; pro
             Usei{d.capture === "sucesso" ? ` · capturou ${tame?.pet ?? ""} ✓` : d.capture === "falha" ? " · falhou" : ""}
           </span>
         ) : <>
-        <select value={status} onChange={(e) => setStatus(e.target.value as Status)}>
+        <select value={status} onChange={(e) => setStatus(e.target.value as Status | "over")}>
           {STATUSES.filter((s) => s !== "projeto" || mine.length > 0 || status === "projeto").map((s) => <option key={s} value={s}>{STATUS_LABEL[s]}</option>)}
+          <option value="over">Dei over…</option>
         </select>
+        {status === "over" && (
+          <select value={over} onChange={(e) => setOverLvl(e.target.value)} style={{ marginTop: 4, display: "block" }}>
+            {Array.from({ length: 10 }, (_, i) => i + 1).map((n) => <option key={n} value={n}>+{n}</option>)}
+          </select>
+        )}
         {status === "projeto" && (
           <select value={proj} onChange={(e) => setProj(e.target.value)} style={{ marginTop: 4, display: "block" }}>
             <option value="">Escolha o projeto</option>
