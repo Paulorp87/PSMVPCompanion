@@ -7,6 +7,7 @@ import DropForm from "./DropForm";
 import DropRow, { type DropRowData } from "./DropRow";
 import ImportHistory from "./ImportHistory";
 import { TAMING } from "@/lib/taming";
+import { BOXES } from "@/lib/boxes";
 
 export const dynamic = "force-dynamic";
 
@@ -18,7 +19,7 @@ export default async function Drops({ searchParams }: { searchParams: Promise<{ 
     getCharacters(),
     q<DropRowData>(
       `SELECT d.id, to_char(d.dropped_on,'YYYY-MM-DD') AS dropped_on, d.mvp, d.item_id, d.item_name, d.qty, c.name AS char,
-              d.status, d.sold_price::float8 AS sold_price, d.split, d.project_id, d.source, d.refine, d.capture
+              d.status, d.sold_price::float8 AS sold_price, d.split, d.project_id, d.source, d.refine, d.capture, d.opened_name
        FROM drops d LEFT JOIN characters c ON c.id=d.character_id
        WHERE ($1::text IS NULL OR d.status=$1) ORDER BY d.dropped_on DESC, d.id DESC LIMIT 300`, [filter]),
     q<{ status: string; n: number }>("SELECT status, SUM(qty)::int AS n FROM drops GROUP BY status"),
@@ -32,6 +33,9 @@ export default async function Drops({ searchParams }: { searchParams: Promise<{ 
   const caps = await q<{ item_id: number; ok: number; fail: number }>(
     `SELECT item_id, COALESCE(SUM(qty) FILTER (WHERE capture='sucesso'),0)::int AS ok, COALESCE(SUM(qty) FILTER (WHERE capture='falha'),0)::int AS fail
      FROM drops WHERE capture IS NOT NULL GROUP BY item_id`);
+  const opened = await q<{ item_id: number; opened_id: number; opened_name: string; n: number }>(
+    `SELECT item_id, opened_id, opened_name, SUM(qty)::int AS n FROM drops WHERE opened_id IS NOT NULL
+     GROUP BY item_id, opened_id, opened_name ORDER BY n DESC, opened_name`);
   const count = new Map(counts.map((c) => [c.status, c.n]));
   const total = counts.reduce((a, c) => a + c.n, 0);
 
@@ -87,6 +91,31 @@ export default async function Drops({ searchParams }: { searchParams: Promise<{ 
           </div>
         </>
       )}
+
+      {opened.length > 0 && Object.entries(BOXES).map(([bid, b]) => {
+        const list = opened.filter((o) => o.item_id === Number(bid));
+        if (!list.length) return null;
+        const price = (id: number) => b.items.find((c) => c.id === id)?.price ?? null;
+        const n = list.reduce((a, o) => a + o.n, 0);
+        const val = list.reduce((a, o) => a + (price(o.opened_id) ?? 0) * o.n, 0);
+        const known = b.items.filter((c) => c.price != null);
+        const avg = known.reduce((a, c) => a + (c.price ?? 0), 0) / (known.length || 1);
+        return (
+          <div key={bid}>
+            <h2>{b.name}: o que saiu</h2>
+            <p className="note">{n} aberto(s). Valor das cartas que saíram: {Math.round(val).toLocaleString("pt-BR")} z
+              ({Math.round(val / n).toLocaleString("pt-BR")} z por álbum). Média de preço das {known.length} cartas com venda: {Math.round(avg).toLocaleString("pt-BR")} z.
+              As cartas entram nos drops como Sem status, mas ficam fora da rentabilidade (lá conta o valor do álbum).</p>
+            <div className="tbl"><table>
+              <thead><tr><th>Carta</th><th className="r">Qtd</th><th className="r">Preço</th></tr></thead>
+              <tbody>{list.map((o) => (
+                <tr key={o.opened_id}><td>{o.opened_name} <span className="dim">#{o.opened_id}</span></td><td className="r num">{o.n}</td>
+                  <td className="r num">{price(o.opened_id) != null ? Math.round(price(o.opened_id)!).toLocaleString("pt-BR") : "—"}</td></tr>
+              ))}</tbody>
+            </table></div>
+          </div>
+        );
+      })}
 
       <h2>Importar do histórico</h2>
       <ImportHistory rows={hist} projects={projects} />

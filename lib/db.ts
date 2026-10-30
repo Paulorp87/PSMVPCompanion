@@ -83,6 +83,8 @@ ALTER TABLE drops ALTER COLUMN status SET DEFAULT 'sem_status';
 ALTER TABLE drops ADD COLUMN IF NOT EXISTS capture TEXT;
 ALTER TABLE drops ADD COLUMN IF NOT EXISTS project_at TIMESTAMPTZ;
 ALTER TABLE drops ADD COLUMN IF NOT EXISTS support BOOLEAN NOT NULL DEFAULT false;
+ALTER TABLE drops ADD COLUMN IF NOT EXISTS opened_id INT;
+ALTER TABLE drops ADD COLUMN IF NOT EXISTS opened_name TEXT;
 CREATE TABLE IF NOT EXISTS support (
   id SERIAL PRIMARY KEY,
   character_id INT REFERENCES characters(id) ON DELETE CASCADE,
@@ -135,15 +137,17 @@ async function loadStatic(c: PoolClient) {
       [name, m.mob_id, JSON.stringify(m.drops)]);
   }
   const day = STATIC_PRICES.updated;
-  for (const [id, p] of Object.entries(STATIC_PRICES.items)) {
-    if (p.price == null) continue;
-    await c.query(
-      `INSERT INTO prices(item_id, name, price, samples, source, fetched_at) VALUES ($1,$2,$3,$4,$5,$6::date + time '12:00')
-       ON CONFLICT (item_id) DO UPDATE SET name=EXCLUDED.name, price=EXCLUDED.price, samples=EXCLUDED.samples,
-         source=EXCLUDED.source, fetched_at=EXCLUDED.fetched_at
-       WHERE prices.fetched_at < EXCLUDED.fetched_at`,
-      [Number(id), p.name, p.price, p.samples, p.source, day]);
-  }
+  const rows = Object.entries(STATIC_PRICES.items).filter(([, p]) => p.price != null)
+    .map(([id, p]) => ({ item_id: Number(id), name: p.name, price: p.price, samples: p.samples, source: p.source, day: p.updated ?? day }));
+  // uma query só (são centenas de itens)
+  await c.query(
+    `INSERT INTO prices(item_id, name, price, samples, source, fetched_at)
+     SELECT item_id, name, price, samples, source, day::date + time '12:00'
+     FROM jsonb_to_recordset($1::jsonb) AS x(item_id int, name text, price numeric, samples int, source text, day text)
+     ON CONFLICT (item_id) DO UPDATE SET name=EXCLUDED.name, price=EXCLUDED.price, samples=EXCLUDED.samples,
+       source=EXCLUDED.source, fetched_at=EXCLUDED.fetched_at
+     WHERE prices.fetched_at < EXCLUDED.fetched_at`,
+    [JSON.stringify(rows)]);
 }
 
 // Lança cada atualização de KC uma única vez; não sobrescreve o que você já digitou na mesma data.

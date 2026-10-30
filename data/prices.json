@@ -1051,6 +1051,2435 @@
    "price": 3525000,
    "samples": 10,
    "source": "mediana de 10 dia(s) com venda, 03/07/2026 a 29/08/2026"
+  },
+  "634": {
+   "name": "Tropical Banana",
+   "price": 99998,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "1716": {
+   "name": "Gakkung Bow",
+   "price": 2787072,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "2407": {
+   "name": "Crystal Pumps",
+   "price": 1042500,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4001": {
+   "name": "Poring Card",
+   "price": 40667,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4002": {
+   "name": "Fabre Card",
+   "price": 999999,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4003": {
+   "name": "Pupa Card",
+   "price": 575000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4004": {
+   "name": "Drops Card",
+   "price": 925000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4005": {
+   "name": "Santa Poring Card",
+   "price": 659372,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4006": {
+   "name": "Lunatic Card",
+   "price": 399999,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4007": {
+   "name": "Peco Peco Egg Card",
+   "price": 2000000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4008": {
+   "name": "Picky Card",
+   "price": 300000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4009": {
+   "name": "Chonchon Card",
+   "price": 100000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 27/09/2026)",
+   "updated": "2026-10-30"
+  },
+  "4010": {
+   "name": "Willow Card",
+   "price": 386667,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4011": {
+   "name": "Picky Egg Card",
+   "price": 170000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4012": {
+   "name": "Thief Bug Egg Card",
+   "price": 600000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4013": {
+   "name": "Andre Egg Card",
+   "price": 44375,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4014": {
+   "name": "Roda Frog Card",
+   "price": 550000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4015": {
+   "name": "Condor Card",
+   "price": 170000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 22/09/2026)",
+   "updated": "2026-10-30"
+  },
+  "4016": {
+   "name": "Thief Bug Card",
+   "price": 500000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4017": {
+   "name": "Savage Babe Card",
+   "price": 875000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4019": {
+   "name": "Hornet Card",
+   "price": 60000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 06/10/2026)",
+   "updated": "2026-10-30"
+  },
+  "4020": {
+   "name": "Familiar Card",
+   "price": 120000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4021": {
+   "name": "Rocker Card",
+   "price": 599780,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4022": {
+   "name": "Spore Card",
+   "price": 90000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4023": {
+   "name": "Baby Desert Wolf Card",
+   "price": 999998,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4024": {
+   "name": "Plankton Card",
+   "price": 99999,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4025": {
+   "name": "Skeleton Card",
+   "price": 90500,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4026": {
+   "name": "Female Thief Bug Card",
+   "price": 975000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4027": {
+   "name": "Kukre Card",
+   "price": 550000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4028": {
+   "name": "Tarou Card",
+   "price": 1118825,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4029": {
+   "name": "Wolf Card",
+   "price": 225000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4030": {
+   "name": "Mandragora Card",
+   "price": 1378750,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4031": {
+   "name": "Peco Peco Card",
+   "price": 575000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4032": {
+   "name": "Ambernite Card",
+   "price": 43750,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 27/09/2026)",
+   "updated": "2026-10-30"
+  },
+  "4033": {
+   "name": "Poporing Card",
+   "price": 34500,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4034": {
+   "name": "Wormtail Card",
+   "price": 200000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4035": {
+   "name": "Hydra Card",
+   "price": 1110000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4036": {
+   "name": "Muka Card",
+   "price": 399999,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 08/10/2026)",
+   "updated": "2026-10-30"
+  },
+  "4037": {
+   "name": "Snake Card",
+   "price": 211111,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 08/10/2026)",
+   "updated": "2026-10-30"
+  },
+  "4038": {
+   "name": "Zombie Card",
+   "price": 73750,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4039": {
+   "name": "Stainer Card",
+   "price": 600000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4041": {
+   "name": "Coco Card",
+   "price": 55000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4042": {
+   "name": "Steel Chonchon Card",
+   "price": 98750,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4043": {
+   "name": "Andre Card",
+   "price": 725000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4044": {
+   "name": "Smokie Card",
+   "price": 850000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 14/09/2026)",
+   "updated": "2026-10-30"
+  },
+  "4045": {
+   "name": "Horn Card",
+   "price": 1000000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4046": {
+   "name": "Martin Card",
+   "price": 645000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4048": {
+   "name": "Poison Spore Card",
+   "price": 52500,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4049": {
+   "name": "Vadon Card",
+   "price": 1980833,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4050": {
+   "name": "Male Thief Bug Card",
+   "price": 746972,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4051": {
+   "name": "Yoyo Card",
+   "price": 850000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4052": {
+   "name": "Elder Willow Card",
+   "price": 1050000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4053": {
+   "name": "Vitata Card",
+   "price": 1588888,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4055": {
+   "name": "Marina Card",
+   "price": 231250,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 09/09/2026)",
+   "updated": "2026-10-30"
+  },
+  "4056": {
+   "name": "Dustiness Card",
+   "price": 833000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4057": {
+   "name": "Metaller Card",
+   "price": 600000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 17/10/2026)",
+   "updated": "2026-10-30"
+  },
+  "4058": {
+   "name": "Thara Frog Card",
+   "price": 1990000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4060": {
+   "name": "Goblin Card",
+   "price": 399000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4061": {
+   "name": "Cornutus Card",
+   "price": 450000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4062": {
+   "name": "Anacondaq Card",
+   "price": 1450000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4063": {
+   "name": "Caramel Card",
+   "price": 1384781,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4064": {
+   "name": "Zerom Card",
+   "price": 3300000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4065": {
+   "name": "Kaho Card",
+   "price": 2900000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4066": {
+   "name": "Orc Warrior Card",
+   "price": 1225000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4067": {
+   "name": "Megalodon Card",
+   "price": 500000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4068": {
+   "name": "Scorpion Card",
+   "price": 900000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4069": {
+   "name": "Drainliar Card",
+   "price": 737774,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4070": {
+   "name": "Eggyra Card",
+   "price": 1613888,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4071": {
+   "name": "Orc Zombie Card",
+   "price": 200000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4072": {
+   "name": "Golem Card",
+   "price": 400000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4073": {
+   "name": "Pirate Skeleton Card",
+   "price": 1575000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4074": {
+   "name": "Bigfoot Card",
+   "price": 949000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4075": {
+   "name": "Argos Card",
+   "price": 55277,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4076": {
+   "name": "Magnolia Card",
+   "price": 1500000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4077": {
+   "name": "Phen Card",
+   "price": 487500,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4078": {
+   "name": "Savage Card",
+   "price": 45499,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4079": {
+   "name": "Mantis Card",
+   "price": 779166,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4080": {
+   "name": "Flora Card",
+   "price": 1599000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4081": {
+   "name": "Hode Card",
+   "price": 280000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 05/09/2026)",
+   "updated": "2026-10-30"
+  },
+  "4082": {
+   "name": "Desert Wolf Card",
+   "price": 1500000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4083": {
+   "name": "Rafflesia Card",
+   "price": 2411750,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 13/10/2026)",
+   "updated": "2026-10-30"
+  },
+  "4084": {
+   "name": "Marine Sphere Card",
+   "price": 1500000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4085": {
+   "name": "Orc Skeleton Card",
+   "price": 1164722,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 16/10/2026)",
+   "updated": "2026-10-30"
+  },
+  "4086": {
+   "name": "Soldier Skeleton Card",
+   "price": 1087000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4087": {
+   "name": "Giearth Card",
+   "price": 199999,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4088": {
+   "name": "Frilldora Card",
+   "price": 1217284,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 11/10/2026)",
+   "updated": "2026-10-30"
+  },
+  "4089": {
+   "name": "Swordfish Card",
+   "price": 418122,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4090": {
+   "name": "Munak Card",
+   "price": 75000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4091": {
+   "name": "Kobold Card",
+   "price": 700000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4092": {
+   "name": "Skeleton Worker Card",
+   "price": 1914833,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4093": {
+   "name": "Obeaune Card",
+   "price": 174500,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4094": {
+   "name": "Archer Skeleton Card",
+   "price": 599999,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4095": {
+   "name": "Marse Card",
+   "price": 1000000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 24/08/2026)",
+   "updated": "2026-10-30"
+  },
+  "4096": {
+   "name": "Zenorc Card",
+   "price": 120000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4097": {
+   "name": "Matyr Card",
+   "price": 1000000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4098": {
+   "name": "Dokebi Card",
+   "price": 3787500,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4099": {
+   "name": "Pasana Card",
+   "price": 2125000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4100": {
+   "name": "Sohee Card",
+   "price": 499999,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4101": {
+   "name": "Sandman Card",
+   "price": 500000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4102": {
+   "name": "Whisper Card",
+   "price": 1390000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4103": {
+   "name": "Horong Card",
+   "price": 1500000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4104": {
+   "name": "Requiem Card",
+   "price": 94722,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 30/09/2026)",
+   "updated": "2026-10-30"
+  },
+  "4105": {
+   "name": "Marc Card",
+   "price": 2900000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4106": {
+   "name": "Mummy Card",
+   "price": 350000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4107": {
+   "name": "Verit Card",
+   "price": 1000000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4108": {
+   "name": "Myst Card",
+   "price": 250000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4109": {
+   "name": "Jakk Card",
+   "price": 1500000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4110": {
+   "name": "Ghoul Card",
+   "price": 99500,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4111": {
+   "name": "Strouf Card",
+   "price": 1850000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4112": {
+   "name": "Marduk Card",
+   "price": 1600000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 21/08/2026)",
+   "updated": "2026-10-30"
+  },
+  "4113": {
+   "name": "Marionette Card",
+   "price": 99500,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4114": {
+   "name": "Argiope Card",
+   "price": 466216,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4115": {
+   "name": "Hunter Fly Card",
+   "price": 5175000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4116": {
+   "name": "Isis Card",
+   "price": 499999,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4117": {
+   "name": "Sidewinder Card",
+   "price": 399250,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4118": {
+   "name": "Earth Petite Card",
+   "price": 1700000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4119": {
+   "name": "Bathory Card",
+   "price": 2275000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4120": {
+   "name": "Sky Petite Card",
+   "price": 2733889,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4122": {
+   "name": "Deviruchi Card",
+   "price": 118055,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4125": {
+   "name": "Deviace Card",
+   "price": 14125000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4127": {
+   "name": "Nightmare Card",
+   "price": 300257,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4129": {
+   "name": "Bapho Jr. Card",
+   "price": 7750000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4133": {
+   "name": "Raydric Card",
+   "price": 2295833,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4136": {
+   "name": "Khalitzburg Card",
+   "price": 599999,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4138": {
+   "name": "Anubis Card",
+   "price": 1750934,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4140": {
+   "name": "Abysmal Knight Card",
+   "price": 21714167,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4141": {
+   "name": "Evil Druid Card",
+   "price": 3500000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4149": {
+   "name": "Gargoyle Card",
+   "price": 300000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4150": {
+   "name": "Goat Card",
+   "price": 150000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4151": {
+   "name": "Gajomart Card",
+   "price": 2166666,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 05/07/2026)",
+   "updated": "2026-10-30"
+  },
+  "4152": {
+   "name": "Galapago Card",
+   "price": 999500,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 28/08/2026)",
+   "updated": "2026-10-30"
+  },
+  "4153": {
+   "name": "Crab Card",
+   "price": 100000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 07/10/2026)",
+   "updated": "2026-10-30"
+  },
+  "4154": {
+   "name": "Dumpling Child Card",
+   "price": 99999,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 12/09/2025)",
+   "updated": "2026-10-30"
+  },
+  "4155": {
+   "name": "Goblin Leader Card",
+   "price": 1924494,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 11/06/2026)",
+   "updated": "2026-10-30"
+  },
+  "4156": {
+   "name": "Goblin Steamrider Card",
+   "price": 1400000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 16/06/2026)",
+   "updated": "2026-10-30"
+  },
+  "4157": {
+   "name": "Goblin Archer Card",
+   "price": 362000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4158": {
+   "name": "Sky Deleter Card",
+   "price": 456250,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4159": {
+   "name": "Nine Tail Card",
+   "price": 1500000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4160": {
+   "name": "Firelock Soldier Card",
+   "price": 2999999,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4161": {
+   "name": "Grand Peco Card",
+   "price": 2367750,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4162": {
+   "name": "Grizzly Card",
+   "price": 200000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4164": {
+   "name": "Gullinbursti Card",
+   "price": 900000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4165": {
+   "name": "Gig Card",
+   "price": 550000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4166": {
+   "name": "Nightmare Terror Card",
+   "price": 80000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4167": {
+   "name": "Nereid Card",
+   "price": 650000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4169": {
+   "name": "Dark Illusion Card",
+   "price": 59999999,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4170": {
+   "name": "Dark Frame Card",
+   "price": 500000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 17/10/2026)",
+   "updated": "2026-10-30"
+  },
+  "4172": {
+   "name": "The Paper Card",
+   "price": 19875000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4173": {
+   "name": "Demon Pungus Card",
+   "price": 144500,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4175": {
+   "name": "Poisonous Toad Card",
+   "price": 20000000,
+   "samples": 1,
+   "source": "mediana de 1 dia(s) com venda (última venda 20/12/2025)",
+   "updated": "2026-10-30"
+  },
+  "4176": {
+   "name": "Dullahan Card",
+   "price": 999995,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4177": {
+   "name": "Dryad Card",
+   "price": 300000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4178": {
+   "name": "Dragon Tail Card",
+   "price": 2200000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 09/10/2026)",
+   "updated": "2026-10-30"
+  },
+  "4179": {
+   "name": "Dragon Fly Card",
+   "price": 1500000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 15/05/2025)",
+   "updated": "2026-10-30"
+  },
+  "4180": {
+   "name": "Driller Card",
+   "price": 450000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 11/10/2026)",
+   "updated": "2026-10-30"
+  },
+  "4181": {
+   "name": "Disguise Card",
+   "price": 150000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4182": {
+   "name": "Diabolic Card",
+   "price": 300000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4183": {
+   "name": "Vagabond Wolf Card",
+   "price": 1499978,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 03/08/2026)",
+   "updated": "2026-10-30"
+  },
+  "4184": {
+   "name": "Lava Golem Card",
+   "price": 2345678,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 03/10/2026)",
+   "updated": "2026-10-30"
+  },
+  "4185": {
+   "name": "Rideword Card",
+   "price": 993827,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4186": {
+   "name": "Raggler Card",
+   "price": 720733,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4187": {
+   "name": "Raydric Archer Card",
+   "price": 490000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4188": {
+   "name": "Leib Olmai Card",
+   "price": 1350000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4189": {
+   "name": "Wraith Dead Card",
+   "price": 1111111,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 21/09/2026)",
+   "updated": "2026-10-30"
+  },
+  "4190": {
+   "name": "Wraith Card",
+   "price": 120000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 26/09/2026)",
+   "updated": "2026-10-30"
+  },
+  "4191": {
+   "name": "Loli Ruri Card",
+   "price": 2970000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 12/10/2026)",
+   "updated": "2026-10-30"
+  },
+  "4193": {
+   "name": "Lude Card",
+   "price": 1500000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 13/10/2026)",
+   "updated": "2026-10-30"
+  },
+  "4194": {
+   "name": "Rybio Card",
+   "price": 187500,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4195": {
+   "name": "Leaf Cat Card",
+   "price": 1432500,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4196": {
+   "name": "Marin Card",
+   "price": 74500,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 12/09/2026)",
+   "updated": "2026-10-30"
+  },
+  "4197": {
+   "name": "Mastering Card",
+   "price": 1498989,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 17/10/2026)",
+   "updated": "2026-10-30"
+  },
+  "4199": {
+   "name": "Merman Card",
+   "price": 349999,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4200": {
+   "name": "Megalith Card",
+   "price": 7000000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4201": {
+   "name": "Majoruros Card",
+   "price": 437500,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 19/10/2026)",
+   "updated": "2026-10-30"
+  },
+  "4202": {
+   "name": "Mao Guai Card",
+   "price": 1225000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 22/08/2026)",
+   "updated": "2026-10-30"
+  },
+  "4204": {
+   "name": "Mini Demon Card",
+   "price": 12750000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 03/05/2026)",
+   "updated": "2026-10-30"
+  },
+  "4205": {
+   "name": "Mimic Card",
+   "price": 4312500,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4206": {
+   "name": "Myst Case Card",
+   "price": 1500000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4207": {
+   "name": "Mysteltainn Card",
+   "price": 7750000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 17/10/2026)",
+   "updated": "2026-10-30"
+  },
+  "4208": {
+   "name": "Miyabi Doll Card",
+   "price": 400000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 27/08/2026)",
+   "updated": "2026-10-30"
+  },
+  "4210": {
+   "name": "Wanderer Card",
+   "price": 999999,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4211": {
+   "name": "Vocal Card",
+   "price": 1234567,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4212": {
+   "name": "Bongun Card",
+   "price": 477498,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4213": {
+   "name": "Brilight Card",
+   "price": 99800,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 18/10/2026)",
+   "updated": "2026-10-30"
+  },
+  "4214": {
+   "name": "Bloody Murderer Card",
+   "price": 500000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4215": {
+   "name": "Blazer Card",
+   "price": 250000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 16/10/2026)",
+   "updated": "2026-10-30"
+  },
+  "4216": {
+   "name": "Sasquatch Card",
+   "price": 91245,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4217": {
+   "name": "Enchanted Peach Tree Card",
+   "price": 1437500,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4219": {
+   "name": "Sage Worm Card",
+   "price": 300000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 20/09/2026)",
+   "updated": "2026-10-30"
+  },
+  "4220": {
+   "name": "Solider Card",
+   "price": 337500,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 23/09/2026)",
+   "updated": "2026-10-30"
+  },
+  "4221": {
+   "name": "Skeleton General Card",
+   "price": 3500000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4222": {
+   "name": "Skeleton Prisoner Card",
+   "price": 150000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4223": {
+   "name": "Stalactic Golem Card",
+   "price": 600000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4224": {
+   "name": "Stem Worm Card",
+   "price": 600000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4225": {
+   "name": "Stone Shooter Card",
+   "price": 250000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 26/07/2026)",
+   "updated": "2026-10-30"
+  },
+  "4226": {
+   "name": "Sting Card",
+   "price": 225000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4227": {
+   "name": "Spring Rabbit Card",
+   "price": 1800000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4228": {
+   "name": "Sleeper Card",
+   "price": 450000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4229": {
+   "name": "Tower Keeper Card",
+   "price": 14999999,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4230": {
+   "name": "Shinobi Card",
+   "price": 1799999,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4231": {
+   "name": "Mi Gao Card",
+   "price": 50000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4232": {
+   "name": "Hermit Plant Card",
+   "price": 1499999,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 07/12/2025)",
+   "updated": "2026-10-30"
+  },
+  "4233": {
+   "name": "Baby Leopard Card",
+   "price": 2775000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4234": {
+   "name": "Anolian Card",
+   "price": 255000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4235": {
+   "name": "Christmas Cookie Card",
+   "price": 150000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 28/09/2026)",
+   "updated": "2026-10-30"
+  },
+  "4237": {
+   "name": "Owl Duke Card",
+   "price": 3999068,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4238": {
+   "name": "Owl Baron Card",
+   "price": 22000000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 22/09/2026)",
+   "updated": "2026-10-30"
+  },
+  "4239": {
+   "name": "Iron Fist Card",
+   "price": 572778,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4240": {
+   "name": "Arclouze Card",
+   "price": 300000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4244": {
+   "name": "Alarm Card",
+   "price": 387500,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4245": {
+   "name": "Am Mut Card",
+   "price": 1999999,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 10/10/2026)",
+   "updated": "2026-10-30"
+  },
+  "4246": {
+   "name": "Assaulter Card",
+   "price": 550000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4247": {
+   "name": "Aster Card",
+   "price": 62500,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 12/07/2026)",
+   "updated": "2026-10-30"
+  },
+  "4248": {
+   "name": "Ancient Mummy Card",
+   "price": 2200000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 04/09/2026)",
+   "updated": "2026-10-30"
+  },
+  "4249": {
+   "name": "Ancient Worm Card",
+   "price": 920000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4250": {
+   "name": "Executioner Card",
+   "price": 120000000,
+   "samples": 1,
+   "source": "mediana de 1 dia(s) com venda (última venda 14/11/2025)",
+   "updated": "2026-10-30"
+  },
+  "4252": {
+   "name": "Alligator Card",
+   "price": 1900000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 13/09/2026)",
+   "updated": "2026-10-30"
+  },
+  "4253": {
+   "name": "Alice Card",
+   "price": 28749749,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4254": {
+   "name": "Ogretooth Card",
+   "price": 45000000,
+   "samples": 4,
+   "source": "mediana de 4 dia(s) com venda (última venda 14/12/2025)",
+   "updated": "2026-10-30"
+  },
+  "4255": {
+   "name": "Orc Lady Card",
+   "price": 500000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4256": {
+   "name": "Orc Archer Card",
+   "price": 469500,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 25/04/2026)",
+   "updated": "2026-10-30"
+  },
+  "4257": {
+   "name": "Wild Rose Card",
+   "price": 50000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4259": {
+   "name": "Wooden Golem Card",
+   "price": 1143519,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4260": {
+   "name": "Wootan Shooter Card",
+   "price": 1000000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 12/01/2026)",
+   "updated": "2026-10-30"
+  },
+  "4261": {
+   "name": "Wootan Fighter Card",
+   "price": 1999999,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 12/09/2026)",
+   "updated": "2026-10-30"
+  },
+  "4262": {
+   "name": "Cloud Hermit Card",
+   "price": 2450000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 06/10/2026)",
+   "updated": "2026-10-30"
+  },
+  "4264": {
+   "name": "Wind Ghost Card",
+   "price": 1999999,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4265": {
+   "name": "Jing Guai Card",
+   "price": 550000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 03/10/2026)",
+   "updated": "2026-10-30"
+  },
+  "4266": {
+   "name": "Eclipse Card",
+   "price": 1500000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4267": {
+   "name": "Explosion Card",
+   "price": 899000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4268": {
+   "name": "Injustice Card",
+   "price": 899999,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4270": {
+   "name": "Giant Spider Card",
+   "price": 99998,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4271": {
+   "name": "Giant Hornet Card",
+   "price": 249999,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 18/10/2026)",
+   "updated": "2026-10-30"
+  },
+  "4272": {
+   "name": "Zhu Po Long Card",
+   "price": 4500000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4273": {
+   "name": "Shell Fish Card",
+   "price": 200000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 09/09/2026)",
+   "updated": "2026-10-30"
+  },
+  "4274": {
+   "name": "Zombie Master Card",
+   "price": 725000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4275": {
+   "name": "Zombie Prisoner Card",
+   "price": 1075000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4277": {
+   "name": "Zealotus Card",
+   "price": 27500000,
+   "samples": 2,
+   "source": "mediana de 2 dia(s) com venda (última venda 01/03/2026)",
+   "updated": "2026-10-30"
+  },
+  "4278": {
+   "name": "Gibbet Card",
+   "price": 200000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4279": {
+   "name": "Earth Deleter Card",
+   "price": 5850000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4280": {
+   "name": "Geographer Card",
+   "price": 750000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4281": {
+   "name": "Zipper Bear Card",
+   "price": 2499999,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4282": {
+   "name": "Tengu Card",
+   "price": 3900000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 17/07/2026)",
+   "updated": "2026-10-30"
+  },
+  "4283": {
+   "name": "Greatest General Card",
+   "price": 1499998,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 01/10/2026)",
+   "updated": "2026-10-30"
+  },
+  "4284": {
+   "name": "Chepet Card",
+   "price": 4000000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 24/04/2025)",
+   "updated": "2026-10-30"
+  },
+  "4285": {
+   "name": "Choco Card",
+   "price": 2688888,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4286": {
+   "name": "Karakasa Card",
+   "price": 262500,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 09/10/2026)",
+   "updated": "2026-10-30"
+  },
+  "4287": {
+   "name": "Kapha Card",
+   "price": 500000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 18/08/2026)",
+   "updated": "2026-10-30"
+  },
+  "4288": {
+   "name": "Carat Card",
+   "price": 1950000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4289": {
+   "name": "Caterpillar Card",
+   "price": 200000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 29/09/2026)",
+   "updated": "2026-10-30"
+  },
+  "4290": {
+   "name": "Cat O' Nine Tails Card",
+   "price": 1850000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 15/08/2026)",
+   "updated": "2026-10-30"
+  },
+  "4292": {
+   "name": "Kobold Archer Card",
+   "price": 150000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 14/10/2026)",
+   "updated": "2026-10-30"
+  },
+  "4293": {
+   "name": "Cookie Card",
+   "price": 500000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 12/10/2026)",
+   "updated": "2026-10-30"
+  },
+  "4294": {
+   "name": "Quve Card",
+   "price": 200000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 01/10/2026)",
+   "updated": "2026-10-30"
+  },
+  "4295": {
+   "name": "Kraben Card",
+   "price": 1500000,
+   "samples": 4,
+   "source": "mediana de 4 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4296": {
+   "name": "Cramp Card",
+   "price": 5775000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 16/10/2026)",
+   "updated": "2026-10-30"
+  },
+  "4297": {
+   "name": "Cruiser Card",
+   "price": 1508333,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4298": {
+   "name": "Creamy Fear Card",
+   "price": 89500,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4299": {
+   "name": "Clock Card",
+   "price": 500000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4301": {
+   "name": "Killer Mantis Card",
+   "price": 599999,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4303": {
+   "name": "Giant Whisper Card",
+   "price": 10500000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4304": {
+   "name": "Tamruan Card",
+   "price": 2562500,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4306": {
+   "name": "Toad Card",
+   "price": 775000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 26/12/2025)",
+   "updated": "2026-10-30"
+  },
+  "4307": {
+   "name": "Beetle King Card",
+   "price": 262500,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 05/09/2026)",
+   "updated": "2026-10-30"
+  },
+  "4308": {
+   "name": "Tri Joint Card",
+   "price": 500000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4309": {
+   "name": "Parasite Card",
+   "price": 375000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 12/09/2026)",
+   "updated": "2026-10-30"
+  },
+  "4310": {
+   "name": "Panzer Goblin Card",
+   "price": 6875000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 11/08/2026)",
+   "updated": "2026-10-30"
+  },
+  "4311": {
+   "name": "Permeter Card",
+   "price": 400000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4312": {
+   "name": "Seal Card",
+   "price": 1150000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4313": {
+   "name": "Punk Card",
+   "price": 127500,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4314": {
+   "name": "Penomena Card",
+   "price": 3211111,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4315": {
+   "name": "Pest Card",
+   "price": 369500,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 17/10/2026)",
+   "updated": "2026-10-30"
+  },
+  "4317": {
+   "name": "Mobster Card",
+   "price": 102500000,
+   "samples": 8,
+   "source": "mediana de 8 dia(s) com venda (última venda 17/10/2026)",
+   "updated": "2026-10-30"
+  },
+  "4319": {
+   "name": "Freezer Card",
+   "price": 256250,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4321": {
+   "name": "Hylozoist Card",
+   "price": 800000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 09/10/2026)",
+   "updated": "2026-10-30"
+  },
+  "4322": {
+   "name": "High Orc Card",
+   "price": 49999,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4323": {
+   "name": "Hatii Babe Card",
+   "price": 1750000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 04/05/2026)",
+   "updated": "2026-10-30"
+  },
+  "4325": {
+   "name": "Harpy Card",
+   "price": 2975000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4326": {
+   "name": "Sea-Otter Card",
+   "price": 95000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4327": {
+   "name": "Bloody Butterfly Card",
+   "price": 132500,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4328": {
+   "name": "Yao Jun Card",
+   "price": 967500,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4329": {
+   "name": "Phendark Card",
+   "price": 2500000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 19/08/2026)",
+   "updated": "2026-10-30"
+  },
+  "4331": {
+   "name": "Heater Card",
+   "price": 375000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4336": {
+   "name": "Ungoliant Card",
+   "price": 9500000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 12/07/2026)",
+   "updated": "2026-10-30"
+  },
+  "4337": {
+   "name": "Porcellio Card",
+   "price": 1825000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4338": {
+   "name": "Obsidian Card",
+   "price": 999999,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 14/08/2026)",
+   "updated": "2026-10-30"
+  },
+  "4339": {
+   "name": "Mineral Card",
+   "price": 997500,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4373": {
+   "name": "Green Maiden Card",
+   "price": 64500000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 25/07/2026)",
+   "updated": "2026-10-30"
+  },
+  "4375": {
+   "name": "Orc Baby Card",
+   "price": 14000000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4377": {
+   "name": "Grove Card",
+   "price": 2900000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4378": {
+   "name": "Gold Acidus Card",
+   "price": 2641667,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4379": {
+   "name": "Blue Acidus Card",
+   "price": 2500000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4380": {
+   "name": "Red Ferus Card",
+   "price": 3644444,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4381": {
+   "name": "Green Ferus Card",
+   "price": 8094623,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 19/10/2026)",
+   "updated": "2026-10-30"
+  },
+  "4382": {
+   "name": "Yellow Novus Card",
+   "price": 425000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 04/09/2026)",
+   "updated": "2026-10-30"
+  },
+  "4383": {
+   "name": "Red Novus Card",
+   "price": 1000000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 06/08/2026)",
+   "updated": "2026-10-30"
+  },
+  "4387": {
+   "name": "Ancient Mimic Card",
+   "price": 32000000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4404": {
+   "name": "Skogul Card",
+   "price": 1450000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 10/08/2026)",
+   "updated": "2026-10-30"
+  },
+  "4405": {
+   "name": "Frus Card",
+   "price": 550000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4415": {
+   "name": "Snowier Card",
+   "price": 7638889,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4416": {
+   "name": "Siroma Card",
+   "price": 774998,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4417": {
+   "name": "Ice Titan Card",
+   "price": 850000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "4418": {
+   "name": "Gazeti Card",
+   "price": 2500000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "5116": {
+   "name": "Banana Hat",
+   "price": 28750,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "8001": {
+   "name": "Cave Viper Card",
+   "price": 4850000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "8089": {
+   "name": "Twinorc Card",
+   "price": 7000000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 11/08/2025)",
+   "updated": "2026-10-30"
+  },
+  "8090": {
+   "name": "Indignant Soul Card",
+   "price": 42249342,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "8091": {
+   "name": "Roper Card",
+   "price": 1405000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "8092": {
+   "name": "Ghost Shroom Card",
+   "price": 11550000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "8093": {
+   "name": "Miasmus Card",
+   "price": 5250000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 29/08/2026)",
+   "updated": "2026-10-30"
+  },
+  "8094": {
+   "name": "Frigid Lich Card",
+   "price": 7000000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "8211": {
+   "name": "Protoring Card",
+   "price": 950000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "8212": {
+   "name": "Doughring Card",
+   "price": 625000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 02/09/2026)",
+   "updated": "2026-10-30"
+  },
+  "8213": {
+   "name": "Jelring Card",
+   "price": 287500,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "8214": {
+   "name": "Abomring Card",
+   "price": 50000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "8216": {
+   "name": "Spectring Card",
+   "price": 1374450,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "8217": {
+   "name": "Conductring Card",
+   "price": 3175000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 16/10/2026)",
+   "updated": "2026-10-30"
+  },
+  "8218": {
+   "name": "Corruptor Card",
+   "price": 8275000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "8233": {
+   "name": "Tomb Crawler Card",
+   "price": 100000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "8234": {
+   "name": "Ancient Guard Card",
+   "price": 325000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 11/10/2026)",
+   "updated": "2026-10-30"
+  },
+  "8235": {
+   "name": "Kalec Card",
+   "price": 3387500,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 02/10/2026)",
+   "updated": "2026-10-30"
+  },
+  "8236": {
+   "name": "Yser Card",
+   "price": 1275000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 14/10/2026)",
+   "updated": "2026-10-30"
+  },
+  "8238": {
+   "name": "Bonechewer Card",
+   "price": 1800000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "8239": {
+   "name": "Shade of Payon Card",
+   "price": 4337500,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "8240": {
+   "name": "Puck Card",
+   "price": 1000000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 12/10/2026)",
+   "updated": "2026-10-30"
+  },
+  "8241": {
+   "name": "Dory Card",
+   "price": 438750,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "8243": {
+   "name": "Wolpertinger Card",
+   "price": 1850000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "8244": {
+   "name": "Moon Rabbit Card",
+   "price": 553389,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "8245": {
+   "name": "Kodama Card",
+   "price": 1500000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "8246": {
+   "name": "Gyokuto Card",
+   "price": 1799123,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 21/09/2026)",
+   "updated": "2026-10-30"
+  },
+  "8247": {
+   "name": "Onigiring Card",
+   "price": 199999,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 03/10/2026)",
+   "updated": "2026-10-30"
+  },
+  "12260": {
+   "name": "Cool Summer Outfit",
+   "price": 90000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "90000": {
+   "name": "Magmawhip Card",
+   "price": 1475000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "90001": {
+   "name": "SCOUT Card",
+   "price": 298281,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "90002": {
+   "name": "Rekenber Soldier Card",
+   "price": 3499999,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "90003": {
+   "name": "WELDER Card",
+   "price": 16000000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "90004": {
+   "name": "CORE Card",
+   "price": 4250000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "90005": {
+   "name": "DRILL Card",
+   "price": 11500000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "90006": {
+   "name": "Living Magma Card",
+   "price": 582500,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "90007": {
+   "name": "FUEL Card",
+   "price": 2000000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "90008": {
+   "name": "Rekenber Guard Card",
+   "price": 80000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "90009": {
+   "name": "Rekenber Mercenary Card",
+   "price": 150000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "90010": {
+   "name": "Magma Familiar Card",
+   "price": 298875,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "90014": {
+   "name": "Pill Bug Card",
+   "price": 1900000,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "90015": {
+   "name": "Great Snake Card",
+   "price": 3999999,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "90016": {
+   "name": "Elite Punk Card",
+   "price": 2941666,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda",
+   "updated": "2026-10-30"
+  },
+  "90017": {
+   "name": "Spurus Card",
+   "price": 1782742,
+   "samples": 10,
+   "source": "mediana de 10 dia(s) com venda (última venda 15/08/2026)",
+   "updated": "2026-10-30"
   }
  }
 }

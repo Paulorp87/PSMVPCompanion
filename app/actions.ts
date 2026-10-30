@@ -306,3 +306,22 @@ export async function setOver(dropId: number, n: number, level: number) {
   await q("UPDATE drops SET refine=$2 WHERE id=$1", [id, Math.max(0, Math.min(10, Math.floor(level)))]);
   revalidatePath("/", "layout");
 }
+
+// ---------- Abrir caixa (Old Card Album) ----------
+/** Abre 1 unidade da caixa: a caixa vira "Usei · saiu X" e o item que saiu entra como drop novo (Sem status). */
+export async function openBox(dropId: number, itemId: number) {
+  const { BOXES } = await import("@/lib/boxes");
+  const cur = (await q<{ item_id: number; character_id: number | null; mvp: string; status: string }>(
+    "SELECT item_id, character_id, mvp, status FROM drops WHERE id=$1", [dropId]))[0];
+  const box = cur && BOXES[cur.item_id];
+  const it = box?.items.find((x) => x.id === itemId);
+  if (!cur || !box || !it || cur.status === "usado") return;
+  const id = await splitOff(dropId, 1);
+  if (!id) return;
+  await q("UPDATE drops SET status='usado', project_id=NULL, opened_id=$2, opened_name=$3 WHERE id=$1", [id, it.id, it.name]);
+  await q(
+    `INSERT INTO drops(dropped_on, character_id, mvp, item_id, item_name, qty, status, source)
+     VALUES ((now() AT TIME ZONE 'America/Chicago')::date, $1, $2, $3, $4, 1, 'sem_status', 'caixa')`,
+    [cur.character_id, cur.mvp, it.id, it.name]);
+  revalidatePath("/", "layout");
+}
