@@ -157,6 +157,14 @@ async function applyKcUpdates(c: PoolClient) {
     if (done.rowCount) continue;
     await c.query("BEGIN");
     try {
+      for (const n of u.newCharacters ?? []) {
+        // entra depois do último com sprite; o "Ajuste manual" continua no fim
+        const ins = await c.query(
+          `INSERT INTO characters(name, sort, sprite)
+           SELECT $1, COALESCE(MAX(sort),0)+1, $2 FROM characters WHERE sprite IS NOT NULL
+           ON CONFLICT (name) DO NOTHING RETURNING sort`, [n, `/sprites/${slug(n)}.png`]);
+        if (ins.rowCount) await c.query("UPDATE characters SET sort=sort+1 WHERE sprite IS NULL AND sort >= $1", [ins.rows[0].sort]);
+      }
       for (const [name, list] of Object.entries(u.data)) {
         const ch = await c.query("SELECT id FROM characters WHERE name=$1", [name]);
         if (!ch.rowCount) continue;

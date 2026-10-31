@@ -83,7 +83,7 @@ export function slug(s: string): string {
 }
 
 // Atualizações de KC lançadas pelo Claude a partir dos prints (aplicadas uma vez cada).
-export const KC_UPDATES: { key: string; week: string; data: Record<string, string> }[] = [
+export const KC_UPDATES: { key: string; week: string; newCharacters?: string[]; data: Record<string, string> }[] = [
   {
     key: "kc-2026-10-23",
     week: "2026-10-23",
@@ -99,6 +99,23 @@ export const KC_UPDATES: { key: string; week: string; data: Record<string, strin
       "Professor Jirafales": "Dark Lord 60",
       "Rami": "Garm 33",
       "Mestra Genkai": "RSX 0806 34, Mistress 11, Aspect of Sol 5",
+    },
+  },
+  {
+    key: "kc-2026-10-30",
+    week: "2026-10-30",
+    newCharacters: ["Trappin Hood"],
+    data: {
+      "Sandara": "Turtle General 283",
+      "MiniZeph": "Golden Thief Bug 704, Phreeoni 227, Eddga 78",
+      "Enami Asa": "Pharaoh 280",
+      "Wonyoung": "Amon Ra 1302",
+      "Kim Taeyeon": "Moonlight Flower 143, Dracula 2",
+      "Brujeria": "Orc Hero 657",
+      "Lucas Silveira": "Maya 11, Orc Lord 4",
+      "Rami": "Garm 45",
+      "Trappin Hood": "Knight of Windstorm 4",
+      "Mestra Genkai": "RSX 0806 38, Lady Huo 24, Mistress 15, Aspect of Sol 7, Lord of Death 7, Garm 6, Logi 6, Amon Ra 5, Eddga 5, Incantation Samurai 5",
     },
   },
 ];
