@@ -12,8 +12,8 @@ const num = (s: string) => Number(s.replace(/\D/g, "")) || 0;
 const pct = (r: number) => (r / 100).toLocaleString("pt-BR", { maximumFractionDigits: 2 }) + "%";
 const norm = (t: string) => t.normalize("NFKD").replace(/[̀-ͯ]/g, "").toLowerCase();
 
-export default function FarmForm({ mapId, mapName, build, today, loot, consumables }: {
-  mapId: string; mapName: string; build: string; today: string; loot: Loot[];
+export default function FarmForm({ mapId, mapName, characterId, today, loot, consumables }: {
+  mapId: string; mapName: string; characterId: number; today: string; loot: Loot[];
   consumables: { id: number; name: string; price: number | null }[];
 }) {
   const router = useRouter();
@@ -60,7 +60,7 @@ export default function FarmForm({ mapId, mapName, build, today, loot, consumabl
     setMsg("");
     start(async () => {
       const r = await createFarmSession({
-        day, mapId, mapName, build, minutes: num(minutes),
+        day, mapId, mapName, characterId, minutes: num(minutes),
         items: rows.filter((x) => num(x.qty) > 0).map((x) => ({ id: x.id, name: x.name, qty: num(x.qty), dest: x.dest, price: x.price ? num(x.price) : null })),
         costs: costs.map((x) => ({ id: x.id, name: x.name, qty: num(x.qty), price: num(x.price) })),
       });

@@ -328,28 +328,29 @@ export async function openBox(dropId: number, itemId: number) {
 
 // ---------- Farm ----------
 export type FarmPayload = {
-  day: string; mapId: string; mapName: string; build: string; minutes: number;
+  day: string; mapId: string; mapName: string; characterId: number; minutes: number;
   items: { id: number; name: string; qty: number; dest: string; price: number | null }[];
   costs: { id: number | null; name: string; qty: number; price: number }[];
 };
 
 export async function createFarmSession(p: FarmPayload): Promise<{ ok: boolean; msg: string; id?: number }> {
   const minutes = Math.floor(p.minutes);
-  if (!p.mapId || !p.build.trim()) return { ok: false, msg: "Escolha o mapa e escreva a classe/build." };
+  const ch = (await q<{ name: string }>("SELECT name FROM characters WHERE id=$1", [p.characterId]))[0];
+  if (!p.mapId || !ch) return { ok: false, msg: "Escolha o mapa e o personagem." };
   if (!(minutes > 0)) return { ok: false, msg: "Coloque quanto tempo você farmou." };
   const items = p.items.filter((i) => i.qty > 0 && ["vender", "guardar", "loja"].includes(i.dest));
   const costs = p.costs.filter((c) => c.qty > 0 && c.name.trim());
   const s = (await q<{ id: number }>(
-    "INSERT INTO farm_sessions(day, map_id, map_name, build, minutes) VALUES ($1,$2,$3,$4,$5) RETURNING id",
-    [p.day || null, p.mapId, p.mapName, p.build.trim(), minutes]))[0];
+    "INSERT INTO farm_sessions(day, map_id, map_name, build, character_id, minutes) VALUES ($1,$2,$3,$4,$5,$6) RETURNING id",
+    [p.day || null, p.mapId, p.mapName, ch.name, p.characterId, minutes]))[0];
   for (const i of items) {
     await q("INSERT INTO farm_items(session_id, item_id, item_name, qty, dest, price) VALUES ($1,$2,$3,$4,$5,$6)",
       [s.id, i.id, i.name, Math.floor(i.qty), i.dest, i.price]);
     if (i.dest === "loja") {
       await q(
         `INSERT INTO drops(dropped_on, character_id, mvp, item_id, item_name, qty, status, source, farm_session_id)
-         VALUES ($1, NULL, $2, $3, $4, $5, 'loja', 'farm', $6)`,
-        [p.day, `Farm · ${p.mapName}`, i.id, i.name, Math.floor(i.qty), s.id]);
+         VALUES ($1, $7, $2, $3, $4, $5, 'loja', 'farm', $6)`,
+        [p.day, `Farm · ${p.mapName}`, i.id, i.name, Math.floor(i.qty), s.id, p.characterId]);
     }
   }
   for (const c of costs)

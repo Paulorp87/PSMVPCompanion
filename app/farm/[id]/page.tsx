@@ -11,8 +11,9 @@ const n = (v: number) => Math.round(v).toLocaleString("pt-BR");
 
 export default async function Sessao({ params }: { params: Promise<{ id: string }> }) {
   const id = Number((await params).id);
-  const s = (await q<{ id: number; day: string; map_id: string; map_name: string; build: string; minutes: number }>(
-    "SELECT id, to_char(day,'YYYY-MM-DD') AS day, map_id, map_name, build, minutes FROM farm_sessions WHERE id=$1", [id]))[0];
+  const s = (await q<{ id: number; day: string; map_id: string; map_name: string; build: string; minutes: number; sprite: string | null }>(
+    `SELECT s.id, to_char(s.day,'YYYY-MM-DD') AS day, s.map_id, s.map_name, COALESCE(c.name, s.build) AS build, s.minutes, c.sprite
+     FROM farm_sessions s LEFT JOIN characters c ON c.id=s.character_id WHERE s.id=$1`, [id]))[0];
   if (!s) notFound();
   const [items, costs, shop, calc] = await Promise.all([
     q<{ item_id: number; item_name: string; qty: number; dest: Dest; price: number | null }>(
@@ -28,13 +29,16 @@ export default async function Sessao({ params }: { params: Promise<{ id: string 
   return (
     <>
       <p className="note"><Link href="/farm">← Farm</Link></p>
-      <h1>{s.map_name} <span className="dim" style={{ fontSize: 16 }}>{s.map_id}</span></h1>
-      <p className="sub">{s.build} · {fmtDate(s.day)} · {s.minutes} min</p>
+      <div className="charhead">
+        {s.sprite && <img src={s.sprite} alt="" />}
+        <div><h1 style={{ margin: 0 }}>{s.map_name} <span className="dim" style={{ fontSize: 16 }}>{s.map_id}</span></h1>
+          <p className="sub" style={{ margin: 0 }}>{s.build} · {fmtDate(s.day)} · {s.minutes} min</p></div>
+      </div>
       <div className="stats">
         <div className="stat"><div className="k">Lucro real</div><div className={`v num ${c.real < 0 ? "down" : ""}`}>{n(c.real)} z</div><div className="note num">{n(c.real / per)} z / 5 min</div></div>
         <div className="stat"><div className="k">Valor potencial</div><div className="v num accent">{n(c.potential)} z</div><div className="note num">{n(c.potential / per)} z / 5 min</div></div>
         <div className="stat"><div className="k">Lojinha</div><div className="v num" style={{ fontSize: 16 }}>{n(c.shopSold)} vendido</div><div className="note num">{n(c.shopOpen)} ainda na loja (estimado)</div></div>
-        <div className="stat"><div className="k">Consumíveis</div><div className="v num down" style={{ fontSize: 16 }}>−{n(c.costs)} z</div></div>
+        <div className="stat"><div className="k">Consumíveis</div><div className={`v num ${c.costs ? "down" : ""}`} style={{ fontSize: 16 }}>{c.costs ? `−${n(c.costs)}` : "0"} z</div></div>
       </div>
 
       <h2>Itens</h2>

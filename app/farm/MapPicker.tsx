@@ -3,13 +3,15 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import type { MapInfo } from "@/lib/farm";
 
+type Char = { id: number; name: string; sprite: string | null };
+
 const norm = (t: string) => t.normalize("NFKD").replace(/[̀-ͯ]/g, "").toLowerCase();
 
-export default function MapPicker({ maps, builds, recent }: { maps: MapInfo[]; builds: string[]; recent: { map_id: string; map_name: string }[] }) {
+export default function MapPicker({ maps, chars, recent }: { maps: MapInfo[]; chars: Char[]; recent: { map_id: string; map_name: string }[] }) {
   const router = useRouter();
   const [find, setFind] = useState("");
   const [map, setMap] = useState<{ id: string; name: string } | null>(null);
-  const [build, setBuild] = useState("");
+  const [char, setChar] = useState<number | null>(null);
   const f = norm(find.trim());
   const hits = f.length >= 2
     ? maps.filter((m) => norm(m.map_name).includes(f) || norm(m.map_id).includes(f) || m.mobs.some((x) => norm(x).includes(f))).slice(0, 12)
@@ -46,12 +48,19 @@ export default function MapPicker({ maps, builds, recent }: { maps: MapInfo[]; b
       )}
       {!map && f.length >= 2 && hits.length === 0 && <p className="note">Nenhum mapa com esse nome ou monstro.</p>}
 
-      <label className="f" style={{ marginTop: 10 }}>Classe e build
-        <input list="builds" placeholder="ex.: BS de meteoro, Kina de Jabber" value={build} onChange={(e) => setBuild(e.target.value)} />
-        <datalist id="builds">{builds.map((b) => <option key={b} value={b} />)}</datalist>
-      </label>
-      <button className="btn" style={{ marginTop: 10 }} disabled={!map || !build.trim()}
-        onClick={() => map && router.push(`/farm/nova?map=${encodeURIComponent(map.id)}&build=${encodeURIComponent(build.trim())}`)}>
+      <div className="f" style={{ marginTop: 12 }}>Personagem</div>
+      <div className="grid" style={{ marginTop: 6 }}>
+        {chars.map((c) => (
+          <button key={c.id} type="button" className="char" onClick={() => setChar(c.id)}
+            style={{ padding: 0, cursor: "pointer", textAlign: "left", font: "inherit", color: "inherit",
+              outline: char === c.id ? "2px solid var(--accent)" : undefined, opacity: char && char !== c.id ? 0.55 : 1 }}>
+            <div className="art">{c.sprite && <img src={c.sprite} alt="" />}</div>
+            <div className="nm" title={c.name}>{c.name}</div>
+          </button>
+        ))}
+      </div>
+      <button className="btn" style={{ marginTop: 12 }} disabled={!map || !char}
+        onClick={() => map && char && router.push(`/farm/nova?map=${encodeURIComponent(map.id)}&char=${char}`)}>
         Carregar loots do mapa
       </button>
     </div>
