@@ -49,7 +49,7 @@ export async function POST(req: NextRequest) {
     n = rows.length;
   } else if (body.kind === "farm_map") {
     // mapa montado com o Paulo: quais loots são raw (NPC) e quais vão pro PC
-    const m = body.data as { map_id: string; map_name: string; items: { id: number; name: string; kind: "npc" | "pc"; npc: number | null }[] };
+    const m = body.data as { map_id: string; map_name: string; items: { id: number; name: string; kind: "npc" | "pc" | "guardar"; npc: number | null }[] };
     await q("INSERT INTO farm_maps(map_id, map_name) VALUES ($1,$2) ON CONFLICT (map_id) DO UPDATE SET map_name=EXCLUDED.map_name", [m.map_id, m.map_name]);
     await q("DELETE FROM farm_map_items WHERE map_id=$1", [m.map_id]);
     await q(

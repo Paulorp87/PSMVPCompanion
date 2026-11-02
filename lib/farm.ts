@@ -2,7 +2,7 @@ import { q } from "./db";
 
 export type FarmMob = { id: number; name: string; level: number; hp: number; base_exp: number; job_exp: number; is_mvp: boolean; amount: number; drops: [number, string, number][] };
 export type MapInfo = { map_id: string; map_name: string; mobs: string[] };
-export type Loot = { id: number; name: string; price: number | null; source: string | null; npc: number | null; kind: "npc" | "pc"; from: { mob: string; rate: number }[] };
+export type Loot = { id: number; name: string; price: number | null; source: string | null; npc: number | null; kind: "npc" | "pc" | "guardar"; from: { mob: string; rate: number }[] };
 
 // Consumíveis mais comuns (preço da Price Check quando tiver, sempre editável).
 export const CONSUMABLES: { id: number; name: string }[] = [
@@ -56,7 +56,7 @@ export async function mapLoot(mapId: string, mobs: FarmMob[]): Promise<Loot[]> {
     for (const p of ps) { const l = by.get(p.item_id)!; l.price = p.price; l.source = p.source; }
     const [np, kinds] = await Promise.all([
       q<{ item_id: number; price: number }>("SELECT item_id, price::float8 AS price FROM npc_prices WHERE item_id = ANY($1)", [ids]),
-      q<{ item_id: number; kind: "npc" | "pc" }>("SELECT item_id, kind FROM farm_map_items WHERE map_id=$1", [mapId]),
+      q<{ item_id: number; kind: "npc" | "pc" | "guardar" }>("SELECT item_id, kind FROM farm_map_items WHERE map_id=$1", [mapId]),
     ]);
     for (const p of np) by.get(p.item_id)!.npc = p.price;
     for (const k of kinds) { const l = by.get(k.item_id); if (l) l.kind = k.kind; }

@@ -25,7 +25,7 @@ export default function FarmForm({ mapId, mapName, characterId, today, loot, con
   const [onlyMine, setOnlyMine] = useState(false);
   const [oc, setOc] = useState("24");
   const [rows, setRows] = useState<Row[]>(() => loot.map((l) => ({
-    id: l.id, name: l.name, qty: "", dest: l.kind === "npc" ? "npc" : "vender", price: l.price != null ? String(Math.round(l.price)) : "",
+    id: l.id, name: l.name, qty: "", dest: l.kind === "npc" ? "npc" : l.kind === "guardar" ? "guardar" : "vender", price: l.price != null ? String(Math.round(l.price)) : "",
     market: l.price, npc: l.npc, source: l.source, from: l.from,
   })));
   // NPC: preço do NPC + Superfaturar
