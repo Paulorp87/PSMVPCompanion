@@ -35,9 +35,9 @@ export default async function Farm() {
       <h1>Farm</h1>
       <p className="sub">Escolha o mapa e o personagem, marque o que caiu e o que fez com cada item. No fim sai o lucro real (o que vendeu), o valor potencial (vendido + guardado + lojinha) e quanto rende a cada 5 minutos.</p>
       {maps.length === 0
-        ? <p className="flash err">Os monstros do Payon Stories ainda não foram carregados. Peça pro Claude puxar o monster database.</p>
+        ? <p className="flash err">Nenhum mapa montado ainda. Fale pro Claude qual mapa você quer farmar: ele lista os loots, você diz o que é raw (NPC) e o que vai pro PC, e o mapa aparece aqui.</p>
         : <MapPicker maps={maps} chars={chars} recent={recent} />}
-      {upd[0]?.d && <p className="note">{maps.length} mapas · monstros puxados do Payon Stories em {fmtDate(upd[0].d)}.</p>}
+      {maps.length > 0 && <p className="note">{maps.length} mapa(s) montado(s): {maps.map((m) => m.map_name).join(", ")}. Pra adicionar outro, fale com o Claude.{upd[0]?.d && <> Monstros puxados do Payon Stories em {fmtDate(upd[0].d)}.</>}</p>}
 
       {cmp.length > 0 && (
         <>

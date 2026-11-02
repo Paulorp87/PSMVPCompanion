@@ -15,7 +15,7 @@ export default function MapPicker({ maps, chars, recent }: { maps: MapInfo[]; ch
   const f = norm(find.trim());
   const hits = f.length >= 2
     ? maps.filter((m) => norm(m.map_name).includes(f) || norm(m.map_id).includes(f) || m.mobs.some((x) => norm(x).includes(f))).slice(0, 12)
-    : [];
+    : maps.slice(0, 30);
 
   return (
     <div className="panel">
@@ -29,7 +29,7 @@ export default function MapPicker({ maps, chars, recent }: { maps: MapInfo[]; ch
           <input placeholder="Busque pelo nome do mapa, código (ex: gef_dun01) ou monstro" value={find} onChange={(e) => setFind(e.target.value)} />
         )}
       </label>
-      {!map && recent.length > 0 && f.length < 2 && (
+      {!map && recent.length > 0 && f.length < 2 && maps.length > 30 && (
         <div className="row" style={{ gap: 6, marginTop: 6, flexWrap: "wrap" }}>
           <span className="dim" style={{ fontSize: 12 }}>Últimos:</span>
           {recent.map((r) => <button key={r.map_id} type="button" className="btn small ghost" onClick={() => setMap({ id: r.map_id, name: r.map_name })}>{r.map_name}</button>)}

@@ -47,6 +47,21 @@ export async function POST(req: NextRequest) {
        ON CONFLICT (item_id) DO UPDATE SET name=EXCLUDED.name, price=EXCLUDED.price, samples=EXCLUDED.samples, source=EXCLUDED.source, fetched_at=now()`,
       [JSON.stringify(rows)]);
     n = rows.length;
+  } else if (body.kind === "farm_map") {
+    // mapa montado com o Paulo: quais loots são raw (NPC) e quais vão pro PC
+    const m = body.data as { map_id: string; map_name: string; items: { id: number; name: string; kind: "npc" | "pc"; npc: number | null }[] };
+    await q("INSERT INTO farm_maps(map_id, map_name) VALUES ($1,$2) ON CONFLICT (map_id) DO UPDATE SET map_name=EXCLUDED.map_name", [m.map_id, m.map_name]);
+    await q("DELETE FROM farm_map_items WHERE map_id=$1", [m.map_id]);
+    await q(
+      `INSERT INTO farm_map_items(map_id, item_id, kind) SELECT $1, id, kind FROM jsonb_to_recordset($2::jsonb) AS x(id int, kind text)`,
+      [m.map_id, JSON.stringify(m.items)]);
+    await q(
+      `INSERT INTO npc_prices(item_id, name, price) SELECT id, name, npc FROM jsonb_to_recordset($1::jsonb) AS x(id int, name text, npc numeric)
+       WHERE npc IS NOT NULL ON CONFLICT (item_id) DO UPDATE SET name=EXCLUDED.name, price=EXCLUDED.price, fetched_at=now()`,
+      [JSON.stringify(m.items)]);
+    n = m.items.length;
+  } else if (body.kind === "farm_map_delete") {
+    await q("DELETE FROM farm_maps WHERE map_id=$1", [body.data]);
   } else return NextResponse.json({ error: "kind" }, { status: 400, headers: cors });
   return NextResponse.json({ ok: true, n }, { headers: cors });
 }

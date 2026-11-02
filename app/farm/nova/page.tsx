@@ -11,8 +11,9 @@ export default async function NovaSessao({ searchParams }: { searchParams: Promi
   const mapId = sp.map ?? "";
   const { name, mobs } = await mapMobs(mapId);
   const ch = sp.char ? await getCharacter(Number(sp.char)) : null;
-  if (!name || !ch) return <><h1>Farm</h1><p className="flash err">Mapa não encontrado. <Link href="/farm">Voltar</Link></p></>;
-  const loot = await mapLoot(mobs);
+  const ok = (await q("SELECT 1 FROM farm_maps WHERE map_id=$1", [mapId])).length > 0;
+  if (!name || !ch || !ok) return <><h1>Farm</h1><p className="flash err">Mapa não encontrado. <Link href="/farm">Voltar</Link></p></>;
+  const loot = await mapLoot(mapId, mobs);
   const cp = await q<{ item_id: number; price: number }>("SELECT item_id, price::float8 AS price FROM prices WHERE item_id = ANY($1)", [CONSUMABLES.map((c) => c.id)]);
   const consumables = CONSUMABLES.map((c) => ({ ...c, price: cp.find((p) => p.item_id === c.id)?.price ?? null }));
 

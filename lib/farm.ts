@@ -2,7 +2,7 @@ import { q } from "./db";
 
 export type FarmMob = { id: number; name: string; level: number; hp: number; base_exp: number; job_exp: number; is_mvp: boolean; amount: number; drops: [number, string, number][] };
 export type MapInfo = { map_id: string; map_name: string; mobs: string[] };
-export type Loot = { id: number; name: string; price: number | null; source: string | null; from: { mob: string; rate: number }[] };
+export type Loot = { id: number; name: string; price: number | null; source: string | null; npc: number | null; kind: "npc" | "pc"; from: { mob: string; rate: number }[] };
 
 // Consumíveis mais comuns (preço da Price Check quando tiver, sempre editável).
 export const CONSUMABLES: { id: number; name: string }[] = [
@@ -16,15 +16,17 @@ export const CONSUMABLES: { id: number; name: string }[] = [
   { id: 1065, name: "Trap" },
 ];
 
-export const DESTS = ["vender", "guardar", "loja"] as const;
+export const DESTS = ["vender", "npc", "guardar", "loja"] as const;
 export type Dest = (typeof DESTS)[number];
-export const DEST_LABEL: Record<Dest, string> = { vender: "Vendi", guardar: "Guardar", loja: "Lojinha" };
+export const DEST_LABEL: Record<Dest, string> = { vender: "Vendi", npc: "NPC", guardar: "Guardar", loja: "Lojinha" };
 
 export async function listMaps(): Promise<MapInfo[]> {
+  // só os mapas que já foram montados (raw x PC definidos)
   return q<MapInfo>(
-    `SELECT s->>0 AS map_id, MIN(s->>1) AS map_name, array_agg(DISTINCT m.name ORDER BY m.name) AS mobs
-     FROM ps_mobs m, jsonb_array_elements(m.spawns) s
-     WHERE NOT m.is_mvp GROUP BY s->>0 ORDER BY MIN(s->>1), s->>0`);
+    `SELECT f.map_id, f.map_name, COALESCE(array_agg(DISTINCT m.name ORDER BY m.name) FILTER (WHERE m.name IS NOT NULL), '{}') AS mobs
+     FROM farm_maps f
+     LEFT JOIN ps_mobs m ON NOT m.is_mvp AND EXISTS (SELECT 1 FROM jsonb_array_elements(m.spawns) s WHERE s->>0 = f.map_id)
+     GROUP BY f.map_id, f.map_name ORDER BY f.map_name`);
 }
 
 export async function mapMobs(mapId: string): Promise<{ name: string | null; mobs: FarmMob[] }> {
@@ -37,12 +39,12 @@ export async function mapMobs(mapId: string): Promise<{ name: string | null; mob
 }
 
 /** Todos os loots dos monstros (não-MVP) do mapa, com quem dropa e o preço de mercado. */
-export async function mapLoot(mobs: FarmMob[]): Promise<Loot[]> {
+export async function mapLoot(mapId: string, mobs: FarmMob[]): Promise<Loot[]> {
   const by = new Map<number, Loot>();
   for (const m of mobs) {
     if (m.is_mvp) continue;
     for (const [id, name, rate] of m.drops) {
-      const l = by.get(id) ?? { id, name, price: null, source: null, from: [] };
+      const l = by.get(id) ?? { id, name, price: null, source: null, npc: null, kind: "pc" as const, from: [] };
       l.from.push({ mob: m.name, rate });
       by.set(id, l);
     }
@@ -52,6 +54,12 @@ export async function mapLoot(mobs: FarmMob[]): Promise<Loot[]> {
     const ps = await q<{ item_id: number; price: number | null; source: string }>(
       "SELECT item_id, price::float8 AS price, source FROM prices WHERE item_id = ANY($1)", [ids]);
     for (const p of ps) { const l = by.get(p.item_id)!; l.price = p.price; l.source = p.source; }
+    const [np, kinds] = await Promise.all([
+      q<{ item_id: number; price: number }>("SELECT item_id, price::float8 AS price FROM npc_prices WHERE item_id = ANY($1)", [ids]),
+      q<{ item_id: number; kind: "npc" | "pc" }>("SELECT item_id, kind FROM farm_map_items WHERE map_id=$1", [mapId]),
+    ]);
+    for (const p of np) by.get(p.item_id)!.npc = p.price;
+    for (const k of kinds) { const l = by.get(k.item_id); if (l) l.kind = k.kind; }
   }
   // mais provável primeiro
   return [...by.values()].sort((a, b) => Math.max(...b.from.map((f) => f.rate)) - Math.max(...a.from.map((f) => f.rate)));
@@ -78,7 +86,7 @@ export async function calcSessions(ids: number[]): Promise<Map<number, SessionCa
   for (const s of sess) {
     const its = items.filter((i) => i.session_id === s.id);
     const priceOf = (id: number) => its.find((i) => i.item_id === id)?.price ?? 0;
-    const sold = its.filter((i) => i.dest === "vender").reduce((a, i) => a + i.qty * (i.price ?? 0), 0);
+    const sold = its.filter((i) => i.dest === "vender" || i.dest === "npc").reduce((a, i) => a + i.qty * (i.price ?? 0), 0);
     const stored = its.filter((i) => i.dest === "guardar").reduce((a, i) => a + i.qty * (i.price ?? 0), 0);
     let shopSold = 0, shopOpen = 0;
     for (const d of shop.filter((d) => d.farm_session_id === s.id)) {

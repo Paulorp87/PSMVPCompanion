@@ -121,6 +121,24 @@ CREATE TABLE IF NOT EXISTS farm_costs (
   qty INT NOT NULL CHECK (qty > 0),
   price NUMERIC NOT NULL DEFAULT 0
 );
+CREATE TABLE IF NOT EXISTS farm_maps (
+  map_id TEXT PRIMARY KEY,
+  map_name TEXT NOT NULL,
+  added_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+CREATE TABLE IF NOT EXISTS farm_map_items (
+  map_id TEXT NOT NULL REFERENCES farm_maps(map_id) ON DELETE CASCADE,
+  item_id INT NOT NULL,
+  kind TEXT NOT NULL CHECK (kind IN ('npc','pc')),
+  PRIMARY KEY (map_id, item_id)
+);
+CREATE TABLE IF NOT EXISTS npc_prices (
+  item_id INT PRIMARY KEY,
+  name TEXT,
+  price NUMERIC NOT NULL,
+  fetched_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+ALTER TABLE farm_sessions ADD COLUMN IF NOT EXISTS overcharge INT NOT NULL DEFAULT 24;
 ALTER TABLE farm_sessions ADD COLUMN IF NOT EXISTS character_id INT REFERENCES characters(id) ON DELETE SET NULL;
 ALTER TABLE drops ADD COLUMN IF NOT EXISTS farm_session_id INT REFERENCES farm_sessions(id) ON DELETE CASCADE;
 CREATE TABLE IF NOT EXISTS support (
