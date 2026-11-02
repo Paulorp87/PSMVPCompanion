@@ -63,7 +63,7 @@ export default function DropRow({ d, projects, onDelete }: { d: DropRowData; pro
   return (
     <tr>
       <td className="num">{fmt(d.dropped_on)}</td>
-      <td>{d.mvp}<div className="dim" style={{ fontSize: 12 }}>{d.char ?? "—"}{d.source === "history" && " · do histórico"}{d.source === "caixa" && " · saiu da caixa"}</div></td>
+      <td>{d.mvp}<div className="dim" style={{ fontSize: 12 }}>{d.char ?? "—"}{d.source === "history" && " · do histórico"}{d.source === "caixa" && " · saiu da caixa"}{d.source === "farm" && " · do farm"}</div></td>
       <td>{d.refine > 0 && <b>+{d.refine} </b>}{d.item_name} <span className="dim">#{d.item_id}</span></td>
       <td className="r">
         {d.qty > 1 && d.status !== "usado"

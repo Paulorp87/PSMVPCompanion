@@ -85,6 +85,43 @@ ALTER TABLE drops ADD COLUMN IF NOT EXISTS project_at TIMESTAMPTZ;
 ALTER TABLE drops ADD COLUMN IF NOT EXISTS support BOOLEAN NOT NULL DEFAULT false;
 ALTER TABLE drops ADD COLUMN IF NOT EXISTS opened_id INT;
 ALTER TABLE drops ADD COLUMN IF NOT EXISTS opened_name TEXT;
+CREATE TABLE IF NOT EXISTS ps_mobs (
+  id INT PRIMARY KEY,
+  name TEXT NOT NULL,
+  level INT, hp BIGINT, base_exp BIGINT, job_exp BIGINT,
+  is_mvp BOOLEAN NOT NULL DEFAULT false,
+  zeny_kill NUMERIC,
+  spawns JSONB NOT NULL DEFAULT '[]',
+  drops JSONB NOT NULL DEFAULT '[]',
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+CREATE TABLE IF NOT EXISTS farm_sessions (
+  id SERIAL PRIMARY KEY,
+  day DATE NOT NULL,
+  map_id TEXT NOT NULL,
+  map_name TEXT NOT NULL,
+  build TEXT NOT NULL,
+  minutes INT NOT NULL CHECK (minutes > 0),
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+CREATE TABLE IF NOT EXISTS farm_items (
+  id SERIAL PRIMARY KEY,
+  session_id INT NOT NULL REFERENCES farm_sessions(id) ON DELETE CASCADE,
+  item_id INT NOT NULL,
+  item_name TEXT NOT NULL,
+  qty INT NOT NULL CHECK (qty > 0),
+  dest TEXT NOT NULL,
+  price NUMERIC
+);
+CREATE TABLE IF NOT EXISTS farm_costs (
+  id SERIAL PRIMARY KEY,
+  session_id INT NOT NULL REFERENCES farm_sessions(id) ON DELETE CASCADE,
+  item_id INT,
+  item_name TEXT NOT NULL,
+  qty INT NOT NULL CHECK (qty > 0),
+  price NUMERIC NOT NULL DEFAULT 0
+);
+ALTER TABLE drops ADD COLUMN IF NOT EXISTS farm_session_id INT REFERENCES farm_sessions(id) ON DELETE CASCADE;
 CREATE TABLE IF NOT EXISTS support (
   id SERIAL PRIMARY KEY,
   character_id INT REFERENCES characters(id) ON DELETE CASCADE,
