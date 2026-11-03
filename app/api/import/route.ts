@@ -60,6 +60,14 @@ export async function POST(req: NextRequest) {
        WHERE npc IS NOT NULL ON CONFLICT (item_id) DO UPDATE SET name=EXCLUDED.name, price=EXCLUDED.price, fetched_at=now()`,
       [JSON.stringify(m.items)]);
     n = m.items.length;
+  } else if (body.kind === "farm_items_add") {
+    // correção de sessão pedida pelo Paulo (itens que faltaram)
+    const d = body.data as { session_id: number; items: { id: number; name: string; qty: number; dest: string; price: number }[] };
+    await q(
+      `INSERT INTO farm_items(session_id, item_id, item_name, qty, dest, price)
+       SELECT $1, id, name, qty, dest, price FROM jsonb_to_recordset($2::jsonb) AS x(id int, name text, qty int, dest text, price numeric)`,
+      [d.session_id, JSON.stringify(d.items)]);
+    n = d.items.length;
   } else if (body.kind === "farm_map_delete") {
     await q("DELETE FROM farm_maps WHERE map_id=$1", [body.data]);
   } else return NextResponse.json({ error: "kind" }, { status: 400, headers: cors });
