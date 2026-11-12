@@ -16,14 +16,14 @@ function niceMax(v: number) {
   return 10 * p;
 }
 
-export default function BarChart({ bars, avg, unit, empty, legend }: { bars: Bar[]; avg: number | null; unit: string; empty: string; legend?: [string, string] }) {
+export default function BarChart({ bars, avg, unit, empty, legend, goal }: { bars: Bar[]; avg: number | null; unit: string; empty: string; legend?: [string, string]; goal?: number | null }) {
   const [hover, setHover] = useState<number | null>(null);
   const vals = bars.map((b) => (b.value ?? 0) + (b.value2 ?? 0));
   if (!bars.some((b) => b.value != null)) return <p className="note">{empty}</p>;
   const H = 220, padL = 48, padR = 12, padT = 16, padB = 40;
   const slot = Math.max(44, Math.min(180, 900 / Math.max(1, bars.length)));
   const W = padL + padR + slot * bars.length;
-  const max = niceMax(Math.max(...vals, avg ?? 0));
+  const max = niceMax(Math.max(...vals, avg ?? 0, goal ?? 0));
   const y = (v: number) => padT + (H - padT - padB) * (1 - v / max);
   const ticks = [0, 0.25, 0.5, 0.75, 1].map((t) => t * max);
   const bw = Math.min(24, slot * 0.5);
@@ -73,6 +73,12 @@ export default function BarChart({ bars, avg, unit, empty, legend }: { bars: Bar
           <g pointerEvents="none">
             <line x1={padL} x2={W - padR} y1={y(avg)} y2={y(avg)} stroke="var(--text)" strokeOpacity={0.55} strokeWidth={1.5} />
             <text x={W - padR} y={y(avg) - 5} textAnchor="end" fontSize={11} fill="var(--text)">média {compact(avg)}</text>
+          </g>
+        )}
+        {goal != null && goal > 0 && (
+          <g pointerEvents="none">
+            <line x1={padL} x2={W - padR} y1={y(goal)} y2={y(goal)} stroke="#5fd38d" strokeWidth={1.5} strokeDasharray="5 4" />
+            <text x={padL + 4} y={y(goal) - 5} fontSize={11} fill="#5fd38d">meta {compact(goal)}</text>
           </g>
         )}
       </svg>

@@ -4,6 +4,7 @@ import { STOCK_IDS } from "@/lib/stock";
 import Link from "next/link";
 import BarChart, { type Bar } from "./BarChart";
 import { chanceOne, type ItemType } from "@/lib/refine";
+import { herbInfo } from "@/lib/herb";
 
 export const dynamic = "force-dynamic";
 
@@ -220,6 +221,8 @@ export default async function Estatisticas({ searchParams }: { searchParams: Pro
             </div>
           )}
 
+          <HerbStats />
+
           <h2>Tabela</h2>
           <div className="tbl">
             <table>
@@ -239,6 +242,28 @@ export default async function Estatisticas({ searchParams }: { searchParams: Pro
           </div>
         </>
       )}
+    </>
+  );
+}
+
+async function HerbStats() {
+  const h = await herbInfo();
+  if (!h.days.length && !h.brews.length && !h.buys.length) return null;
+  const last = h.days.slice(-30);
+  const bars: Bar[] = last.map((d) => ({ label: dm(d.day), sub: d.goal && d.qty >= d.goal ? "✓" : "", value: d.qty,
+    tip: `${fmtDate(d.day)}: ${n(d.qty)} ervas · ${n(d.qty * h.price)} z` }));
+  const withGoal = h.days.filter((d) => d.goal > 0).length;
+  return (
+    <>
+      <h2>Farm de erva <Link href="/erva" className="dim" style={{ fontSize: 13, fontWeight: 400 }}>abrir</Link></h2>
+      <div className="stats">
+        <div className="stat"><div className="k">Ervas farmadas</div><div className="v num">{n(h.total)}</div><div className="note">{h.days.length} dia(s){h.days.length ? ` · média ${n(h.total / h.days.length)}/dia` : ""}</div></div>
+        <div className="stat"><div className="k">Em zeny</div><div className="v num accent">{n(h.total * h.price)} z</div><div className="note">a {n(h.price)} z cada</div></div>
+        <div className="stat"><div className="k">Estoque</div><div className="v num">{n(h.stock)}</div><div className="note">{withGoal ? `meta batida em ${h.hit} de ${withGoal} dia(s)` : ""}</div></div>
+        {h.bought > 0 && <div className="stat"><div className="k">Compradas</div><div className="v num">{n(h.bought)}</div><div className="note">{n(h.spent)} z · média {n(h.spent / h.bought)} z</div></div>}
+        {h.rate != null && <div className="stat"><div className="k">Viraram Blue Potion</div><div className="v num up">{(h.rate * 100).toLocaleString("pt-BR", { maximumFractionDigits: 1 })}%</div><div className="note">{n(h.potions)} de {n(h.used)} ervas</div></div>}
+      </div>
+      {h.days.length > 0 && <div className="panel"><BarChart bars={bars} avg={h.total / h.days.length} goal={h.goal || null} unit="ervas" empty="" /></div>}
     </>
   );
 }

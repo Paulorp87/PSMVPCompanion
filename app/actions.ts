@@ -366,3 +366,69 @@ export async function deleteFarmSession(form: FormData) {
   revalidatePath("/", "layout");
   redirect("/farm");
 }
+
+// ---------- Farm de erva ----------
+export async function saveHerbGoal(form: FormData) {
+  const goal = Math.max(0, Math.floor(Number(form.get("goal")) || 0));
+  const price = Math.max(0, Math.floor(Number(form.get("price")) || 0));
+  await q(`INSERT INTO herb_settings(id, goal, price) VALUES (1,$1,$2)
+           ON CONFLICT (id) DO UPDATE SET goal=EXCLUDED.goal, price=EXCLUDED.price`, [goal, price]);
+  revalidatePath("/", "layout");
+  redirect("/erva?ok=meta");
+}
+
+export async function saveHerbDay(form: FormData) {
+  const day = String(form.get("day") ?? "");
+  const raw = String(form.get("qty") ?? "").trim();
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(day) || raw === "") redirect("/erva?e=1");
+  const qty = Math.max(0, Math.floor(Number(raw) || 0));
+  const goal = (await q<{ goal: number }>("SELECT goal FROM herb_settings WHERE id=1"))[0]?.goal ?? 0;
+  // salvar de novo no mesmo dia substitui; a meta do dia fica a que estava valendo quando registrou pela primeira vez
+  await q(`INSERT INTO herb_days(day, qty, goal) VALUES ($1,$2,$3) ON CONFLICT (day) DO UPDATE SET qty=EXCLUDED.qty`, [day, qty, goal]);
+  revalidatePath("/", "layout");
+  redirect("/erva?ok=dia");
+}
+
+export async function deleteHerbDay(form: FormData) {
+  await q("DELETE FROM herb_days WHERE day=$1", [String(form.get("day"))]);
+  revalidatePath("/", "layout");
+  redirect("/erva");
+}
+
+export async function saveHerbStock(form: FormData) {
+  const day = String(form.get("day") ?? "");
+  const raw = String(form.get("qty") ?? "").trim();
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(day) || raw === "") redirect("/erva?e=1");
+  await q(`INSERT INTO herb_stock(day, qty) VALUES ($1,$2) ON CONFLICT (day) DO UPDATE SET qty=EXCLUDED.qty, created_at=now()`,
+    [day, Math.max(0, Math.floor(Number(raw) || 0))]);
+  revalidatePath("/", "layout");
+  redirect("/erva?ok=estoque");
+}
+
+export async function addHerbBuy(form: FormData) {
+  const day = String(form.get("day") ?? "");
+  const qty = Math.floor(Number(form.get("qty")) || 0);
+  const price = Math.max(0, Number(String(form.get("price") ?? "").replace(/\D/g, "")) || 0);
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(day) || qty <= 0) redirect("/erva?e=1");
+  await q("INSERT INTO herb_buys(day, qty, price) VALUES ($1,$2,$3)", [day, qty, price]);
+  revalidatePath("/", "layout");
+  redirect("/erva?ok=compra");
+}
+
+export async function addHerbBrew(form: FormData) {
+  const day = String(form.get("day") ?? "");
+  const used = Math.floor(Number(form.get("used")) || 0);
+  const potions = Math.floor(Number(form.get("potions")) || 0);
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(day) || used <= 0 || potions < 0 || potions > used) redirect("/erva?e=2");
+  await q("INSERT INTO herb_brews(day, used, potions) VALUES ($1,$2,$3)", [day, used, potions]);
+  revalidatePath("/", "layout");
+  redirect("/erva?ok=pocao");
+}
+
+export async function deleteHerbRow(form: FormData) {
+  const kind = String(form.get("kind")), id = Number(form.get("id"));
+  if (kind === "buy") await q("DELETE FROM herb_buys WHERE id=$1", [id]);
+  if (kind === "brew") await q("DELETE FROM herb_brews WHERE id=$1", [id]);
+  revalidatePath("/", "layout");
+  redirect("/erva");
+}
