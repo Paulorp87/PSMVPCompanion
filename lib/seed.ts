@@ -118,4 +118,20 @@ export const KC_UPDATES: { key: string; week: string; newCharacters?: string[]; 
       "Mestra Genkai": "RSX 0806 38, Lady Huo 24, Mistress 15, Aspect of Sol 7, Lord of Death 7, Garm 6, Logi 6, Amon Ra 5, Eddga 5, Incantation Samurai 5",
     },
   },
+  {
+    key: "kc-2026-11-13",
+    week: "2026-11-13",
+    data: {
+      "Sandara": "Ktullanux 560, Turtle General 349, Garm 10",
+      "MiniZeph": "Golden Thief Bug 736, Phreeoni 231, Eddga 85",
+      "Enami Asa": "Pharaoh 287",
+      "Wonyoung": "Amon Ra 1325",
+      "Kim Taeyeon": "Moonlight Flower 161",
+      "Brujeria": "Orc Hero 701",
+      "Lucas Silveira": "Maya 37, Orc Lord 14, Phreeoni 1",
+      "Rami": "Garm 54",
+      "Trappin Hood": "Knight of Windstorm 12, Ktullanux 1",
+      "Mestra Genkai": "Lady Huo 28, Mistress 19, Aspect of Sol 10, Lord of Death 10, Garm 8, Dark Lord 7, Logi 7, Incantation Samurai 7, Drake 6",
+    },
+  },
 ];
