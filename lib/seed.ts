@@ -83,7 +83,7 @@ export function slug(s: string): string {
 }
 
 // Atualizações de KC lançadas pelo Claude a partir dos prints (aplicadas uma vez cada).
-export const KC_UPDATES: { key: string; week: string; newCharacters?: string[]; data: Record<string, string> }[] = [
+export const KC_UPDATES: { key: string; week: string; newCharacters?: string[]; fix?: boolean; data: Record<string, string> }[] = [
   {
     key: "kc-2026-10-23",
     week: "2026-10-23",
@@ -133,5 +133,12 @@ export const KC_UPDATES: { key: string; week: string; newCharacters?: string[]; 
       "Trappin Hood": "Knight of Windstorm 12, Ktullanux 1",
       "Mestra Genkai": "Lady Huo 28, Mistress 19, Aspect of Sol 10, Lord of Death 10, Garm 8, Dark Lord 7, Logi 7, Incantation Samurai 7, Drake 6",
     },
+  },
+  {
+    // correção: em 30/10 o Dracula da Kim Taeyeon foi lido como 2, era 1
+    key: "fix-2026-10-30-kim-dracula",
+    week: "2026-10-30",
+    fix: true,
+    data: { "Kim Taeyeon": "Dracula 1" },
   },
 ];

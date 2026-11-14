@@ -257,7 +257,7 @@ async function applyKcUpdates(c: PoolClient) {
         if (!ch.rowCount) continue;
         for (const { mvp, kills } of parseList(list)) {
           await c.query(
-            "INSERT INTO kc(character_id, mvp, week, kills) VALUES ($1,$2,$3,$4) ON CONFLICT (character_id, mvp, week) DO NOTHING",
+            `INSERT INTO kc(character_id, mvp, week, kills) VALUES ($1,$2,$3,$4) ON CONFLICT (character_id, mvp, week) ${u.fix ? "DO UPDATE SET kills=EXCLUDED.kills" : "DO NOTHING"}`,
             [ch.rows[0].id, mvp, u.week, kills]);
         }
       }
