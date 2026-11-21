@@ -141,4 +141,20 @@ export const KC_UPDATES: { key: string; week: string; newCharacters?: string[]; 
     fix: true,
     data: { "Kim Taeyeon": "Dracula 1" },
   },
+  {
+    key: "kc-2026-11-20",
+    week: "2026-11-20",
+    data: {
+      "Sandara": "Turtle General 386",
+      "MiniZeph": "Golden Thief Bug 757, Eddga 87",
+      "Enami Asa": "Pharaoh 295",
+      "Wonyoung": "Amon Ra 1346",
+      "Brujeria": "Orc Hero 736",
+      "Kim Taeyeon": "Moonlight Flower 187",
+      "Lucas Silveira": "Maya 55, Orc Lord 27, Phreeoni 11",
+      "Rami": "Garm 70",
+      "Trappin Hood": "Knight of Windstorm 19",
+      "Mestra Genkai": "Mistress 20, Lord of Death 11, Garm 9, Incantation Samurai 8, Dark Lord 8, Doppelganger 7, Moonlight Flower 7",
+    },
+  },
 ];
