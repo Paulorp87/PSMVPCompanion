@@ -8,7 +8,7 @@ import { UnitRow, AddFromStock } from "./ProjectItems";
 export const dynamic = "force-dynamic";
 const pct = (x: number) => (x * 100).toLocaleString("pt-BR", { maximumFractionDigits: x < 0.01 ? 3 : 1 }) + "%";
 const n = (x: number) => Math.round(x).toLocaleString("pt-BR");
-const nk = (x: number) => x >= 1e6 ? (x / 1e6).toLocaleString("pt-BR", { maximumFractionDigits: 2 }) + "M" : x >= 1e3 ? (x / 1e3).toLocaleString("pt-BR", { maximumFractionDigits: 1 }) + "K" : n(x);
+const nk = (x: number): string => x < 0 ? "−" + nk(-x) : x >= 1e6 ? (x / 1e6).toLocaleString("pt-BR", { maximumFractionDigits: 2 }) + "M" : x >= 1e3 ? (x / 1e3).toLocaleString("pt-BR", { maximumFractionDigits: 1 }) + "K" : n(x);
 
 type P = { id: number; name: string; item_id: number; item_name: string; item_type: ItemType; target_refine: number; target_qty: number; status: string };
 
@@ -18,8 +18,10 @@ export default async function Projeto({ params }: { params: Promise<{ id: string
   if (!p) notFound();
   const t = ITEM_TYPES[p.item_type] ?? ITEM_TYPES.w4;
   const [units, stock, priceRows] = await Promise.all([
-    q<{ id: number; refine: number; status: string; char: string | null; mvp: string; source: string }>(
-      `SELECT d.id, d.refine, d.status, c.name AS char, d.mvp, d.source FROM drops d LEFT JOIN characters c ON c.id=d.character_id
+    q<{ id: number; refine: number; status: string; char: string | null; mvp: string; source: string;
+        over_result: string | null; over_from: number | null; over_base: number | null; over_cost: number | null; over_value: number | null }>(
+      `SELECT d.id, d.refine, d.status, c.name AS char, d.mvp, d.source, d.over_result, d.over_from,
+              d.over_base::float8 AS over_base, d.over_cost::float8 AS over_cost, d.over_value::float8 AS over_value FROM drops d LEFT JOIN characters c ON c.id=d.character_id
        WHERE d.project_id=$1 ORDER BY (d.status='quebrou'), d.refine DESC, d.id`, [id]),
     q<{ id: number; qty: number; char: string | null; mvp: string; status: string; source: string }>(
       `SELECT d.id, d.qty, c.name AS char, d.mvp, d.status, d.source FROM drops d LEFT JOIN characters c ON c.id=d.character_id
@@ -41,6 +43,15 @@ export default async function Projeto({ params }: { params: Promise<{ id: string
   const oreCost = (orePrice ?? 0) + t.fee;
   const missingToGoal = Math.max(0, p.target_qty - alive.length);
   const avgOres = attemptsOne(p.item_type, 0, p.target_refine) / (each || 1);
+
+  // Dinheiro: alocado (itens ainda no projeto, sem over) · prejuízo (quebrados: item + refino) · lucro (conseguidos: valor − item − refino)
+  const pending = alive.filter((u) => !u.over_result);
+  const allocated = pending.length * (itemPrice ?? 0);
+  const brokenUnits = units.filter((u) => u.status === "quebrou");
+  const loss = brokenUnits.reduce((a, u) => a + (u.over_result ? (u.over_base ?? 0) + (u.over_cost ?? 0) : itemPrice ?? 0), 0);
+  const won = units.filter((u) => u.over_result === "consegui");
+  const wonPriced = won.filter((u) => u.over_value != null);
+  const profit = wonPriced.reduce((a, u) => a + (u.over_value ?? 0) - (u.over_base ?? 0) - (u.over_cost ?? 0), 0);
 
   return (
     <>
@@ -75,6 +86,17 @@ export default async function Projeto({ params }: { params: Promise<{ id: string
         <div className="stat"><div className="k">Chance real com o que tem</div><div className="v num" style={{ fontSize: 20 }}>{odds.done ? "100%" : pct(odds.chance)}</div><div className="note">pelo menos 1 chegar em +{p.target_refine}</div></div>
       </div>
 
+      <div className="stats">
+        <div className="stat"><div className="k">Valor alocado</div><div className="v num">{nk(allocated)} z</div>
+          <div className="note">{pending.length} item(ns) × {itemPrice != null ? n(itemPrice) : "sem preço"} z</div></div>
+        <div className="stat"><div className="k">Prejuízo (quebrados)</div><div className={`v num ${loss ? "down" : ""}`}>{nk(-loss)} z</div>
+          <div className="note">{brokenUnits.length} quebrado(s) · item + {t.ore.name} + taxa</div></div>
+        <div className="stat"><div className="k">Lucro (conseguidos)</div><div className={`v num ${profit > 0 ? "up" : profit < 0 ? "down" : ""}`}>{nk(profit)} z</div>
+          <div className="note">{won.length ? `${won.length} conseguido(s)${won.length > wonPriced.length ? ` · ${won.length - wonPriced.length} sem valor ainda` : ""}` : "nenhum ainda"}</div></div>
+        <div className="stat"><div className="k">Saldo</div><div className={`v num ${profit - loss > 0 ? "up" : profit - loss < 0 ? "down" : ""}`}>{nk(profit - loss)} z</div>
+          <div className="note">lucro − prejuízo</div></div>
+      </div>
+
       <h2>Itens do projeto</h2>
       {units.length === 0 ? <p className="note">Nenhum item ainda. Adicione do estoque abaixo ou importe do histórico na página <Link href="/drops">Drops</Link>.</p> : (
         <div className="tbl">
@@ -84,7 +106,7 @@ export default async function Projeto({ params }: { params: Promise<{ id: string
           </table>
         </div>
       )}
-      <p className="note">Quando for refinar, ajuste o "Refino atual" de cada item conforme sobe. Se quebrar, clique em Quebrou. A chance é recalculada na hora.</p>
+      <p className="note">Use o seletor de refino para o refino seguro. Na hora do over, clique em <b>Dei over</b>, diga até onde chegou e se quebrou ou conseguiu: o custo do refino ({t.ore.name} a {orePrice != null ? n(orePrice) : "?"} z + taxa de {n(t.fee)} z por tentativa) e o valor do item entram no prejuízo ou no lucro. No "Consegui", coloque o valor do item refinado (ou peça pro Claude puxar da Price Check).</p>
 
       <h2>Adicionar do estoque</h2>
       <AddFromStock projectId={p.id} stock={stock} />

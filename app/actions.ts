@@ -387,3 +387,37 @@ export async function potei(herbId: number, used: number, pots: number): Promise
   revalidatePath("/", "layout");
   return { ok: true, msg: `Potei: −${used} ${h.name}, +${pots} ${h.potion.name}.` };
 }
+
+// ---------- Over nos projetos ----------
+/** Registra o over de um item do projeto: chegou até +reached e quebrou (tentando o próximo) ou conseguiu.
+ *  Guarda o valor do item e o custo do refino (minério + taxa por tentativa) pra calcular prejuízo/lucro. */
+export async function overItem(dropId: number, reached: number, result: "quebrou" | "consegui", value: number | null) {
+  const { ITEM_TYPES } = await import("@/lib/refine");
+  const d = (await q<{ refine: number; item_id: number; item_type: string; status: string; over_result: string | null }>(
+    `SELECT d.refine, d.item_id, p.item_type, d.status, d.over_result FROM drops d JOIN projects p ON p.id=d.project_id WHERE d.id=$1`, [dropId]))[0];
+  if (!d || d.status !== "projeto" || d.over_result) return;
+  const t = ITEM_TYPES[d.item_type as keyof typeof ITEM_TYPES] ?? ITEM_TYPES.w4;
+  reached = Math.max(0, Math.min(10, Math.floor(reached)));
+  if (result === "consegui" && reached <= d.refine) return;
+  if (result === "quebrou" && reached < d.refine) return;
+  const pr = await q<{ item_id: number; price: number }>("SELECT item_id, price::float8 AS price FROM prices WHERE item_id = ANY($1::int[])", [[d.item_id, t.ore.id]]);
+  const base = pr.find((x) => x.item_id === d.item_id)?.price ?? 0;
+  const ore = pr.find((x) => x.item_id === t.ore.id)?.price ?? 0;
+  const attempts = result === "quebrou" ? reached - d.refine + 1 : reached - d.refine;
+  const cost = attempts * (ore + t.fee);
+  await q(`UPDATE drops SET over_result=$2, over_from=refine, refine=$3, over_base=$4, over_cost=$5, over_value=$6,
+           status=CASE WHEN $2='quebrou' THEN 'quebrou' ELSE status END WHERE id=$1`,
+    [dropId, result, reached, base, cost, result === "consegui" && value ? value : null]);
+  revalidatePath("/", "layout");
+}
+
+export async function setOverValue(dropId: number, value: number | null) {
+  await q("UPDATE drops SET over_value=$2 WHERE id=$1 AND over_result='consegui'", [dropId, value && value > 0 ? value : null]);
+  revalidatePath("/", "layout");
+}
+
+export async function undoOver(dropId: number) {
+  await q(`UPDATE drops SET refine=COALESCE(over_from, refine), status='projeto', over_result=NULL, over_from=NULL,
+           over_base=NULL, over_cost=NULL, over_value=NULL WHERE id=$1 AND project_id IS NOT NULL`, [dropId]);
+  revalidatePath("/", "layout");
+}
