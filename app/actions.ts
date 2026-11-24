@@ -240,10 +240,11 @@ export async function saveStock(form: FormData) {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(week)) redirect("/estoque?e=1");
   const { STOCK_ITEMS } = await import("@/lib/stock");
   for (const it of STOCK_ITEMS) {
-    const v = String(form.get(`q${it.id}`) ?? "").trim();
+    // aceita "2.500", "2,500" ou "2 500" (separador de milhar): fica só com os dígitos
+    const v = String(form.get(`q${it.id}`) ?? "").replace(/\D/g, "");
     if (v === "") continue;
     await q(`INSERT INTO stock(item_id, week, qty) VALUES ($1,$2,$3)
-             ON CONFLICT (item_id, week) DO UPDATE SET qty=EXCLUDED.qty`, [it.id, week, Math.max(0, Math.floor(Number(v)))]);
+             ON CONFLICT (item_id, week) DO UPDATE SET qty=EXCLUDED.qty`, [it.id, week, Number(v)]);
   }
   revalidatePath("/", "layout");
   redirect("/estoque?ok=1");
